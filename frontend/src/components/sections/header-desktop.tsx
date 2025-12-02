@@ -22,7 +22,6 @@ import { getSelectedAddress, getAddressUpdateEventName, type Address } from "@/l
 
 const navLinks = [
   { href: "/pages/membership", text: "Co-Op Member" },
-  { href: "/pages/faas", text: "Farming As A Service" },
   { href: "https://trust.eversol.com", text: "Lab Test Reports" },
   { href: "/pages/store-locator", text: "Store Locations" },
   { href: "/collections/om-deals", text: "Deals" },

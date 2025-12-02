@@ -13,7 +13,6 @@ import { getSelectedAddress, getAddressUpdateEventName, type Address } from "@/l
 const navItems = [
   { name: 'Browse All Categories', href: '/collections/all' },
   { name: 'Co-Op Member', href: '/pages/membership' },
-  { name: 'Farming As A Service', href: '/pages/faas' },
   { name: 'Lab Test Reports', href: 'https://trust.eversol.com', external: true },
   { name: 'Store Locations', href: '/pages/store-locator' },
   { name: 'Deals', href: '/collections/om-deals' },

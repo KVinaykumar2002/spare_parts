@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
-import { Lock, Mail } from 'lucide-react';
+import { Home, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -58,7 +58,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f5f6f8] p-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#f5f6f8] p-4 relative">
+      {/* Home icon */}
+      <Link
+        href="/"
+        className="absolute top-6 left-6 inline-flex items-center justify-center rounded-full bg-white shadow-md text-[#0d4d3d] hover:bg-[#e7f4ef] transition-colors"
+        aria-label="Go to home page"
+      >
+        <Home className="h-6 w-6 m-3" />
+      </Link>
+
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
         {/* Left panel */}
         <div className="bg-[#0d4d3d] text-white flex flex-col justify-between p-8 md:p-12">
