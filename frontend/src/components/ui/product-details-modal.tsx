@@ -155,8 +155,8 @@ export default function ProductDetailsModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-white max-w-[900px] p-0 overflow-hidden shadow-lg rounded-xl w-[calc(100%-2rem)] max-h-[90vh] overflow-y-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8">
+      <DialogContent className="bg-white max-w-[900px] p-0 overflow-hidden shadow-lg rounded-xl w-[calc(100%-1rem)] sm:w-[calc(100%-2rem)] max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 p-4 sm:p-6 md:p-8">
           {/* Product Image */}
           <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-gray-50">
             <Image
@@ -179,15 +179,15 @@ export default function ProductDetailsModal({
           </div>
 
           {/* Product Details */}
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-3 sm:space-y-4">
             <DialogHeader className="p-0 text-left">
-              <DialogTitle className="text-2xl md:text-3xl font-semibold text-dark-gray mb-2">
+              <DialogTitle className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-gray mb-2">
                 {product.title}
               </DialogTitle>
             </DialogHeader>
 
             {product.description && (
-              <p className="text-sm text-medium-gray leading-relaxed">
+              <p className="text-xs sm:text-sm text-medium-gray leading-relaxed">
                 {product.description}
               </p>
             )}
@@ -221,26 +221,26 @@ export default function ProductDetailsModal({
             )}
 
             {/* Price Display */}
-            <div className="space-y-2 py-4 border-t border-b border-border-gray-alt">
-              <div className="flex items-baseline gap-3">
-                <span className="text-3xl font-bold text-dark-gray">
+            <div className="space-y-2 py-3 sm:py-4 border-t border-b border-border-gray-alt">
+              <div className="flex items-baseline gap-2 sm:gap-3 flex-wrap">
+                <span className="text-2xl sm:text-3xl font-bold text-dark-gray">
                   ₹{displayPrice.toFixed(2)}
                 </span>
                 {onSale && selectedVariant.salePrice && (
-                  <span className="text-lg text-medium-gray line-through">
+                  <span className="text-base sm:text-lg text-medium-gray line-through">
                     ₹{selectedVariant.price.toFixed(2)}
                   </span>
                 )}
                 {onSale && (
-                  <span className="text-sm font-semibold text-red-alert">
+                  <span className="text-xs sm:text-sm font-semibold text-red-alert">
                     Save ₹{(selectedVariant.price - displayPrice).toFixed(2)}
                   </span>
                 )}
               </div>
-              <p className="text-sm font-medium text-primary-green">
+              <p className="text-xs sm:text-sm font-medium text-primary-green">
                 ₹{selectedVariant.coopPrice.toFixed(2)} for Co-Op Members*
               </p>
-              <p className="text-xs text-medium-gray">
+              <p className="text-[10px] sm:text-xs text-medium-gray">
                 Stock: {selectedVariant.stock > 0 ? `${selectedVariant.stock} available` : 'Out of Stock'}
               </p>
             </div>
@@ -297,11 +297,11 @@ export default function ProductDetailsModal({
             )}
 
             {/* Add to Cart Button */}
-            <div className="pt-4 space-y-3">
+            <div className="pt-3 sm:pt-4 space-y-2 sm:space-y-3">
               <Button
                 onClick={handleAddToCart}
                 disabled={isSoldOut || isAdding}
-                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold"
+                className="w-full h-11 sm:h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-base font-semibold touch-manipulation"
               >
                 {isAdding ? (
                   "Adding to Cart..."

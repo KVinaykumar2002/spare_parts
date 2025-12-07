@@ -6,12 +6,26 @@ import Image from "next/image";
 import { Package, ArrowLeft } from "lucide-react";
 import ProductCard from "@/components/ui/product-card";
 import { addToCart } from "@/lib/cart-functionality";
+import { publicApi } from '@/lib/api';
 
 type PageProps = {
   params: Promise<{ category: string }>;
 };
 
-// Mock products data - in a real app, this would come from an API
+// Category slug to category name mapping
+const categorySlugToName: Record<string, string> = {
+  'dals-pulses': 'Dals & Pulses',
+  'spices-masalas': 'Spices & Masalas',
+  'home-essential': 'Home Essential',
+  'millets': 'Millets',
+  'edible-oils': 'Oils',
+  'ready-to-cook': 'Ready To Cook',
+  'staples': 'Staples',
+  'oils': 'Oils',
+  'seeds': 'Seeds',
+};
+
+// Mock products data - fallback if API fails
 const mockProductsByCategory: Record<string, any[]> = {
   // Top Categories mappings
   staples: [
@@ -649,24 +663,94 @@ export default function CategoryPage({ params }: PageProps) {
   const [categoryName, setCategoryName] = useState<string>("");
   const [products, setProducts] = useState<any[]>([]);
   const [categoryImage, setCategoryImage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    params.then(({ category: cat }) => {
-      setCategory(cat);
-      const formattedName = cat
-        .split('-')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-      setCategoryName(formattedName);
-      
-      // Get products for this category
-      const categoryProducts = mockProductsByCategory[cat] || [];
-      setProducts(categoryProducts);
-      
-      // Get category image
-      const img = categoryImages[cat] || "";
-      setCategoryImage(img);
-    });
+    const fetchCategoryData = async () => {
+      try {
+        setIsLoading(true);
+        const { category: cat } = await params;
+        setCategory(cat);
+        
+        // Get category name from mapping or format from slug
+        const mappedName = categorySlugToName[cat];
+        const formattedName = mappedName || cat
+          .split('-')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+        setCategoryName(formattedName);
+        
+        // Get category image
+        const img = categoryImages[cat] || "";
+        setCategoryImage(img);
+
+        // Fetch products from API filtered by category
+        try {
+          // Try both slug and name to ensure we find the category
+          const categoryQuery = cat; // Use the slug from URL
+          const response = await publicApi.products.getAll({ 
+            category: categoryQuery, // API will match by slug or name
+            limit: 100 
+          });
+
+          if (response.success && response.data && typeof response.data === 'object' && 'products' in response.data) {
+            const productsData = (response.data as any).products;
+            
+            // Backend already filters by category ID, so all products should be from this category
+            // But we add a safety check to ensure category matches
+            const expectedCategoryName = mappedName || formattedName;
+            const expectedCategorySlug = cat.toLowerCase();
+            
+            // Transform API products to component format
+            // Backend already filtered, but we verify category matches as safety check
+            const transformedProducts = productsData
+              .filter((p: any) => {
+                // Safety check: ensure product has category and it matches
+                if (!p.category) return false;
+                
+                const productCategory = p.category;
+                const productCategoryName = productCategory.name || '';
+                const productCategorySlug = (productCategory.slug || '').toLowerCase();
+                
+                // Match by name or slug (case-insensitive)
+                const nameMatch = productCategoryName.toLowerCase() === expectedCategoryName.toLowerCase();
+                const slugMatch = productCategorySlug === expectedCategorySlug;
+                
+                return nameMatch || slugMatch;
+              })
+              .map((p: any, index: number) => ({
+                id: p._id || `prod-${index}`,
+                title: p.name,
+                imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop',
+                variants: [
+                  {
+                    id: `var-${p._id || index}-default`,
+                    name: '500g', // Default variant, can be enhanced later
+                    price: p.price,
+                    coopPrice: p.price * 0.85, // Calculate 15% discount for co-op members
+                    stock: p.stock || 0,
+                  }
+                ],
+              }));
+            
+            setProducts(transformedProducts);
+          } else {
+            // No products found or API error
+            setProducts([]);
+          }
+        } catch (apiError) {
+          console.error('API error fetching category products:', apiError);
+          // On error, show empty state (don't use fallback mock data)
+          setProducts([]);
+        }
+      } catch (error) {
+        console.error('Error fetching category data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategoryData();
   }, [params]);
 
   const handleAddToCart = async (variantId: string, quantity: number) => {
@@ -696,17 +780,17 @@ export default function CategoryPage({ params }: PageProps) {
   };
 
   return (
-    <div className="bg-background font-body">
-      <div className="container mx-auto px-5 py-16 lg:px-10">
+    <div className="bg-white font-body" style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <div className="container mx-auto px-4 sm:px-5 py-8 sm:py-12 md:py-16 lg:px-10">
           <div className="max-w-7xl mx-auto">
-            <Link href="/" className="inline-flex items-center text-primary-green font-semibold mb-8">
-              <ArrowLeft className="w-4 h-4 mr-2" />
+            <Link href="/" className="inline-flex items-center text-primary-green font-semibold mb-4 sm:mb-6 md:mb-8 text-sm sm:text-base">
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
               Back to Home
             </Link>
 
-            <div className="text-center mb-12">
+            <div className="text-center mb-8 sm:mb-12">
               {categoryImage ? (
-                <div className="inline-flex items-center justify-center w-32 h-32 md:w-40 md:h-40 rounded-full bg-light-green mb-6 overflow-hidden">
+                <div className="inline-flex items-center justify-center w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full bg-light-green mb-4 sm:mb-6 overflow-hidden">
                   <Image
                     src={categoryImage}
                     alt={categoryName}
@@ -716,20 +800,26 @@ export default function CategoryPage({ params }: PageProps) {
                   />
                 </div>
               ) : (
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-light-green mb-6">
-                  <Package className="w-12 h-12 text-primary-green" />
+                <div className="inline-flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-light-green mb-4 sm:mb-6">
+                  <Package className="w-10 h-10 sm:w-12 sm:h-12 text-primary-green" />
                 </div>
               )}
-              <h1 className="text-4xl font-bold text-dark-gray mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-gray mb-2 sm:mb-4">
                 {categoryName}
               </h1>
-              <p className="text-lg text-medium-gray">
+              <p className="text-sm sm:text-base md:text-lg text-medium-gray px-4">
                 Explore our organic {categoryName.toLowerCase()} collection
               </p>
             </div>
 
-            {products.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {isLoading ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div key={i} className="animate-pulse bg-gray-200 rounded-lg aspect-square" />
+                ))}
+              </div>
+            ) : products.length > 0 ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
                 {products.map((product) => (
                   <ProductCard
                     key={product.id}

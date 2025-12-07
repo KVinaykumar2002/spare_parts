@@ -22,11 +22,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState('');
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState<string | null>(null);
 
   useEffect(() => {
     fetchReviews();
@@ -74,11 +86,19 @@ export default function ReviewsPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this review?')) return;
+  const handleDeleteClick = (id: string) => {
+    setReviewToDelete(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!reviewToDelete) return;
+
     try {
-      await adminApi.reviews.delete(id);
-      toast.success('Review deleted');
+      await adminApi.reviews.delete(reviewToDelete);
+      toast.success('Review deleted successfully');
+      setDeleteDialogOpen(false);
+      setReviewToDelete(null);
       fetchReviews();
     } catch (error) {
       toast.error('Failed to delete review');
@@ -189,7 +209,7 @@ export default function ReviewsPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleDelete(review._id)}
+                        onClick={() => handleDeleteClick(review._id)}
                       >
                         <Trash2 className="h-4 w-4 text-red-500" />
                       </Button>
@@ -202,6 +222,23 @@ export default function ReviewsPage() {
           )}
         </CardContent>
       </Card>
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Review</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this review? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setReviewToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 /* Updated: 2025-11-20T04:22:15.319Z */
 /* Updated: 2025-11-19T15:22:51.702Z */
+/* Font import with fallback - if it fails, use system fonts */
 @import url('https://fonts.googleapis.com/css2?family=GT+Standard:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -93,9 +94,9 @@
   --color-border-gray: #e0e0e0;
   --color-border-gray-alt: #dddddd; /* Used for dividers, card borders */
 
-  /* Custom Design System Fonts */
-  --font-display: "GT Standard", sans-serif;
-  --font-body: "GT Standard", sans-serif;
+  /* Custom Design System Fonts - with fallback */
+  --font-display: "GT Standard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "GT Standard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 /*
@@ -118,7 +119,7 @@
 
 @layer base {
   :root {
-    --background: var(--color-background);
+    --background: #ffffff;
     --foreground: var(--color-foreground);
     --card: var(--color-card);
     --card-foreground: var(--color-card-foreground);
@@ -180,13 +181,106 @@
   }
 
   body {
-    background-color: var(--background);
+    background-color: #ffffff !important;
     color: var(--foreground);
     font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  
+  /* Ensure all main content areas have white background */
+  main {
+    background-color: #ffffff !important;
+  }
+  
+  /* Ensure no black backgrounds on root elements */
+  html, body, #__next, [data-nextjs-scroll-focus-boundary], #root {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* Ensure all divs and sections default to white unless specified */
+  div:not([class*="bg-"]):not([style*="background"]), 
+  section:not([class*="bg-"]):not([style*="background"]) {
+    background-color: transparent;
+  }
+  
+  body.dark {
+    background-color: #0a0a0a !important;
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+  }
+  
+  html.dark {
+    background-color: #0a0a0a !important;
+  }
+  
+  /* Critical: Ensure content is visible and not hidden */
+  * {
+    box-sizing: border-box;
+  }
+  
+  /* Prevent any element from covering the entire viewport with black */
+  body > *:first-child {
+    background-color: #ffffff !important;
+  }
+  
+  /* Ensure all content is visible by default */
+  body, html {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Critical fix: Ensure no black overlay is blocking content on page load */
+  body > div:not([data-portal]):not([data-radix-portal]) {
+    background-color: #ffffff !important;
+  }
+  
+  /* Prevent horizontal scrolling */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 640px) {
+    /* Better touch targets for mobile */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improve text readability */
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Prevent text size adjustment on iOS */
+    input, select, textarea {
+      font-size: 16px !important;
+    }
+    
+    /* Ensure containers don't overflow */
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
+  /* Ensure all sections are responsive */
+  section {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Prevent fixed width elements from causing overflow */
+  img, video, iframe {
+    max-width: 100%;
+    height: auto;
   }
 
   h1 {

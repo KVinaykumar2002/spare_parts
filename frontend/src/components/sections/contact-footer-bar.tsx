@@ -26,7 +26,7 @@ const socialLinks = [
 
 const ContactFooterBar = () => {
   return (
-    <div className="bg-background py-5 shadow-[0_-2px_8px_rgba(0,0,0,0.08)]">
+    <div className="bg-white py-5 shadow-[0_-2px_8px_rgba(0,0,0,0.08)]">
       <div className="container mx-auto px-5 md:px-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 items-center">
           

@@ -22,6 +22,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -37,6 +47,8 @@ export default function CouponsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingCoupon, setEditingCoupon] = useState<any>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [couponToDelete, setCouponToDelete] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     code: '',
     description: '',
@@ -112,11 +124,19 @@ export default function CouponsPage() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this coupon?')) return;
+  const handleDeleteClick = (id: string) => {
+    setCouponToDelete(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!couponToDelete) return;
+
     try {
-      await adminApi.coupons.delete(id);
+      await adminApi.coupons.delete(couponToDelete);
       toast.success('Coupon deleted successfully');
+      setDeleteDialogOpen(false);
+      setCouponToDelete(null);
       fetchCoupons();
     } catch (error) {
       toast.error('Failed to delete coupon');
@@ -345,7 +365,7 @@ export default function CouponsPage() {
                       <Button variant="ghost" size="sm" onClick={() => handleEdit(coupon)}>
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm" onClick={() => handleDelete(coupon._id)}>
+                      <Button variant="ghost" size="sm" onClick={() => handleDeleteClick(coupon._id)}>
                         <Trash2 className="h-4 w-4 text-red-500" />
                       </Button>
                     </div>
@@ -357,6 +377,23 @@ export default function CouponsPage() {
           )}
         </CardContent>
       </Card>
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Coupon</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this coupon? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setCouponToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

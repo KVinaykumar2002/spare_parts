@@ -124,12 +124,12 @@ export default function CheckoutPage() {
 
   if (isCheckingAuth || isLoading) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-5 py-16 lg:px-10">
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 sm:px-5 py-8 sm:py-12 md:py-16 lg:px-10">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-4xl font-bold text-dark-gray mb-8">Checkout</h1>
-            <div className="text-center py-12">
-              <p className="text-medium-gray">Loading...</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-gray mb-4 sm:mb-6 md:mb-8">Checkout</h1>
+            <div className="text-center py-8 sm:py-12">
+              <p className="text-sm sm:text-base text-medium-gray">Loading...</p>
             </div>
           </div>
         </div>
@@ -139,15 +139,15 @@ export default function CheckoutPage() {
 
   if (!cart || cart.items.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-5 py-16 lg:px-10">
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 sm:px-5 py-8 sm:py-12 md:py-16 lg:px-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl font-bold text-dark-gray mb-4">Your Cart is Empty</h1>
-            <p className="text-lg text-medium-gray mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-gray mb-3 sm:mb-4">Your Cart is Empty</h1>
+            <p className="text-base sm:text-lg text-medium-gray mb-6 sm:mb-8 px-4">
               Please add items to your cart before proceeding to checkout.
             </p>
             <Link href="/cart">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold px-8 py-6">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold px-6 sm:px-8 py-4 sm:py-6 w-full sm:w-auto touch-manipulation">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Cart
               </Button>
@@ -159,25 +159,25 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-5 py-16 lg:px-10">
+    <div className="min-h-screen bg-white">
+      <div className="container mx-auto px-4 sm:px-5 py-8 sm:py-12 md:py-16 lg:px-10">
         <div className="max-w-6xl mx-auto">
-          <Link href="/cart" className="inline-flex items-center text-primary-green font-semibold mb-8 hover:underline">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <Link href="/cart" className="inline-flex items-center text-primary-green font-semibold mb-4 sm:mb-6 md:mb-8 hover:underline text-sm sm:text-base">
+            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
             Back to Cart
           </Link>
 
-          <h1 className="text-4xl font-bold text-dark-gray mb-8">Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-gray mb-4 sm:mb-6 md:mb-8">Checkout</h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {/* Checkout Form */}
               <div className="lg:col-span-2 space-y-8">
                 {/* Shipping Information */}
-                <div className="bg-white border border-border-gray-alt rounded-lg p-6 shadow-sm">
-                  <div className="flex items-center gap-2 mb-6">
-                    <MapPin className="w-5 h-5 text-primary-green" />
-                    <h2 className="text-xl font-semibold text-dark-gray">Shipping Information</h2>
+                <div className="bg-white border border-border-gray-alt rounded-lg p-4 sm:p-6 shadow-sm">
+                  <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                    <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary-green" />
+                    <h2 className="text-lg sm:text-xl font-semibold text-dark-gray">Shipping Information</h2>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -320,10 +320,10 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Payment Method */}
-                <div className="bg-white border border-border-gray-alt rounded-lg p-6 shadow-sm">
-                  <div className="flex items-center gap-2 mb-6">
-                    <CreditCard className="w-5 h-5 text-primary-green" />
-                    <h2 className="text-xl font-semibold text-dark-gray">Payment Method</h2>
+                <div className="bg-white border border-border-gray-alt rounded-lg p-4 sm:p-6 shadow-sm">
+                  <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                    <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 text-primary-green" />
+                    <h2 className="text-lg sm:text-xl font-semibold text-dark-gray">Payment Method</h2>
                   </div>
 
                   <div className="space-y-3">
@@ -363,8 +363,8 @@ export default function CheckoutPage() {
 
               {/* Order Summary */}
               <div className="lg:col-span-1">
-                <div className="bg-white border border-border-gray-alt rounded-lg p-6 sticky top-4">
-                  <h2 className="text-xl font-semibold text-dark-gray mb-6">Order Summary</h2>
+                <div className="bg-white border border-border-gray-alt rounded-lg p-4 sm:p-6 sticky top-4">
+                  <h2 className="text-lg sm:text-xl font-semibold text-dark-gray mb-4 sm:mb-6">Order Summary</h2>
 
                   {/* Cart Items */}
                   <div className="space-y-4 mb-6 max-h-[300px] overflow-y-auto">
@@ -434,7 +434,7 @@ export default function CheckoutPage() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold py-6"
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold py-4 sm:py-6 touch-manipulation"
                   >
                     {isSubmitting ? (
                       <>

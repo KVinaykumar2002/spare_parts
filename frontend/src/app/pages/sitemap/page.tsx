@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SitemapPage() {
   return (
-    <div className="bg-background font-body">
+    <div className="bg-white font-body">
       <div className="container mx-auto px-5 py-16 lg:px-10 max-w-4xl">
         <h1 className="text-3xl md:text-4xl font-bold text-dark-gray mb-4">
           Sitemap

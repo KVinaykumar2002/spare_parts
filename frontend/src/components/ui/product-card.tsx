@@ -207,14 +207,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
 
-        <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5 z-10">
+        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col items-start gap-1 z-10">
           {onSale && (
-            <span className="bg-red-alert-alt text-white text-[10px] font-semibold tracking-wide px-2 py-0.5 rounded-sm">
+            <span className="bg-red-alert-alt text-white text-[9px] sm:text-[10px] font-semibold tracking-wide px-1.5 sm:px-2 py-0.5 rounded-sm">
               SALE
             </span>
           )}
           {product.isNew && (
-            <span className="bg-primary text-white text-[10px] font-semibold tracking-wide px-2 py-0.5 rounded-sm">
+            <span className="bg-primary text-white text-[9px] sm:text-[10px] font-semibold tracking-wide px-1.5 sm:px-2 py-0.5 rounded-sm">
               NEW
             </span>
           )}
@@ -223,11 +223,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Button
           variant="ghost"
           size="icon"
-          className="absolute top-2 right-2 z-10 h-9 w-9 bg-white/80 rounded-full hover:bg-white text-medium-gray"
+          className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 h-8 w-8 sm:h-9 sm:w-9 bg-white/90 rounded-full hover:bg-white text-medium-gray touch-manipulation"
           onClick={handleWishlistClick}
           aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
-          <Heart className={cn('h-5 w-5 transition-all', isWishlisted ? 'text-destructive fill-current' : 'text-inherit')} />
+          <Heart className={cn('h-4 w-4 sm:h-5 sm:w-5 transition-all', isWishlisted ? 'text-destructive fill-current' : 'text-inherit')} />
         </Button>
 
         {isSoldOut && (
@@ -239,54 +239,54 @@ const ProductCard: React.FC<ProductCardProps> = ({
         )}
       </div>
 
-      <div className="flex flex-col flex-grow p-4 space-y-3">
-        <h3 className="font-body text-dark-gray-alt text-sm font-normal line-clamp-2 min-h-[45px]">
+      <div className="flex flex-col flex-grow p-3 sm:p-4 space-y-2 sm:space-y-3">
+        <h3 className="font-body text-dark-gray-alt text-xs sm:text-sm font-normal line-clamp-2 min-h-[36px] sm:min-h-[45px] leading-tight">
           {product.title}
         </h3>
 
         <div className="flex-grow"></div>
 
-        <div className="space-y-1">
-          <div className="flex items-baseline gap-2">
-            <span className="text-dark-gray font-semibold text-price-regular">
+        <div className="space-y-0.5 sm:space-y-1">
+          <div className="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
+            <span className="text-dark-gray font-semibold text-sm sm:text-base">
               ₹{onSale ? selectedVariant.salePrice?.toFixed(2) : selectedVariant.price.toFixed(2)}
             </span>
             {onSale && (
-              <span className="text-medium-gray text-xs line-through">
+              <span className="text-medium-gray text-[10px] sm:text-xs line-through">
                 ₹{selectedVariant.price.toFixed(2)}
               </span>
             )}
           </div>
-          <p className="text-primary text-xs font-normal">
+          <p className="text-primary text-[10px] sm:text-xs font-normal leading-tight">
             ₹{selectedVariant.coopPrice.toFixed(2)} for Co-Op Members*
           </p>
         </div>
 
-        <div className="flex items-center gap-2 pt-1">
+        <div className="flex items-center gap-1.5 sm:gap-2 pt-1">
           {product.variants.length > 1 ? (
             <Select
               defaultValue={selectedVariantId}
               onValueChange={setSelectedVariantId}
               disabled={isSoldOut}
             >
-              <SelectTrigger className="h-10 flex-1 text-xs focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-[4px]">
+              <SelectTrigger className="h-9 sm:h-10 flex-1 text-[10px] sm:text-xs focus:ring-2 focus:ring-ring focus:ring-offset-2 rounded-[4px] px-2 sm:px-3">
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
                 {product.variants.map((variant) => (
-                  <SelectItem key={variant.id} value={variant.id} className="text-xs">
+                  <SelectItem key={variant.id} value={variant.id} className="text-xs sm:text-sm">
                     {variant.name}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
           ) : (
-            <div className="h-10 flex-1 border border-input rounded-[4px] flex items-center justify-center text-xs text-muted-foreground bg-secondary/50 px-3 truncate">
+            <div className="h-9 sm:h-10 flex-1 border border-input rounded-[4px] flex items-center justify-center text-[10px] sm:text-xs text-muted-foreground bg-secondary/50 px-2 sm:px-3 truncate">
                 {product.variants[0]?.name}
             </div>
           )}
           <Button
-            className="h-10 min-w-[78px] bg-primary hover:bg-[#0A3D31] text-primary-foreground font-semibold text-sm leading-none rounded-[4px] transition-colors"
+            className="h-9 sm:h-10 min-w-[60px] sm:min-w-[78px] bg-primary hover:bg-[#0A3D31] text-primary-foreground font-semibold text-xs sm:text-sm leading-none rounded-[4px] transition-colors px-2 sm:px-3"
             disabled={isSoldOut}
             onClick={handleAddToCartClick}
           >

@@ -15,7 +15,7 @@ export default function TopBanner() {
 
   return (
     <div className="bg-primary text-primary-foreground sticky top-0 z-[60] overflow-hidden">
-      <div className="relative h-[36px] flex items-center">
+      <div className="relative h-[32px] sm:h-[36px] flex items-center">
         <motion.div
           className="flex items-center gap-8 whitespace-nowrap"
           animate={{
@@ -34,7 +34,7 @@ export default function TopBanner() {
               key={`banner-${index}`}
               className="flex items-center gap-8 shrink-0"
             >
-              <p className="text-xs md:text-sm font-medium whitespace-nowrap">
+              <p className="text-[10px] sm:text-xs md:text-sm font-medium whitespace-nowrap">
                 {item}
               </p>
               <span className="text-primary-foreground/50 text-lg">•</span>

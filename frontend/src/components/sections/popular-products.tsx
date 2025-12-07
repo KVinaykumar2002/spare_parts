@@ -20,6 +20,7 @@ import {
   getWishlistUpdateEventName,
   type WishlistItem,
 } from '@/lib/wishlist-functionality';
+import { publicApi } from '@/lib/api';
 
 interface Product {
   id: number;
@@ -32,26 +33,13 @@ interface Product {
   variants: string[];
 }
 
-const allProducts: Product[] = [
-  { id: 1, name: 'Organic Rajmudi Rice', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop', price: 152.00, coOpPrice: 129.20, category: 'Staples', variants: ['1kg'] },
-  { id: 3, name: 'Organic Tur/Toor Dal', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&h=500&fit=crop', price: 182.00, coOpPrice: 154.70, category: 'Staples', variants: ['500g'] },
-  { id: 4, name: 'Cold Pressed - Groundnut Oil', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&h=500&fit=crop', price: 494.00, coOpPrice: 419.90, category: 'Cold Pressed Oils', variants: ['1L'] },
-  { id: 5, name: 'Organic Groundnuts', image: 'https://images.unsplash.com/photo-1606914501446-0c2c0c0a0c0c?w=500&h=500&fit=crop', price: 185.00, coOpPrice: 157.25, category: 'Staples', variants: ['500g'] },
-  { id: 6, name: 'Organic Moong Dal', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&h=500&fit=crop', price: 162.00, coOpPrice: 137.70, category: 'Staples', variants: ['500g'] },
-  { id: 7, name: 'Cold Pressed - Coconut Oil', image: 'https://images.unsplash.com/photo-1606914469633-bd39206ea739?w=500&h=500&fit=crop', price: 110.00, coOpPrice: 93.50, category: 'Cold Pressed Oils', variants: ['200ml'] },
-  { id: 8, name: 'Organic Green Gram', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&h=500&fit=crop', price: 182.00, coOpPrice: 154.70, category: 'Staples', variants: ['500g'] },
-  { id: 9, name: 'Organic Jaggery Powder', image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=500&h=500&fit=crop', price: 95.00, coOpPrice: 80.75, category: 'Staples', variants: ['1kg'] },
-  { id: 10, name: 'Organic Kabuli Chana', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&h=500&fit=crop', price: 85.00, coOpPrice: 72.25, category: 'Staples', variants: ['500g'] },
-  { id: 13, name: 'Organic Ragi Flour', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop', price: 260.00, coOpPrice: 221.00, category: 'Staples', variants: ['1kg'] },
-  { id: 14, name: 'Multi Millet Dosa Mix', image: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop', price: 295.00, coOpPrice: 250.75, category: 'Staples', variants: ['500g'] },
-  { id: 16, name: 'Cold Pressed- Safflower Oil', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&h=500&fit=crop', price: 494.00, coOpPrice: 419.90, category: 'Cold Pressed Oils', variants: ['1L'] },
-  { id: 17, name: 'Sunflower Oil - Cold Pressed', image: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500&h=500&fit=crop', price: 455.00, coOpPrice: 386.75, category: 'Cold Pressed Oils', variants: ['1L'] },
-  { id: 18, name: 'Herbal Tooth Powder', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c1c?w=500&h=500&fit=crop', price: 120.00, coOpPrice: 102.00, category: 'Home Essentials', variants: ['100g'] },
-  { id: 22, name: 'Champa Agarbatti - 12pcs', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c1c?w=500&h=500&fit=crop', price: 50.00, coOpPrice: 43.00, category: 'Home Essentials', variants: ['12 Pcs'] },
-  { id: 23, name: 'Chilli Powder', image: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=500&h=500&fit=crop', price: 265.00, coOpPrice: 225.25, category: 'Staples', variants: ['100g'] },
-];
-
-const categories = ['All', 'Staples', 'Cold Pressed Oils', 'Home Essentials'];
+// Category mapping from database to display
+const categoryMapping: Record<string, string> = {
+  'Staples': 'Staples',
+  'Oils': 'Cold Pressed Oils',
+  'Home Essential': 'Home Essentials',
+  'Millets': 'Millets',
+};
 
 const ProductCard = ({ product }: { product: Product }) => {
   const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
@@ -210,11 +198,58 @@ const ProductSkeleton = () => (
 export default function PopularProducts() {
   const [activeTab, setActiveTab] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<string[]>(['All']);
 
+  // Fetch products from API
   useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await publicApi.products.getAll({ limit: 100 });
+        
+        if (response.success && response.data && response.data.products) {
+          // Transform API products to component format
+          const transformedProducts: Product[] = response.data.products.map((p: any, index: number) => ({
+            id: index + 1,
+            name: p.name,
+            image: p.images && p.images.length > 0 ? p.images[0] : 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop',
+            price: p.price,
+            originalPrice: p.compareAtPrice || undefined,
+            coOpPrice: p.price * 0.85, // Calculate 15% discount for co-op members
+            category: categoryMapping[p.category?.name] || p.category?.name || 'Staples',
+            variants: ['500g', '1kg'], // Default variants, can be enhanced later
+          }));
+
+          setAllProducts(transformedProducts);
+          
+          // Extract unique categories
+          const uniqueCategories = ['All', ...Array.from(new Set(transformedProducts.map(p => p.category)))];
+          setCategories(uniqueCategories);
+
+          // Filter by active tab
+          let productsToShow;
+          if (activeTab === 'All') {
+            productsToShow = transformedProducts;
+          } else {
+            productsToShow = transformedProducts.filter(p => p.category === activeTab);
+          }
+          setFilteredProducts(productsToShow);
+        }
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Filter products when tab changes
+  useEffect(() => {
+    if (allProducts.length > 0) {
       let productsToShow;
       if (activeTab === 'All') {
         productsToShow = allProducts;
@@ -222,18 +257,15 @@ export default function PopularProducts() {
         productsToShow = allProducts.filter(p => p.category === activeTab);
       }
       setFilteredProducts(productsToShow);
-      setLoading(false);
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [activeTab]);
+    }
+  }, [activeTab, allProducts]);
 
   return (
     <section className="py-12 lg:py-20 bg-white">
       <div className="container">
         <div className="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4 md:gap-8">
           <div className="flex items-center gap-4">
-            <h2 className="text-3xl font-semibold text-dark-gray-alt" style={{ fontFamily: 'var(--font-display)' }}>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-dark-gray-alt" style={{ fontFamily: 'var(--font-display)' }}>
               Popular Products
             </h2>
             <a href="#" className="text-primary-green font-semibold text-sm hidden md:block whitespace-nowrap">
@@ -261,7 +293,7 @@ export default function PopularProducts() {
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
           {loading
             ? Array.from({ length: 10 }).map((_, i) => <ProductSkeleton key={i} />)
             : filteredProducts.map((product) => (

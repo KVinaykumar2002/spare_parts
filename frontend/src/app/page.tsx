@@ -11,7 +11,7 @@ import NewsletterSubscription from "@/components/sections/newsletter-subscriptio
 
 export default function Home() {
   return (
-    <div className="bg-background font-body">
+    <div className="bg-white font-body min-h-screen w-full" style={{ backgroundColor: '#ffffff' }}>
       <HeroCarousel />
       <TopCategories />
       <FeaturedBanners />

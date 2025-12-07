@@ -24,7 +24,7 @@ export default function StoreLocatorPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <div className="container mx-auto px-5 py-16 lg:px-10">
         <div className="max-w-5xl mx-auto">
           <Link href="/" className="inline-flex items-center text-primary-green font-semibold mb-8">

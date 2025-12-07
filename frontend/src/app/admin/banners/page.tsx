@@ -22,6 +22,16 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -37,6 +47,8 @@ export default function BannersPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingBanner, setEditingBanner] = useState<any>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [bannerToDelete, setBannerToDelete] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     title: '',
     subtitle: '',
@@ -101,11 +113,19 @@ export default function BannersPage() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this banner?')) return;
+  const handleDeleteClick = (id: string) => {
+    setBannerToDelete(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!bannerToDelete) return;
+
     try {
-      await adminApi.banners.delete(id);
+      await adminApi.banners.delete(bannerToDelete);
       toast.success('Banner deleted successfully');
+      setDeleteDialogOpen(false);
+      setBannerToDelete(null);
       fetchBanners();
     } catch (error) {
       toast.error('Failed to delete banner');
@@ -293,7 +313,7 @@ export default function BannersPage() {
                       <Button variant="ghost" size="sm" onClick={() => handleEdit(banner)}>
                         <Edit className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="sm" onClick={() => handleDelete(banner._id)}>
+                      <Button variant="ghost" size="sm" onClick={() => handleDeleteClick(banner._id)}>
                         <Trash2 className="h-4 w-4 text-red-500" />
                       </Button>
                     </div>
@@ -305,6 +325,23 @@ export default function BannersPage() {
           )}
         </CardContent>
       </Card>
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Banner</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this banner? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setBannerToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

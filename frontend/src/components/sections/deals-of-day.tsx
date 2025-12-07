@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { addToCartDirect, Product, ProductVariant } from '@/lib/cart-functionality';
 import ProductDetailsModal from '@/components/ui/product-details-modal';
+import { publicApi } from '@/lib/api';
 
 interface Product {
   id: number;
@@ -17,14 +18,6 @@ interface Product {
   total: number;
   weight: string;
 }
-
-const deals: Product[] = [
-  { id: 1, name: "Organic Foxtail Millet (Navane)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop", dealPrice: 110.00, originalPrice: 125.00, coopPrice: "₹ 93.50 for Co-Op Members*", discount: 12, sold: 75, total: 100, weight: "500g" },
-  { id: 2, name: "Organic Little Millet (Saame)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop", dealPrice: 108.00, originalPrice: 130.00, coopPrice: "₹ 91.80 for Co-Op Members*", discount: 17, sold: 45, total: 100, weight: "500g" },
-  { id: 3, name: "Organic Finger Millet (Ragi)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop", dealPrice: 115.00, originalPrice: 135.00, coopPrice: "₹ 97.75 for Co-Op Members*", discount: 15, sold: 90, total: 120, weight: "1kg" },
-  { id: 4, name: "Organic Kodo Millet (Harka)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop", dealPrice: 112.00, originalPrice: 140.00, coopPrice: "₹ 95.20 for Co-Op Members*", discount: 20, sold: 30, total: 100, weight: "500g" },
-  { id: 5, name: "Organic Barnyard Millet (Udala)", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop", dealPrice: 146.00, originalPrice: 160.00, coopPrice: "₹ 124.10 for Co-Op Members*", discount: 9, sold: 65, total: 100, weight: "500g" },
-];
 
 const padZero = (num: number) => num.toString().padStart(2, '0');
 
@@ -170,12 +163,69 @@ const DealProductCard = ({ product }: { product: Product }) => {
 };
 
 const DealsOfDay = () => {
+    const [deals, setDeals] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchDeals = async () => {
+            try {
+                const response = await publicApi.products.getAll({ featured: 'true', limit: 5 });
+                if (response.success && response.data && response.data.products) {
+                    const transformedDeals: Product[] = response.data.products
+                        .filter((p: any) => p.compareAtPrice && p.compareAtPrice < p.price) // Only products with discounts
+                        .slice(0, 5)
+                        .map((p: any, index: number) => {
+                            const discount = Math.round(((p.price - p.compareAtPrice) / p.price) * 100);
+                            const coopPrice = p.price * 0.85;
+                            return {
+                                id: index + 1,
+                                name: p.name,
+                                image: p.images && p.images.length > 0 ? p.images[0] : "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop",
+                                dealPrice: p.compareAtPrice,
+                                originalPrice: p.price,
+                                coopPrice: `₹ ${coopPrice.toFixed(2)} for Co-Op Members*`,
+                                discount,
+                                sold: Math.floor(Math.random() * 50) + 20, // Random sold count
+                                total: 100,
+                                weight: "500g",
+                            };
+                        });
+                    setDeals(transformedDeals);
+                }
+            } catch (error) {
+                console.error('Failed to fetch deals:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDeals();
+    }, []);
+
+    if (loading) {
+        return (
+            <section className="py-20 bg-white">
+                <div className="max-w-[1400px] mx-auto px-5 md:px-10">
+                    <div className="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-6">
+                        {[1, 2, 3, 4, 5].map((i) => (
+                            <div key={i} className="animate-pulse bg-gray-200 rounded-lg h-64" />
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (deals.length === 0) {
+        return null;
+    }
+
     return (
         <section className="py-20 bg-white">
             <div className="max-w-[1400px] mx-auto px-5 md:px-10">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
                     <div className="flex items-center gap-4 mb-4 md:mb-0">
-                        <h2 className="text-2xl md:text-3xl font-semibold text-dark-gray-alt" style={{fontFamily: 'GT Standard, sans-serif', letterSpacing: '-0.3px', lineHeight: '1.3'}}>Deals Of The Day</h2>
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-dark-gray-alt" style={{fontFamily: 'GT Standard, sans-serif', letterSpacing: '-0.3px', lineHeight: '1.3'}}>Deals Of The Day</h2>
                         <CountdownTimer />
                     </div>
                     <a href="/collections/om-deals" className="text-primary-green font-semibold text-sm flex items-center">

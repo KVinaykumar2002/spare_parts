@@ -14,28 +14,20 @@ import {
 // Categories in exact order as specified
 const categories = [
   "Dals & Pulses",
-  "Dry Fruits",
   "Spices & Masalas",
   "Home Essential",
   "Millets",
   "Oils",
-  "Sweeteners",
-  "Sweets",
-  "Bakery",
   "Ready To Cook",
 ];
 
 // Category hrefs mapping
 const categoryHrefs: Record<string, string> = {
   "Dals & Pulses": "/collections/dals-pulses",
-  "Dry Fruits": "/collections/dry-fruits",
   "Spices & Masalas": "/collections/spices-masalas",
   "Home Essential": "/collections/home-essential",
   "Millets": "/collections/millets",
   "Oils": "/collections/edible-oils",
-  "Sweeteners": "/collections/sweeteners",
-  "Sweets": "/collections/sweets",
-  "Bakery": "/collections/bakery",
   "Ready To Cook": "/collections/ready-to-cook",
 };
 

@@ -31,7 +31,7 @@ const createAdmin = async () => {
     // Admin credentials
     const adminData = {
       name: 'Admin User',
-      email: 'admin@eversol.com',
+      email: 'admin@mangala.com',
       password: 'Admin@123',
       role: 'admin',
       isActive: true,
@@ -40,23 +40,24 @@ const createAdmin = async () => {
     // Check if admin already exists
     const existingAdmin = await User.findOne({ email: adminData.email });
     if (existingAdmin) {
-      console.log('Admin already exists with email:', adminData.email);
-      console.log('You can use these credentials to login:');
+      // Update existing admin with plain text password
+      existingAdmin.password = adminData.password;
+      await existingAdmin.save();
+      console.log('✅ Admin account updated successfully!');
+      console.log('\n📧 Admin Credentials:');
       console.log('Email:', adminData.email);
       console.log('Password:', adminData.password);
+      console.log('\n⚠️  Password stored as plain text in database.');
       await mongoose.disconnect();
       return;
     }
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(adminData.password, salt);
-
+    // Store password as-is (plain text)
     // Create admin user
     const admin = await User.create({
       name: adminData.name,
       email: adminData.email,
-      password: hashedPassword,
+      password: adminData.password, // Store password exactly as provided
       role: adminData.role,
       isActive: adminData.isActive,
     });

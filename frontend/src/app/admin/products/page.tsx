@@ -23,6 +23,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
@@ -42,6 +52,8 @@ export default function ProductsPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -64,8 +76,8 @@ export default function ProductsPage() {
   const fetchProducts = async () => {
     try {
       const response = await adminApi.products.getAll({ limit: 50 });
-      if (response.success && response.data) {
-        setProducts(response.data.products);
+      if (response.success && response.data && typeof response.data === 'object' && 'products' in response.data) {
+        setProducts((response.data as any).products);
       }
     } catch (error) {
       toast.error('Failed to load products');
@@ -78,10 +90,22 @@ export default function ProductsPage() {
     try {
       const response = await adminApi.categories.getAll();
       if (response.success && response.data) {
-        setCategories(response.data);
+        // Handle both array and object with array
+        const categoriesArray = Array.isArray(response.data) 
+          ? response.data 
+          : (response.data as any).categories || [];
+        
+        // Filter out unwanted categories
+        const excludedCategories = ['Dry Fruits', 'Sweets', 'Sweeteners', 'Bakery'];
+        const filteredCategories = categoriesArray.filter(
+          (cat: any) => cat && cat.name && !excludedCategories.includes(cat.name)
+        );
+        setCategories(filteredCategories);
+      } else {
+        toast.error('Failed to load categories');
       }
-    } catch (error) {
-      // Handle error
+    } catch (error: any) {
+      toast.error('Failed to load categories');
     }
   };
 
@@ -130,12 +154,19 @@ export default function ProductsPage() {
     setIsDialogOpen(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this product?')) return;
+  const handleDeleteClick = (id: string) => {
+    setProductToDelete(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!productToDelete) return;
 
     try {
-      await adminApi.products.delete(id);
+      await adminApi.products.delete(productToDelete);
       toast.success('Product deleted successfully');
+      setDeleteDialogOpen(false);
+      setProductToDelete(null);
       fetchProducts();
     } catch (error) {
       toast.error('Failed to delete product');
@@ -165,10 +196,10 @@ export default function ProductsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold dark:text-gray-100">Product Management</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <h1 className="text-2xl sm:text-3xl font-bold dark:text-gray-100">Product Management</h1>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-2">
             Manage your product inventory
           </p>
         </div>
@@ -182,12 +213,12 @@ export default function ProductsPage() {
               Add Product
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto w-[95vw] sm:w-full">
             <DialogHeader>
               <DialogTitle>{editingProduct ? 'Edit Product' : 'Add New Product'}</DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="name">Product Name *</Label>
                   <Input
@@ -204,14 +235,20 @@ export default function ProductsPage() {
                     onValueChange={(value) => setFormData({ ...formData, category: value })}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder={categories.length === 0 ? "No categories available" : "Select category"} />
                     </SelectTrigger>
                     <SelectContent>
-                      {categories.map((cat) => (
-                        <SelectItem key={cat._id} value={cat._id}>
-                          {cat.name}
+                      {categories.length === 0 ? (
+                        <SelectItem value="no-categories" disabled>
+                          No categories available. Please create categories first.
                         </SelectItem>
-                      ))}
+                      ) : (
+                        categories.map((cat) => (
+                          <SelectItem key={cat._id} value={cat._id}>
+                            {cat.name}
+                          </SelectItem>
+                        ))
+                      )}
                     </SelectContent>
                   </Select>
                 </div>
@@ -328,58 +365,97 @@ export default function ProductsPage() {
               {searchTerm ? 'No products found matching your search' : 'No products yet. Create your first product!'}
             </div>
           ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Price</TableHead>
-                  <TableHead>Stock</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredProducts.map((product) => (
-                <TableRow key={product._id}>
-                  <TableCell className="font-medium">{product.name}</TableCell>
-                  <TableCell>{product.category?.name || 'N/A'}</TableCell>
-                  <TableCell>₹{product.price.toLocaleString()}</TableCell>
-                  <TableCell>
-                    <Badge variant={product.stock < 10 ? 'destructive' : 'default'}>
-                      {product.stock}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={product.isActive ? 'default' : 'secondary'}>
-                      {product.isActive ? 'Active' : 'Inactive'}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleEdit(product)}
-                      >
-                        <Edit className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDelete(product._id)}
-                      >
-                        <Trash2 className="h-4 w-4 text-red-500" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-              </TableBody>
-            </Table>
+            <div className="overflow-x-auto -mx-4 sm:mx-0">
+              <div className="inline-block min-w-full align-middle px-4 sm:px-0">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="min-w-[200px]">Name</TableHead>
+                      <TableHead className="hidden sm:table-cell">Category</TableHead>
+                      <TableHead className="hidden md:table-cell">Price</TableHead>
+                      <TableHead className="hidden md:table-cell">Stock</TableHead>
+                      <TableHead className="hidden sm:table-cell">Status</TableHead>
+                      <TableHead className="min-w-[100px]">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredProducts.map((product) => (
+                    <TableRow key={product._id}>
+                      <TableCell className="font-medium">
+                        <div>
+                          <div className="font-semibold">{product.name}</div>
+                          <div className="text-xs text-gray-500 sm:hidden mt-1 space-y-1">
+                            <div>{product.category?.name || 'N/A'}</div>
+                            <div>₹{product.price.toLocaleString()}</div>
+                            <div className="flex items-center gap-2">
+                              <Badge variant={product.stock < 10 ? 'destructive' : 'default'} className="text-xs">
+                                Stock: {product.stock}
+                              </Badge>
+                              <Badge variant={product.isActive ? 'default' : 'secondary'} className="text-xs">
+                                {product.isActive ? 'Active' : 'Inactive'}
+                              </Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">{product.category?.name || 'N/A'}</TableCell>
+                      <TableCell className="hidden md:table-cell">₹{product.price.toLocaleString()}</TableCell>
+                      <TableCell className="hidden md:table-cell">
+                        <Badge variant={product.stock < 10 ? 'destructive' : 'default'}>
+                          {product.stock}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="hidden sm:table-cell">
+                        <Badge variant={product.isActive ? 'default' : 'secondary'}>
+                          {product.isActive ? 'Active' : 'Inactive'}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleEdit(product)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteClick(product._id)}
+                            className="h-8 w-8 p-0"
+                          >
+                            <Trash2 className="h-4 w-4 text-red-500" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </div>
           )}
         </CardContent>
       </Card>
+
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete Product</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete this product? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setProductToDelete(null)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleDeleteConfirm} className="bg-red-600 hover:bg-red-700">
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

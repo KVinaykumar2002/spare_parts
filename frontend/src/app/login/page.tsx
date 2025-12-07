@@ -58,19 +58,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f5f6f8] p-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-[#f5f6f8] p-4 sm:p-6 relative">
       {/* Home icon */}
       <Link
         href="/"
-        className="absolute top-6 left-6 inline-flex items-center justify-center rounded-full bg-white shadow-md text-[#0d4d3d] hover:bg-[#e7f4ef] transition-colors"
+        className="absolute top-4 left-4 sm:top-6 sm:left-6 inline-flex items-center justify-center rounded-full bg-white shadow-md text-[#0d4d3d] hover:bg-[#e7f4ef] transition-colors z-10"
         aria-label="Go to home page"
       >
-        <Home className="h-6 w-6 m-3" />
+        <Home className="h-5 w-5 sm:h-6 sm:w-6 m-2 sm:m-3" />
       </Link>
 
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+      <div className="w-full max-w-5xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-2 mt-8 sm:mt-0">
         {/* Left panel */}
-        <div className="bg-[#0d4d3d] text-white flex flex-col justify-between p-8 md:p-12">
+        <div className="bg-[#0d4d3d] text-white flex flex-col justify-between p-6 sm:p-8 md:p-12 order-2 md:order-1">
           <div>
             <div className="w-16 h-16 rounded-full bg-white/10 border border-white/30 flex items-center justify-center mb-8">
               <span className="text-2xl font-bold">OM</span>
@@ -87,7 +87,7 @@ export default function LoginPage() {
             <Link href="/register">
               <Button
                 variant="outline"
-                className="w-full md:w-auto border-white text-white hover:bg-white hover:text-[#0d4d3d] rounded-full px-10"
+                className="w-full md:w-auto border-white text-white rounded-full px-10"
               >
                 SIGN UP
               </Button>
@@ -96,7 +96,7 @@ export default function LoginPage() {
         </div>
 
         {/* Right panel */}
-        <div className="flex flex-col justify-center p-8 md:p-12">
+        <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 order-1 md:order-2">
           <div className="mb-8 text-center md:text-left">
             <h1 className="text-3xl font-bold text-[#0d4d3d] mb-2">welcome</h1>
             <p className="text-sm text-gray-500">

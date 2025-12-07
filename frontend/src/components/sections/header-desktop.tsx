@@ -144,12 +144,6 @@ const HeaderDesktop = () => {
             </Link>
             <div className="flex items-center gap-4">
               <Link
-                href="/register"
-                className="flex items-center gap-2 text-dark-gray-alt hover:text-primary-green transition-colors"
-              >
-                <span className="text-sm font-medium">Register</span>
-              </Link>
-              <Link
                 href="/login"
                 className="flex items-center gap-2 text-dark-gray-alt hover:text-primary-green transition-colors"
               >

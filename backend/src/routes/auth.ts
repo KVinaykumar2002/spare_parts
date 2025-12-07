@@ -31,15 +31,12 @@ router.post(
         return res.status(400).json({ success: false, message: 'User already exists' });
       }
 
-      // Hash password
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-
+      // Store password as-is (plain text)
       // Create admin user
       const user = await User.create({
         name,
         email,
-        password: hashedPassword,
+        password: password, // Store password exactly as provided
         role: 'admin',
       });
 
@@ -104,8 +101,8 @@ router.post(
         return res.status(403).json({ success: false, message: 'Access denied. Admin only.' });
       }
 
-      // Check password
-      const isMatch = await bcrypt.compare(password, user.password);
+      // Check password (direct comparison for plain text storage)
+      const isMatch = password === user.password;
       if (!isMatch) {
         return res.status(401).json({ success: false, message: 'Invalid credentials' });
       }
@@ -234,7 +231,8 @@ router.post(
           .json({ success: false, message: 'Invalid credentials' });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
+      // Check password (direct comparison for plain text storage)
+      const isMatch = password === user.password;
       if (!isMatch) {
         return res.status(401).json({ success: false, message: 'Invalid credentials' });
       }

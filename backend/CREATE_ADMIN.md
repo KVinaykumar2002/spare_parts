@@ -10,7 +10,7 @@ curl -X POST http://localhost:5001/api/auth/admin/register \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Admin User",
-    "email": "admin@eversol.com",
+    "email": "admin@mangala.com",
     "password": "Admin@123"
   }'
 ```
@@ -23,7 +23,7 @@ curl -X POST http://localhost:5001/api/auth/admin/register \
 ```json
 {
   "name": "Admin User",
-  "email": "admin@eversol.com",
+  "email": "admin@mangala.com",
   "password": "Admin@123"
 }
 ```
@@ -39,7 +39,7 @@ node scripts/create-admin.js
 
 ## Default Admin Credentials (after creation):
 
-**Email**: `admin@eversol.com`  
+**Email**: `admin@mangala.com`  
 **Password**: `Admin@123`
 
 ⚠️ **Important**: Change the password after first login!

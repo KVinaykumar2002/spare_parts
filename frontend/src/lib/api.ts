@@ -170,3 +170,23 @@ export const adminApi = {
   },
 };
 
+// Public API (no authentication required)
+export const publicApi = {
+  products: {
+    getAll: (params?: any) => {
+      const query = new URLSearchParams(params).toString();
+      return apiClient.get(`/public/products${query ? `?${query}` : ''}`);
+    },
+    getById: (id: string) => apiClient.get(`/public/products/${id}`),
+  },
+  banners: {
+    getAll: (params?: any) => {
+      const query = new URLSearchParams(params).toString();
+      return apiClient.get(`/public/banners${query ? `?${query}` : ''}`);
+    },
+  },
+  categories: {
+    getAll: () => apiClient.get('/public/categories'),
+  },
+};
+

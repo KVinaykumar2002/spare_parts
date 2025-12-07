@@ -23,6 +23,11 @@ const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
     {/* Overlay */}
     <div 
       className={`fixed inset-0 bg-black transition-opacity duration-300 ease-in-out z-40 lg:hidden ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0 pointer-events-none'}`}
+      style={{ 
+        display: isOpen ? 'block' : 'none',
+        opacity: isOpen ? 0.5 : 0,
+        pointerEvents: isOpen ? 'auto' : 'none'
+      }}
       onClick={onClose}
       aria-hidden="true"
     />
@@ -51,11 +56,6 @@ const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
               )}
             </li>
           ))}
-          <li className="border-b border-border-gray-alt">
-            <Link href="/register" onClick={onClose} className="block py-4 text-dark-gray-alt hover:text-primary-green transition-colors">
-              Register
-            </Link>
-          </li>
           <li className="border-b border-border-gray-alt">
             <Link href="/login" onClick={onClose} className="block py-4 text-dark-gray-alt hover:text-primary-green transition-colors flex items-center gap-2">
               <User className="h-5 w-5" />
@@ -115,20 +115,20 @@ const HeaderMobile = () => {
   return (
     <>
       <header className="sticky top-[36px] left-0 right-0 z-30 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.1)] lg:hidden">
-        <div className="relative flex items-center justify-between h-[72px] px-4">
+        <div className="relative flex items-center justify-between h-[64px] sm:h-[72px] px-3 sm:px-4">
           
-          <div className="flex items-center gap-2">
-            <button onClick={() => setNavOpen(true)} className="flex items-center justify-center w-11 h-11 -ml-2 cursor-pointer" aria-label="Open menu">
-              <Menu size={28} className="text-dark-gray" />
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <button onClick={() => setNavOpen(true)} className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 -ml-1 sm:-ml-2 cursor-pointer touch-manipulation" aria-label="Open menu">
+              <Menu size={24} className="sm:w-7 sm:h-7 text-dark-gray" />
             </button>
             <AddressDropdown onAddressChange={setSelectedAddress}>
-              <div className="flex items-center gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <Image src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg" alt="Location Icon" width={18} height={21} />
+              <div className="flex items-center gap-1 sm:gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
+                <Image src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg" alt="Location Icon" width={16} height={18} className="sm:w-[18px] sm:h-[21px]" />
                 <div>
-                  <span className="block text-caption text-medium-gray leading-none">Deliver to</span>
-                  <div className="flex items-center text-sm font-semibold text-dark-gray-alt pt-1">
-                    <span>{getAddressDisplay()}</span>
-                    <ChevronDown size={16} className="ml-0.5" />
+                  <span className="block text-[10px] sm:text-caption text-medium-gray leading-none">Deliver to</span>
+                  <div className="flex items-center text-xs sm:text-sm font-semibold text-dark-gray-alt pt-0.5 sm:pt-1">
+                    <span className="max-w-[60px] sm:max-w-none truncate">{getAddressDisplay()}</span>
+                    <ChevronDown size={14} className="sm:w-4 sm:h-4 ml-0.5" />
                   </div>
                 </div>
               </div>
@@ -140,26 +140,27 @@ const HeaderMobile = () => {
               <Image
                 src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/OM_Logo_2-1.png"
                 alt="EverSol"
-                width={100}
-                height={36}
+                width={85}
+                height={30}
+                className="sm:w-[100px] sm:h-[36px]"
                 priority
               />
             </Link>
           </div>
 
           <div className="flex items-center">
-            <Link href="/wishlist" className="relative flex items-center justify-center w-11 h-11" aria-label="Wishlist">
-              <Heart size={25} className="text-dark-gray"/>
+            <Link href="/wishlist" className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 touch-manipulation" aria-label="Wishlist">
+              <Heart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray"/>
               {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 bg-primary-green text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center min-w-[16px]">
+                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-primary-green text-white text-[9px] sm:text-[10px] font-bold rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 flex items-center justify-center min-w-[14px] sm:min-w-[16px]">
                   {wishlistCount > 99 ? '99+' : wishlistCount}
                 </span>
               )}
             </Link>
-            <Link href="/cart" className="relative flex items-center justify-center w-11 h-11 -mr-2" aria-label="Cart">
-              <ShoppingCart size={25} className="text-dark-gray"/>
+            <Link href="/cart" className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 -mr-1 sm:-mr-2 touch-manipulation" aria-label="Cart">
+              <ShoppingCart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray"/>
               {cartCount > 0 && (
-                <span className="absolute top-1 right-1 bg-primary-green text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center min-w-[16px]">
+                <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-primary-green text-white text-[9px] sm:text-[10px] font-bold rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 flex items-center justify-center min-w-[14px] sm:min-w-[16px]">
                   {cartCount > 99 ? '99+' : cartCount}
                 </span>
               )}

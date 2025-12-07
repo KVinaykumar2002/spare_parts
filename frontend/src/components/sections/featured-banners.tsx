@@ -1,29 +1,15 @@
+"use client";
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { publicApi } from '@/lib/api';
 
 interface BannerCardProps {
   title: string;
   imageUrl: string;
   href: string;
 }
-
-const banners: BannerCardProps[] = [
-  {
-    title: "Natural, chemical-free cereals to start your day the organic way",
-    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/cereals_banner-26.jpg",
-    href: "#"
-  },
-  {
-    title: "Fuel your day with premium quality dry fruits and seeds",
-    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/dry_fruites_banner-27.jpg",
-    href: "#"
-  },
-  {
-    title: "Organic, cold pressed cooking oils to nourish your health",
-    imageUrl: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/Oils_banner-28.jpg",
-    href: "#"
-  }
-];
 
 const BannerCard = ({ title, imageUrl, href }: BannerCardProps) => (
   <Link href={href} className="group relative block overflow-hidden rounded-lg aspect-w-4 aspect-h-3">
@@ -43,12 +29,55 @@ const BannerCard = ({ title, imageUrl, href }: BannerCardProps) => (
 );
 
 const FeaturedBanners = () => {
+  const [banners, setBanners] = useState<BannerCardProps[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await publicApi.banners.getAll({ position: 'middle' });
+        if (response.success && response.data) {
+          const transformedBanners: BannerCardProps[] = response.data.map((banner: any) => ({
+            title: banner.title || banner.subtitle || '',
+            imageUrl: banner.image,
+            href: banner.link || '#',
+          }));
+          setBanners(transformedBanners);
+        }
+      } catch (error) {
+        console.error('Failed to fetch banners:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="bg-white">
+        <div className="container py-12 md:py-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="animate-pulse bg-gray-200 rounded-lg aspect-[4/3]" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (banners.length === 0) {
+    return null;
+  }
+
   return (
-    <section className="bg-background">
+    <section className="bg-white">
       <div className="container py-12 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {banners.map((banner) => (
-            <BannerCard key={banner.title} {...banner} />
+          {banners.map((banner, index) => (
+            <BannerCard key={index} {...banner} />
           ))}
         </div>
       </div>
