@@ -82,23 +82,6 @@ export default function ProductDetailsModal({
     
     try {
       // Check authentication first
-      const { checkAuth } = await import('@/lib/auth-utils');
-      const user = await checkAuth();
-      
-      if (!user || user.role !== 'user') {
-        window.dispatchEvent(
-          new CustomEvent('show-toast', {
-            detail: { message: 'Please login to add items to cart', type: 'error' },
-          })
-        );
-        // Redirect to login with current page as redirect
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
-        }
-        setIsAdding(false);
-        return;
-      }
-
       // Create product data structure
       const productData: CartProduct = {
         id: product.id,
@@ -129,18 +112,11 @@ export default function ProductDetailsModal({
         
         onOpenChange(false);
       } else {
-        if (result.requiresAuth) {
-          // Redirect to login
-          if (typeof window !== 'undefined') {
-            window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
-          }
-        } else {
-          window.dispatchEvent(
-            new CustomEvent('show-toast', {
-              detail: { message: result.message || 'Failed to add to cart', type: 'error' },
-            })
-          );
-        }
+        window.dispatchEvent(
+          new CustomEvent('show-toast', {
+            detail: { message: result.message || 'Failed to add to cart', type: 'error' },
+          })
+        );
       }
     } catch (error) {
       window.dispatchEvent(

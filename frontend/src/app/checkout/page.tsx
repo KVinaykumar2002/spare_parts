@@ -15,13 +15,11 @@ import {
   type Cart,
   type CartItem
 } from "@/lib/cart-functionality";
-import { checkAuth } from "@/lib/auth-utils";
-
 export default function CheckoutPage() {
   const router = useRouter();
   const [cart, setCart] = useState<Cart | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -55,23 +53,8 @@ export default function CheckoutPage() {
   };
 
   useEffect(() => {
-    // Check authentication first
-    const checkAuthentication = async () => {
-      try {
-        const user = await checkAuth();
-        if (!user || user.role !== 'user') {
-          // Redirect to login if not authenticated
-          router.push('/login?redirect=/checkout');
-          return;
-        }
-        setIsCheckingAuth(false);
-        loadCart();
-      } catch (error) {
-        router.push('/login?redirect=/checkout');
-      }
-    };
-
-    checkAuthentication();
+    setIsCheckingAuth(false);
+    loadCart();
 
     const eventName = getCartUpdateEventName();
     const handleCartUpdate = () => {

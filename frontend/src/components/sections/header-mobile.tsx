@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, Heart, ShoppingCart, ChevronDown, X, User } from "lucide-react";
+import { Menu, Heart, ShoppingCart, ChevronDown, X } from "lucide-react";
 import { getCartItemCount, getCartUpdateEventName } from "@/lib/cart-functionality";
 import { getWishlistCount, getWishlistUpdateEventName } from "@/lib/wishlist-functionality";
 import AddressDropdown from "@/components/ui/address-dropdown";
@@ -56,12 +56,6 @@ const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
               )}
             </li>
           ))}
-          <li className="border-b border-border-gray-alt">
-            <Link href="/login" onClick={onClose} className="block py-4 text-dark-gray-alt hover:text-primary-green transition-colors flex items-center gap-2">
-              <User className="h-5 w-5" />
-              Log in
-            </Link>
-          </li>
         </ul>
       </nav>
     </div>

@@ -25,12 +25,6 @@ export default function SitemapPage() {
           <li>
             <Link href="/pages/store-locator">Store Locator</Link>
           </li>
-          <li>
-            <Link href="/login">Sign In</Link>
-          </li>
-          <li>
-            <Link href="/register">Register</Link>
-          </li>
         </ul>
       </div>
     </div>

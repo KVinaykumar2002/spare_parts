@@ -55,7 +55,6 @@ const linkGroups: LinkGroup[] = [
   {
     title: "Account",
     links: [
-      { name: "Sign In", href: "/login" },
       { name: "Contact Us", href: "mailto:support@eversol.com" },
       { name: "Become a Co-Op Member", href: "/pages/membership" },
     ],

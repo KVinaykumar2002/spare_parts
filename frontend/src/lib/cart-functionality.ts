@@ -238,19 +238,6 @@ export const addToCart = async (
   variantId: string,
   quantity: number
 ): Promise<{ success: boolean; message: string; requiresAuth?: boolean }> => {
-  // Check authentication
-  if (typeof window !== 'undefined') {
-    const { checkAuth } = await import('./auth-utils');
-    const user = await checkAuth();
-    if (!user || user.role !== 'user') {
-      return { 
-        success: false, 
-        message: 'Please login to add items to cart.', 
-        requiresAuth: true 
-      };
-    }
-  }
-
   if (quantity <= 0) {
     return { success: false, message: 'Quantity must be positive.' };
   }
@@ -311,19 +298,6 @@ export const addToCartDirect = async (
   variantId: string,
   quantity: number
 ): Promise<{ success: boolean; message: string; requiresAuth?: boolean }> => {
-  // Check authentication
-  if (typeof window !== 'undefined') {
-    const { checkAuth } = await import('./auth-utils');
-    const user = await checkAuth();
-    if (!user || user.role !== 'user') {
-      return { 
-        success: false, 
-        message: 'Please login to add items to cart.', 
-        requiresAuth: true 
-      };
-    }
-  }
-
   if (quantity <= 0) {
     return { success: false, message: 'Quantity must be positive.' };
   }

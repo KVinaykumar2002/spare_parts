@@ -152,21 +152,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
     } else if (product) {
       // If no callback provided, use direct cart function
       const { addToCartDirect } = await import('@/lib/cart-functionality');
-      const { checkAuth } = await import('@/lib/auth-utils');
-      
-      const user = await checkAuth();
-      if (!user || user.role !== 'user') {
-        window.dispatchEvent(
-          new CustomEvent('show-toast', {
-            detail: { message: 'Please login to add items to cart', type: 'error' },
-          })
-        );
-        if (typeof window !== 'undefined') {
-          window.location.href = '/login?redirect=' + encodeURIComponent(window.location.pathname);
-        }
-        return;
-      }
-      
       const productData = {
         id: product.id,
         name: product.title,

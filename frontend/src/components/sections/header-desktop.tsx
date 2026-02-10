@@ -9,7 +9,6 @@ import {
   Phone,
   Search,
   ShoppingCart,
-  User,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -142,15 +141,6 @@ const HeaderDesktop = () => {
               </div>
               <span className="text-sm font-medium">Cart</span>
             </Link>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/login"
-                className="flex items-center gap-2 text-dark-gray-alt hover:text-primary-green transition-colors"
-              >
-                <User className="h-6 w-6" />
-                <span className="text-sm font-medium">Log in</span>
-              </Link>
-            </div>
           </div>
         </div>
       </div>

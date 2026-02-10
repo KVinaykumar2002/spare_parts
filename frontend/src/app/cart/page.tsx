@@ -14,13 +14,12 @@ import {
   type Cart,
   type CartItem
 } from "@/lib/cart-functionality";
-import { checkAuth } from "@/lib/auth-utils";
 
 export default function CartPage() {
   const router = useRouter();
   const [cart, setCart] = useState<Cart | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState<{
     itemId: string;
     message: string;
@@ -35,23 +34,8 @@ export default function CartPage() {
   };
 
   useEffect(() => {
-    // Check authentication first
-    const checkAuthentication = async () => {
-      try {
-        const user = await checkAuth();
-        if (!user || user.role !== 'user') {
-          // Redirect to login if not authenticated
-          router.push('/login?redirect=/cart');
-          return;
-        }
-        setIsCheckingAuth(false);
-        loadCart();
-      } catch (error) {
-        router.push('/login?redirect=/cart');
-      }
-    };
-
-    checkAuthentication();
+    setIsCheckingAuth(false);
+    loadCart();
 
     // Listen for cart updates
     const eventName = getCartUpdateEventName();
