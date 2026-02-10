@@ -33,12 +33,19 @@ interface Product {
   variants: string[];
 }
 
-// Category mapping from database to display
+// Category mapping from API category name to display name
 const categoryMapping: Record<string, string> = {
-  'Staples': 'Staples',
-  'Oils': 'Cold Pressed Oils',
-  'Home Essential': 'Home Essentials',
-  'Millets': 'Millets',
+  'Fuel Dispensers / Petrol Pump Equipment': 'Fuel Dispensers',
+  'Petrol Pump Spare Parts': 'Spare Parts',
+  'Petrol Pump Accessories': 'Accessories',
+  'Fuel System Spare Parts': 'Fuel System',
+  'Nozzles & Hoses': 'Nozzles & Hoses',
+  'MPD / Fuel Metering Accessories': 'MPD / Metering',
+  'Fire & Safety Equipment': 'Fire & Safety',
+  'Uniforms': 'Uniforms',
+  'Testing & Measurement Equipment': 'Testing & Measurement',
+  'Queue Management Systems': 'Queue Management',
+  'LED / Canopy Lighting': 'LED / Lighting',
 };
 
 const ProductCard = ({ product }: { product: Product }) => {

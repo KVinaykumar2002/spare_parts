@@ -26,16 +26,19 @@ interface SearchResults {
 
 // Data from website content to populate mock results
 const mockProducts: Product[] = [
-  { id: "1", name: "Organic Rajmudi Rice", price: 152.00, url: "/products/organic-rajmudi-rice" },
-  { id: "2", name: "A2 Desi Cow Ghee", price: 625.50, url: "/products/a2-desi-cow-ghee" },
-  { id: "3", name: "Organic Tur/Toor Dal", price: 182.00, url: "/products/organic-tur-toor-dal" },
-  { id: "4", name: "Cold Pressed - Groundnut Oil", price: 494.00, url: "/products/cold-pressed-groundnut-oil" },
-  { id: "5", name: "Organic Moong Dal", price: 162.00, url: "/products/organic-moong-dal" },
+  { id: "1", name: "Dual Hose Fuel Dispenser Unit", price: 185000, url: "/collections/fuel-dispensers" },
+  { id: "2", name: "Dispenser Display Board", price: 4500, url: "/collections/petrol-pump-spare-parts" },
+  { id: "3", name: "Auto-Cut Nozzle 3/4\"", price: 2200, url: "/collections/nozzles-hoses" },
+  { id: "4", name: "Fire Extinguisher 9kg ABC", price: 3200, url: "/collections/fire-safety-equipment" },
+  { id: "5", name: "Canopy LED Panel 40W", price: 3200, url: "/collections/led-canopy-lighting" },
 ];
 
 const mockCategories: Category[] = [
-  { id: "1", name: "Staples", url: "/collections/staples" },
-  { id: "2", name: "Oils", url: "/collections/oils" },
+  { id: "1", name: "Fuel Dispensers / Petrol Pump Equipment", url: "/collections/fuel-dispensers" },
+  { id: "2", name: "Petrol Pump Spare Parts", url: "/collections/petrol-pump-spare-parts" },
+  { id: "3", name: "Nozzles & Hoses", url: "/collections/nozzles-hoses" },
+  { id: "4", name: "Fire & Safety Equipment", url: "/collections/fire-safety-equipment" },
+  { id: "5", name: "LED / Canopy Lighting", url: "/collections/led-canopy-lighting" },
 ];
 
 const SearchBar = () => {

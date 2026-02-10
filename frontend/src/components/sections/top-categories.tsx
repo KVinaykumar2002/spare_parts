@@ -14,41 +14,17 @@ interface Category {
 }
 
 const categoriesData: Category[] = [
-  {
-    name: "Staples",
-    items: "48 Items",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/1-9.png",
-    bgColor: "bg-[#FBF3D4]",
-    href: "/collections/staples",
-  },
-  {
-    name: "Oils",
-    items: "10 Items",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/2_29d5505b-daa9-4f09-aa36-35b30477a53d-10.png",
-    bgColor: "bg-[#DDEFE0]",
-    href: "/collections/oils",
-  },
-  {
-    name: "Seeds",
-    items: "15 Items",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/3-11.png",
-    bgColor: "bg-[#FBE5E1]",
-    href: "/collections/seeds",
-  },
-  {
-    name: "Home Essential",
-    items: "25 Items",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/1-17.png",
-    bgColor: "bg-[#F1EDFC]",
-    href: "/collections/home-essential",
-  },
-  {
-    name: "Ready To Cook",
-    items: "18 Items",
-    image: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/2_29d5505b-daa9-4f09-aa36-35b30477a53d-18.png",
-    bgColor: "bg-[#DDEFE0]",
-    href: "/collections/ready-to-cook",
-  },
+  { name: "Fuel Dispensers / Petrol Pump Equipment", items: "12 Items", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop", bgColor: "bg-[#E8F4F8]", href: "/collections/fuel-dispensers" },
+  { name: "Petrol Pump Spare Parts", items: "15 Items", image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop", bgColor: "bg-[#FBF3D4]", href: "/collections/petrol-pump-spare-parts" },
+  { name: "Petrol Pump Accessories", items: "10 Items", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop", bgColor: "bg-[#DDEFE0]", href: "/collections/petrol-pump-accessories" },
+  { name: "Fuel System Spare Parts", items: "14 Items", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop", bgColor: "bg-[#FBE5E1]", href: "/collections/fuel-system-spare-parts" },
+  { name: "Nozzles & Hoses", items: "18 Items", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop", bgColor: "bg-[#F1EDFC]", href: "/collections/nozzles-hoses" },
+  { name: "MPD / Fuel Metering Accessories", items: "8 Items", image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop", bgColor: "bg-[#E8F4F8]", href: "/collections/mpd-fuel-metering-accessories" },
+  { name: "Fire & Safety Equipment", items: "12 Items", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop", bgColor: "bg-[#FFE5E5]", href: "/collections/fire-safety-equipment" },
+  { name: "Uniforms", items: "6 Items", image: "https://images.unsplash.com/photo-1558769132-cb1aeaede002?w=400&h=400&fit=crop", bgColor: "bg-[#DDEFE0]", href: "/collections/uniforms" },
+  { name: "Testing & Measurement Equipment", items: "9 Items", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop", bgColor: "bg-[#FBF3D4]", href: "/collections/testing-measurement-equipment" },
+  { name: "Queue Management Systems", items: "5 Items", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop", bgColor: "bg-[#F1EDFC]", href: "/collections/queue-management-systems" },
+  { name: "LED / Canopy Lighting", items: "11 Items", image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=400&h=400&fit=crop", bgColor: "bg-[#FFF8E5]", href: "/collections/led-canopy-lighting" },
 ];
 
 const CategoryCard = ({ category }: { category: Category }) => (
@@ -66,7 +42,7 @@ const CategoryCard = ({ category }: { category: Category }) => (
         className="transition-transform duration-300"
       />
     </div>
-    <h3 className="font-semibold text-center text-base text-dark-gray-alt" style={{ fontFamily: 'var(--font-display)' }}>{category.name}</h3>
+    <h3 className="font-semibold text-center text-base text-dark-gray-alt line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>{category.name}</h3>
     <p className="text-sm text-medium-gray-alt mt-1" style={{ fontFamily: 'var(--font-body)' }}>{category.items}</p>
   </Link>
 );

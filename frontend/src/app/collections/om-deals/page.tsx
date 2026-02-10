@@ -19,16 +19,16 @@ export default function DealsPage() {
               Deals of the Day
             </h1>
             <p className="text-lg text-medium-gray">
-              Amazing discounts on organic products - limited time offers
+              Amazing discounts on petrol pump equipment and spare parts - limited time offers
             </p>
           </div>
 
           <div className="p-8 bg-light-gray rounded-lg">
             <p className="text-medium-gray mb-4">
-              Check back soon for amazing deals on organic products!
+              Check back soon for amazing deals on fuel dispensers, spare parts and accessories!
             </p>
             <Link
-              href="/"
+              href="/collections/all"
               className="inline-block bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold px-8 py-3 rounded-md transition-colors"
             >
               Browse All Products

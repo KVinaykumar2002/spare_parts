@@ -15,97 +15,50 @@ interface Category {
   products: Product[];
 }
 
+const PLACEHOLDER = 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=200&h=200&fit=crop';
+const NOZZLE = 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=200&h=200&fit=crop';
+const SAFETY = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=200&h=200&fit=crop';
+const LIGHT = 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=200&h=200&fit=crop';
+
 const categoriesData: Category[] = [
   {
-    title: 'Millets',
+    title: 'Fuel Dispensers / Petrol Pump Equipment',
     products: [
-      {
-        name: 'Organic Foxtail Millet (Navane)',
-        coopPrice: '93.50',
-        imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic Little Millet (Saame)',
-        coopPrice: '91.80',
-        imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic Finger Millet (Ragi)',
-        coopPrice: '97.75',
-        imageUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=200&h=200&fit=crop',
-        href: '#',
-      },
+      { name: 'Dual Hose Fuel Dispenser Unit', coopPrice: '1,57,250', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
+      { name: 'Electronic Petrol Pump Dispenser', coopPrice: '1,91,250', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
+      { name: 'Compact Single Nozzle Dispenser', coopPrice: '80,750', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
     ],
   },
   {
-    title: 'Edible Oils',
+    title: 'Petrol Pump Spare Parts',
     products: [
-      {
-        name: 'Cold Pressed - Groundnut Oil',
-        coopPrice: '419.90',
-        imageUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Sunflower Oil - Cold Pressed',
-        coopPrice: '386.75',
-        imageUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Cold Pressed - Coconut Oil',
-        coopPrice: '93.50',
-        imageUrl: 'https://images.unsplash.com/photo-1606914469633-bd39206ea739?w=200&h=200&fit=crop',
-        href: '#',
-      },
+      { name: 'Dispenser Display Board', coopPrice: '3,825', imageUrl: PLACEHOLDER, href: '/collections/petrol-pump-spare-parts' },
+      { name: 'Pump Motor Assembly', coopPrice: '10,625', imageUrl: PLACEHOLDER, href: '/collections/petrol-pump-spare-parts' },
+      { name: 'Valve Assembly Kit', coopPrice: '2,720', imageUrl: NOZZLE, href: '/collections/petrol-pump-spare-parts' },
     ],
   },
   {
-    title: 'Seeds',
+    title: 'Nozzles & Hoses',
     products: [
-      {
-        name: 'Organic Pumpkin Seed',
-        coopPrice: '112.20',
-        imageUrl: 'https://images.unsplash.com/photo-1606914501446-0c2c0c0a0c0c?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic White Sesame',
-        coopPrice: '68.80',
-        imageUrl: 'https://images.unsplash.com/photo-1606914501446-0c2c0c0a0c0c?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic Sunflower Seeds',
-        coopPrice: '72.25',
-        imageUrl: 'https://images.unsplash.com/photo-1606914501446-0c2c0c0a0c0c?w=200&h=200&fit=crop',
-        href: '#',
-      },
+      { name: 'Auto-Cut Nozzle 3/4"', coopPrice: '1,870', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
+      { name: 'Reinforced Fuel Hose 5m', coopPrice: '1,573', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
+      { name: 'Dispenser Hose with Nozzle', coopPrice: '3,825', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
     ],
   },
   {
-    title: 'Pulses',
+    title: 'Fire & Safety Equipment',
     products: [
-      {
-        name: 'Organic Tur/Toor Dal',
-        coopPrice: '154.70',
-        imageUrl: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic Groundnuts',
-        coopPrice: '157.25',
-        imageUrl: 'https://images.unsplash.com/photo-1606914501446-0c2c0c0a0c0c?w=200&h=200&fit=crop',
-        href: '#',
-      },
-      {
-        name: 'Organic Moong Dal',
-        coopPrice: '137.70',
-        imageUrl: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=200&h=200&fit=crop',
-        href: '#',
-      },
+      { name: 'Fire Extinguisher 9kg ABC', coopPrice: '2,720', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
+      { name: 'Safety Signage Kit', coopPrice: '723', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
+      { name: 'Fire Blanket', coopPrice: '1,020', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
+    ],
+  },
+  {
+    title: 'LED / Canopy Lighting',
+    products: [
+      { name: 'Canopy LED Panel 40W', coopPrice: '2,720', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
+      { name: 'Strip Light 5m', coopPrice: '1,530', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
+      { name: 'Flood Light 50W', coopPrice: '2,125', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
     ],
   },
 ];
@@ -136,7 +89,7 @@ const CategoryShowcases = () => {
                         alt={product.name}
                         width={70}
                         height={70}
-                        className="sm:w-20 sm:h-20 rounded-md bg-white shadow-sm ring-1 ring-border-gray-alt transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg"
+                        className="sm:w-20 sm:h-20 rounded-md bg-white shadow-sm ring-1 ring-border-gray-alt transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:shadow-lg object-cover"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">

@@ -11,24 +11,32 @@ import {
   X,
 } from "lucide-react";
 
-// Categories in exact order as specified
 const categories = [
-  "Dals & Pulses",
-  "Spices & Masalas",
-  "Home Essential",
-  "Millets",
-  "Oils",
-  "Ready To Cook",
+  "Fuel Dispensers / Petrol Pump Equipment",
+  "Petrol Pump Spare Parts",
+  "Petrol Pump Accessories",
+  "Fuel System Spare Parts",
+  "Nozzles & Hoses",
+  "MPD / Fuel Metering Accessories",
+  "Fire & Safety Equipment",
+  "Uniforms",
+  "Testing & Measurement Equipment",
+  "Queue Management Systems",
+  "LED / Canopy Lighting",
 ];
 
-// Category hrefs mapping
 const categoryHrefs: Record<string, string> = {
-  "Dals & Pulses": "/collections/dals-pulses",
-  "Spices & Masalas": "/collections/spices-masalas",
-  "Home Essential": "/collections/home-essential",
-  "Millets": "/collections/millets",
-  "Oils": "/collections/edible-oils",
-  "Ready To Cook": "/collections/ready-to-cook",
+  "Fuel Dispensers / Petrol Pump Equipment": "/collections/fuel-dispensers",
+  "Petrol Pump Spare Parts": "/collections/petrol-pump-spare-parts",
+  "Petrol Pump Accessories": "/collections/petrol-pump-accessories",
+  "Fuel System Spare Parts": "/collections/fuel-system-spare-parts",
+  "Nozzles & Hoses": "/collections/nozzles-hoses",
+  "MPD / Fuel Metering Accessories": "/collections/mpd-fuel-metering-accessories",
+  "Fire & Safety Equipment": "/collections/fire-safety-equipment",
+  "Uniforms": "/collections/uniforms",
+  "Testing & Measurement Equipment": "/collections/testing-measurement-equipment",
+  "Queue Management Systems": "/collections/queue-management-systems",
+  "LED / Canopy Lighting": "/collections/led-canopy-lighting",
 };
 
 export default function CategoryDropdown() {
@@ -101,10 +109,9 @@ export default function CategoryDropdown() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 mt-2.5 w-[calc(100vw-40px)] md:w-[500px] max-w-[500px] bg-white rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.15)] border border-[#E6E6E6] p-4 z-50"
+            className="absolute top-full left-0 mt-2.5 w-[calc(100vw-40px)] md:w-[500px] max-w-[500px] max-h-[80vh] overflow-y-auto bg-white rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.15)] border border-[#E6E6E6] p-4 z-50"
             style={{ willChange: "transform, opacity" }}
           >
-            {/* Close Button */}
             <button
               onClick={() => setOpen(false)}
               className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-sm opacity-70 hover:opacity-100 hover:bg-gray-100 transition-all duration-200"
@@ -113,7 +120,6 @@ export default function CategoryDropdown() {
               <X className="h-4 w-4 text-dark-gray-alt" />
             </button>
 
-            {/* Categories Grid - 2 Columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pr-6">
               {categories.map((category, index) => (
                 <motion.div
