@@ -270,33 +270,44 @@ export default function PopularProducts() {
   return (
     <section className="py-12 lg:py-20 bg-white">
       <div className="container">
-        <div className="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4 md:gap-8">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-5 mb-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-2xl sm:text-3xl font-semibold text-dark-gray-alt" style={{ fontFamily: 'var(--font-display)' }}>
               Popular Products
             </h2>
-            <a href="#" className="text-primary-green font-semibold text-sm hidden md:block whitespace-nowrap">
+            <a
+              href="/collections/all"
+              className="text-primary font-semibold text-sm whitespace-nowrap rounded-lg px-3 py-1.5 hover:bg-primary/5 transition-colors"
+            >
               View All
             </a>
           </div>
-          <div className="overflow-x-auto -mb-px">
-            <ul className="flex space-x-4 sm:space-x-6 lg:space-x-8 border-b border-border-gray whitespace-nowrap">
-              {categories.map((category) => (
-                <li key={category}>
-                  <button
-                    onClick={() => setActiveTab(category)}
-                    className={`pb-3 cursor-pointer transition-colors relative text-base font-medium ${
-                      activeTab === category ? 'text-primary' : 'text-medium-gray-alt hover:text-primary'
-                    }`}
-                  >
-                    <span>{category}</span>
-                    {activeTab === category && (
-                      <span className="absolute bottom-[-1px] left-0 w-full h-0.5 bg-primary" />
-                    )}
-                  </button>
-                </li>
-              ))}
-            </ul>
+          <div className="rounded-xl bg-stone-50/80 border border-stone-200/80 p-2">
+            <div className="overflow-x-auto -mx-1 px-1">
+              <ul className="flex gap-2 min-w-0 pb-1" role="tablist" aria-label="Product category filters">
+                {categories.map((category) => (
+                  <li key={category} role="presentation">
+                    <button
+                      role="tab"
+                      aria-selected={activeTab === category}
+                      tabIndex={activeTab === category ? 0 : -1}
+                      onClick={() => setActiveTab(category)}
+                      className={`
+                        shrink-0 rounded-lg px-4 py-2.5 text-sm font-medium whitespace-nowrap
+                        transition-all duration-200 cursor-pointer
+                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+                        ${activeTab === category
+                          ? 'bg-primary text-primary-foreground shadow-sm'
+                          : 'text-stone-600 hover:bg-white hover:text-primary hover:shadow-sm border border-transparent hover:border-stone-200'
+                        }
+                      `}
+                    >
+                      {category}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
