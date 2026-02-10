@@ -35,17 +35,7 @@ interface Product {
 
 // Category mapping from API category name to display name
 const categoryMapping: Record<string, string> = {
-  'Fuel Dispensers / Petrol Pump Equipment': 'Fuel Dispensers',
-  'Petrol Pump Spare Parts': 'Spare Parts',
-  'Petrol Pump Accessories': 'Accessories',
-  'Fuel System Spare Parts': 'Fuel System',
-  'Nozzles & Hoses': 'Nozzles & Hoses',
-  'MPD / Fuel Metering Accessories': 'MPD / Metering',
-  'Fire & Safety Equipment': 'Fire & Safety',
-  'Uniforms': 'Uniforms',
-  'Testing & Measurement Equipment': 'Testing & Measurement',
-  'Queue Management Systems': 'Queue Management',
-  'LED / Canopy Lighting': 'LED / Lighting',
+  'Indian Oil Petrol Bunk Products': 'Petrol Bunk',
 };
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -276,7 +266,7 @@ export default function PopularProducts() {
               Popular Products
             </h2>
             <a
-              href="/collections/all"
+              href="/collections/indian-oil-petrol-bunk-products"
               className="text-primary font-semibold text-sm whitespace-nowrap rounded-lg px-3 py-1.5 hover:bg-primary/5 transition-colors"
             >
               View All

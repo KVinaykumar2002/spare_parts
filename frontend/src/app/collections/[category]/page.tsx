@@ -12,53 +12,27 @@ type PageProps = {
   params: Promise<{ category: string }>;
 };
 
-// Category slug to category name mapping
+const PETROL_BUNK_IMG = '/products/Indian_oil_petrol_bump_products/0.jpg';
+
+// Category slug to category name mapping (Indian Oil petrol bunk only)
 const categorySlugToName: Record<string, string> = {
-  'fuel-dispensers': 'Fuel Dispensers / Petrol Pump Equipment',
-  'petrol-pump-spare-parts': 'Petrol Pump Spare Parts',
-  'petrol-pump-accessories': 'Petrol Pump Accessories',
-  'fuel-system-spare-parts': 'Fuel System Spare Parts',
-  'nozzles-hoses': 'Nozzles & Hoses',
-  'mpd-fuel-metering-accessories': 'MPD / Fuel Metering Accessories',
-  'fire-safety-equipment': 'Fire & Safety Equipment',
-  'uniforms': 'Uniforms',
-  'testing-measurement-equipment': 'Testing & Measurement Equipment',
-  'queue-management-systems': 'Queue Management Systems',
-  'led-canopy-lighting': 'LED / Canopy Lighting',
+  'indian-oil-petrol-bunk-products': 'Indian Oil Petrol Bunk Products',
+  'all': 'All Products',
 };
 
-const PLACEHOLDER_IMG = 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=500&h=500&fit=crop';
+const PLACEHOLDER_IMG = PETROL_BUNK_IMG;
 
 // Mock products data - fallback if API fails
 const mockProductsByCategory: Record<string, any[]> = {
-  'fuel-dispensers': [
-    { id: 'fd-1', title: 'Dual Hose Fuel Dispenser Unit', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v1', name: 'Unit', price: 185000, coopPrice: 157250, stock: 50 }] },
+  'indian-oil-petrol-bunk-products': [
+    { id: 'pb-1', title: 'Indian Oil Petrol Bunk Product 1', imageUrl: PETROL_BUNK_IMG, variants: [{ id: 'v1', name: 'Unit', price: 5500, coopPrice: 4675, stock: 50 }] },
   ],
-  'petrol-pump-spare-parts': [{ id: 's-1', title: 'Dispenser Display Board', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v2', name: 'Unit', price: 4500, coopPrice: 3825, stock: 50 }] }],
-  'petrol-pump-accessories': [{ id: 'a-1', title: 'Nozzle Holder Bracket', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v3', name: 'Unit', price: 850, coopPrice: 723, stock: 50 }] }],
-  'fuel-system-spare-parts': [{ id: 'fs-1', title: 'Submersible Pump Unit', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v4', name: 'Unit', price: 28500, coopPrice: 24225, stock: 50 }] }],
-  'nozzles-hoses': [{ id: 'n-1', title: 'Auto-Cut Nozzle 3/4"', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v5', name: 'Unit', price: 2200, coopPrice: 1870, stock: 50 }] }],
-  'mpd-fuel-metering-accessories': [{ id: 'm-1', title: 'MPD Sensor Unit', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v6', name: 'Unit', price: 8500, coopPrice: 7225, stock: 50 }] }],
-  'fire-safety-equipment': [{ id: 'f-1', title: 'Fire Extinguisher 9kg ABC', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v7', name: 'Unit', price: 3200, coopPrice: 2720, stock: 50 }] }],
-  'uniforms': [{ id: 'u-1', title: 'Staff Shirt - Petrol Pump', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v8', name: 'Unit', price: 650, coopPrice: 553, stock: 50 }] }],
-  'testing-measurement-equipment': [{ id: 't-1', title: 'Fuel Density Meter', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v9', name: 'Unit', price: 8500, coopPrice: 7225, stock: 50 }] }],
-  'queue-management-systems': [{ id: 'q-1', title: 'Token Display Unit', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v10', name: 'Unit', price: 9500, coopPrice: 8075, stock: 50 }] }],
-  'led-canopy-lighting': [{ id: 'l-1', title: 'Canopy LED Panel 40W', imageUrl: PLACEHOLDER_IMG, variants: [{ id: 'v11', name: 'Unit', price: 3200, coopPrice: 2720, stock: 50 }] }],
 };
 
-// Category header images
+// Category header images (local petrol bunk images)
 const categoryImages: Record<string, string> = {
-  'fuel-dispensers': 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop',
-  'petrol-pump-spare-parts': 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
-  'petrol-pump-accessories': 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop',
-  'fuel-system-spare-parts': 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop',
-  'nozzles-hoses': 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop',
-  'mpd-fuel-metering-accessories': 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop',
-  'fire-safety-equipment': 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop',
-  'uniforms': 'https://images.unsplash.com/photo-1558769132-cb1aeaede002?w=400&h=400&fit=crop',
-  'testing-measurement-equipment': 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop',
-  'queue-management-systems': 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop',
-  'led-canopy-lighting': 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=400&h=400&fit=crop',
+  'indian-oil-petrol-bunk-products': '/products/Indian_oil_petrol_bump_products/7.png',
+  'all': '/products/Indian_oil_petrol_bump_products/0.jpg',
 };
 
 export default function CategoryPage({ params }: PageProps) {
@@ -87,12 +61,11 @@ export default function CategoryPage({ params }: PageProps) {
         const img = categoryImages[cat] || "";
         setCategoryImage(img);
 
-        // Fetch products from API filtered by category
+        // Fetch products from API (no filter when slug is "all")
         try {
-          // Try both slug and name to ensure we find the category
-          const categoryQuery = cat; // Use the slug from URL
+          const categoryQuery = cat === 'all' ? undefined : cat;
           const response = await publicApi.products.getAll({ 
-            category: categoryQuery, // API will match by slug or name
+            ...(categoryQuery ? { category: categoryQuery } : {}),
             limit: 100 
           });
 
@@ -105,26 +78,22 @@ export default function CategoryPage({ params }: PageProps) {
             const expectedCategorySlug = cat.toLowerCase();
             
             // Transform API products to component format
-            // Backend already filtered, but we verify category matches as safety check
+            // When slug is "all", show all products; otherwise filter by category
             const transformedProducts = productsData
               .filter((p: any) => {
-                // Safety check: ensure product has category and it matches
+                if (expectedCategorySlug === 'all') return true;
                 if (!p.category) return false;
-                
                 const productCategory = p.category;
                 const productCategoryName = productCategory.name || '';
                 const productCategorySlug = (productCategory.slug || '').toLowerCase();
-                
-                // Match by name or slug (case-insensitive)
                 const nameMatch = productCategoryName.toLowerCase() === expectedCategoryName.toLowerCase();
                 const slugMatch = productCategorySlug === expectedCategorySlug;
-                
                 return nameMatch || slugMatch;
               })
               .map((p: any, index: number) => ({
                 id: p._id || `prod-${index}`,
                 title: p.name,
-                imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500&h=500&fit=crop',
+                imageUrl: p.images && p.images.length > 0 ? p.images[0] : PETROL_BUNK_IMG,
                 variants: [
                   {
                     id: `var-${p._id || index}-default`,

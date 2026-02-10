@@ -24,21 +24,19 @@ interface SearchResults {
   categories: Category[];
 }
 
-// Data from website content to populate mock results
+const PETROL_BUNK_URL = "/collections/indian-oil-petrol-bunk-products";
+
+// Data from website content – Indian Oil petrol bunk products only
 const mockProducts: Product[] = [
-  { id: "1", name: "Dual Hose Fuel Dispenser Unit", price: 185000, url: "/collections/fuel-dispensers" },
-  { id: "2", name: "Dispenser Display Board", price: 4500, url: "/collections/petrol-pump-spare-parts" },
-  { id: "3", name: "Auto-Cut Nozzle 3/4\"", price: 2200, url: "/collections/nozzles-hoses" },
-  { id: "4", name: "Fire Extinguisher 9kg ABC", price: 3200, url: "/collections/fire-safety-equipment" },
-  { id: "5", name: "Canopy LED Panel 40W", price: 3200, url: "/collections/led-canopy-lighting" },
+  { id: "1", name: "Indian Oil Petrol Bunk Product 1", price: 5500, url: PETROL_BUNK_URL },
+  { id: "2", name: "Indian Oil Petrol Bunk Product 2", price: 6000, url: PETROL_BUNK_URL },
+  { id: "3", name: "Indian Oil Petrol Bunk Product 3", price: 6500, url: PETROL_BUNK_URL },
+  { id: "4", name: "Indian Oil Petrol Bunk Product 4", price: 7000, url: PETROL_BUNK_URL },
+  { id: "5", name: "Indian Oil Petrol Bunk Product 5", price: 7500, url: PETROL_BUNK_URL },
 ];
 
 const mockCategories: Category[] = [
-  { id: "1", name: "Fuel Dispensers / Petrol Pump Equipment", url: "/collections/fuel-dispensers" },
-  { id: "2", name: "Petrol Pump Spare Parts", url: "/collections/petrol-pump-spare-parts" },
-  { id: "3", name: "Nozzles & Hoses", url: "/collections/nozzles-hoses" },
-  { id: "4", name: "Fire & Safety Equipment", url: "/collections/fire-safety-equipment" },
-  { id: "5", name: "LED / Canopy Lighting", url: "/collections/led-canopy-lighting" },
+  { id: "1", name: "Indian Oil Petrol Bunk Products", url: PETROL_BUNK_URL },
 ];
 
 const SearchBar = () => {

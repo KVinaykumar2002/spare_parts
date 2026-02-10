@@ -13,18 +13,11 @@ interface Category {
   href: string;
 }
 
+const PETROL_BUNK_HREF = "/collections/indian-oil-petrol-bunk-products";
+const PETROL_BUNK_IMG = "/products/Indian_oil_petrol_bump_products/0.jpg";
+
 const categoriesData: Category[] = [
-  { name: "Fuel Dispensers / Petrol Pump Equipment", items: "12 Items", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop", bgColor: "bg-[#E8F4F8]", href: "/collections/fuel-dispensers" },
-  { name: "Petrol Pump Spare Parts", items: "15 Items", image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop", bgColor: "bg-[#FBF3D4]", href: "/collections/petrol-pump-spare-parts" },
-  { name: "Petrol Pump Accessories", items: "10 Items", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop", bgColor: "bg-[#DDEFE0]", href: "/collections/petrol-pump-accessories" },
-  { name: "Fuel System Spare Parts", items: "14 Items", image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400&h=400&fit=crop", bgColor: "bg-[#FBE5E1]", href: "/collections/fuel-system-spare-parts" },
-  { name: "Nozzles & Hoses", items: "18 Items", image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=400&fit=crop", bgColor: "bg-[#F1EDFC]", href: "/collections/nozzles-hoses" },
-  { name: "MPD / Fuel Metering Accessories", items: "8 Items", image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&h=400&fit=crop", bgColor: "bg-[#E8F4F8]", href: "/collections/mpd-fuel-metering-accessories" },
-  { name: "Fire & Safety Equipment", items: "12 Items", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop", bgColor: "bg-[#FFE5E5]", href: "/collections/fire-safety-equipment" },
-  { name: "Uniforms", items: "6 Items", image: "https://images.unsplash.com/photo-1558769132-cb1aeaede002?w=400&h=400&fit=crop", bgColor: "bg-[#DDEFE0]", href: "/collections/uniforms" },
-  { name: "Testing & Measurement Equipment", items: "9 Items", image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=400&fit=crop", bgColor: "bg-[#FBF3D4]", href: "/collections/testing-measurement-equipment" },
-  { name: "Queue Management Systems", items: "5 Items", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop", bgColor: "bg-[#F1EDFC]", href: "/collections/queue-management-systems" },
-  { name: "LED / Canopy Lighting", items: "11 Items", image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=400&h=400&fit=crop", bgColor: "bg-[#FFF8E5]", href: "/collections/led-canopy-lighting" },
+  { name: "Indian Oil Petrol Bunk Products", items: "28 Items", image: PETROL_BUNK_IMG, bgColor: "bg-[#E8F4F8]", href: PETROL_BUNK_HREF },
 ];
 
 const CategoryCard = ({ category }: { category: Category }) => (

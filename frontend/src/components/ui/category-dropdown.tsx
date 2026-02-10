@@ -11,32 +11,10 @@ import {
   X,
 } from "lucide-react";
 
-const categories = [
-  "Fuel Dispensers / Petrol Pump Equipment",
-  "Petrol Pump Spare Parts",
-  "Petrol Pump Accessories",
-  "Fuel System Spare Parts",
-  "Nozzles & Hoses",
-  "MPD / Fuel Metering Accessories",
-  "Fire & Safety Equipment",
-  "Uniforms",
-  "Testing & Measurement Equipment",
-  "Queue Management Systems",
-  "LED / Canopy Lighting",
-];
+const categories = ["Indian Oil Petrol Bunk Products"];
 
 const categoryHrefs: Record<string, string> = {
-  "Fuel Dispensers / Petrol Pump Equipment": "/collections/fuel-dispensers",
-  "Petrol Pump Spare Parts": "/collections/petrol-pump-spare-parts",
-  "Petrol Pump Accessories": "/collections/petrol-pump-accessories",
-  "Fuel System Spare Parts": "/collections/fuel-system-spare-parts",
-  "Nozzles & Hoses": "/collections/nozzles-hoses",
-  "MPD / Fuel Metering Accessories": "/collections/mpd-fuel-metering-accessories",
-  "Fire & Safety Equipment": "/collections/fire-safety-equipment",
-  "Uniforms": "/collections/uniforms",
-  "Testing & Measurement Equipment": "/collections/testing-measurement-equipment",
-  "Queue Management Systems": "/collections/queue-management-systems",
-  "LED / Canopy Lighting": "/collections/led-canopy-lighting",
+  "Indian Oil Petrol Bunk Products": "/collections/indian-oil-petrol-bunk-products",
 };
 
 export default function CategoryDropdown() {

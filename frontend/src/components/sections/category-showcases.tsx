@@ -15,50 +15,18 @@ interface Category {
   products: Product[];
 }
 
-const PLACEHOLDER = 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=200&h=200&fit=crop';
-const NOZZLE = 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=200&h=200&fit=crop';
-const SAFETY = 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=200&h=200&fit=crop';
-const LIGHT = 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=200&h=200&fit=crop';
+const PETROL_BUNK_HREF = '/collections/indian-oil-petrol-bunk-products';
+const IMG = '/products/Indian_oil_petrol_bump_products';
 
 const categoriesData: Category[] = [
   {
-    title: 'Fuel Dispensers / Petrol Pump Equipment',
+    title: 'Indian Oil Petrol Bunk Products',
     products: [
-      { name: 'Dual Hose Fuel Dispenser Unit', coopPrice: '1,57,250', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
-      { name: 'Electronic Petrol Pump Dispenser', coopPrice: '1,91,250', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
-      { name: 'Compact Single Nozzle Dispenser', coopPrice: '80,750', imageUrl: PLACEHOLDER, href: '/collections/fuel-dispensers' },
-    ],
-  },
-  {
-    title: 'Petrol Pump Spare Parts',
-    products: [
-      { name: 'Dispenser Display Board', coopPrice: '3,825', imageUrl: PLACEHOLDER, href: '/collections/petrol-pump-spare-parts' },
-      { name: 'Pump Motor Assembly', coopPrice: '10,625', imageUrl: PLACEHOLDER, href: '/collections/petrol-pump-spare-parts' },
-      { name: 'Valve Assembly Kit', coopPrice: '2,720', imageUrl: NOZZLE, href: '/collections/petrol-pump-spare-parts' },
-    ],
-  },
-  {
-    title: 'Nozzles & Hoses',
-    products: [
-      { name: 'Auto-Cut Nozzle 3/4"', coopPrice: '1,870', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
-      { name: 'Reinforced Fuel Hose 5m', coopPrice: '1,573', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
-      { name: 'Dispenser Hose with Nozzle', coopPrice: '3,825', imageUrl: NOZZLE, href: '/collections/nozzles-hoses' },
-    ],
-  },
-  {
-    title: 'Fire & Safety Equipment',
-    products: [
-      { name: 'Fire Extinguisher 9kg ABC', coopPrice: '2,720', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
-      { name: 'Safety Signage Kit', coopPrice: '723', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
-      { name: 'Fire Blanket', coopPrice: '1,020', imageUrl: SAFETY, href: '/collections/fire-safety-equipment' },
-    ],
-  },
-  {
-    title: 'LED / Canopy Lighting',
-    products: [
-      { name: 'Canopy LED Panel 40W', coopPrice: '2,720', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
-      { name: 'Strip Light 5m', coopPrice: '1,530', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
-      { name: 'Flood Light 50W', coopPrice: '2,125', imageUrl: LIGHT, href: '/collections/led-canopy-lighting' },
+      { name: 'Indian Oil Petrol Bunk Product 1', coopPrice: '4,675', imageUrl: `${IMG}/0.jpg`, href: PETROL_BUNK_HREF },
+      { name: 'Indian Oil Petrol Bunk Product 2', coopPrice: '5,100', imageUrl: `${IMG}/1.png`, href: PETROL_BUNK_HREF },
+      { name: 'Indian Oil Petrol Bunk Product 3', coopPrice: '5,525', imageUrl: `${IMG}/7.png`, href: PETROL_BUNK_HREF },
+      { name: 'Indian Oil Petrol Bunk Product 4', coopPrice: '5,950', imageUrl: `${IMG}/14.png`, href: PETROL_BUNK_HREF },
+      { name: 'Indian Oil Petrol Bunk Product 5', coopPrice: '6,375', imageUrl: `${IMG}/27.jpg`, href: PETROL_BUNK_HREF },
     ],
   },
 ];

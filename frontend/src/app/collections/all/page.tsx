@@ -2,17 +2,7 @@ import Link from "next/link";
 import { Package, ArrowLeft } from "lucide-react";
 
 const categories = [
-  { name: "Fuel Dispensers / Petrol Pump Equipment", href: "/collections/fuel-dispensers", count: "12 items" },
-  { name: "Petrol Pump Spare Parts", href: "/collections/petrol-pump-spare-parts", count: "15 items" },
-  { name: "Petrol Pump Accessories", href: "/collections/petrol-pump-accessories", count: "10 items" },
-  { name: "Fuel System Spare Parts", href: "/collections/fuel-system-spare-parts", count: "14 items" },
-  { name: "Nozzles & Hoses", href: "/collections/nozzles-hoses", count: "18 items" },
-  { name: "MPD / Fuel Metering Accessories", href: "/collections/mpd-fuel-metering-accessories", count: "8 items" },
-  { name: "Fire & Safety Equipment", href: "/collections/fire-safety-equipment", count: "12 items" },
-  { name: "Uniforms", href: "/collections/uniforms", count: "6 items" },
-  { name: "Testing & Measurement Equipment", href: "/collections/testing-measurement-equipment", count: "9 items" },
-  { name: "Queue Management Systems", href: "/collections/queue-management-systems", count: "5 items" },
-  { name: "LED / Canopy Lighting", href: "/collections/led-canopy-lighting", count: "11 items" },
+  { name: "Indian Oil Petrol Bunk Products", href: "/collections/indian-oil-petrol-bunk-products", count: "28 items" },
 ];
 
 export default function AllProductsPage() {
