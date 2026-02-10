@@ -25,7 +25,18 @@ const PLACEHOLDER_IMG = PETROL_BUNK_IMG;
 // Mock products data - fallback if API fails
 const mockProductsByCategory: Record<string, any[]> = {
   'indian-oil-petrol-bunk-products': [
-    { id: 'pb-1', title: 'Indian Oil Petrol Bunk Product 1', imageUrl: PETROL_BUNK_IMG, variants: [{ id: 'v1', name: 'Unit', price: 5500, coopPrice: 4675, stock: 50 }] },
+    {
+      id: 'pb-1',
+      title: 'Indian Oil Petrol Bunk Product 1',
+      imageUrl: PETROL_BUNK_IMG,
+      variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({
+        id: `v1-${qty}`,
+        name: String(qty),
+        price: 5500 * qty,
+        coopPrice: Math.round(5500 * qty * 0.85),
+        stock: 50,
+      })),
+    },
   ],
 };
 
@@ -94,15 +105,13 @@ export default function CategoryPage({ params }: PageProps) {
                 id: p._id || `prod-${index}`,
                 title: p.name,
                 imageUrl: p.images && p.images.length > 0 ? p.images[0] : PETROL_BUNK_IMG,
-                variants: [
-                  {
-                    id: `var-${p._id || index}-default`,
-                    name: '500g', // Default variant, can be enhanced later
-                    price: p.price,
-                    coopPrice: p.price * 0.85, // Calculate 15% discount for co-op members
-                    stock: p.stock || 0,
-                  }
-                ],
+                variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({
+                  id: `var-${p._id || index}-${qty}`,
+                  name: String(qty),
+                  price: p.price * qty,
+                  coopPrice: p.price * qty * 0.85,
+                  stock: p.stock || 0,
+                })),
               }));
             
             setProducts(transformedProducts);

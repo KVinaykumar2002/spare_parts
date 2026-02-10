@@ -216,7 +216,7 @@ export default function PopularProducts() {
             originalPrice: p.compareAtPrice || undefined,
             coOpPrice: p.price * 0.85, // Calculate 15% discount for co-op members
             category: categoryMapping[p.category?.name] || p.category?.name || 'Staples',
-            variants: ['500g', '1kg'], // Default variants, can be enhanced later
+            variants: ['1', '2', '3', '4', '5', '6', '7'],
           }));
 
           setAllProducts(transformedProducts);
