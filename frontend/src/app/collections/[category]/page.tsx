@@ -14,9 +14,11 @@ type PageProps = {
 
 const PETROL_BUNK_IMG = '/products/Indian_oil_petrol_bump_products/0.jpg';
 
-// Category slug to category name mapping (Indian Oil petrol bunk only)
+// Category slug to category name mapping
 const categorySlugToName: Record<string, string> = {
   'indian-oil-petrol-bunk-products': 'Indian Oil Petrol Bunk Products',
+  'hindustan-oil-products': 'Hindustan Oil Products',
+  'bharat-petrol-products': 'Bharat Petrol Products',
   'all': 'All Products',
 };
 
@@ -25,24 +27,21 @@ const PLACEHOLDER_IMG = PETROL_BUNK_IMG;
 // Mock products data - fallback if API fails
 const mockProductsByCategory: Record<string, any[]> = {
   'indian-oil-petrol-bunk-products': [
-    {
-      id: 'pb-1',
-      title: 'Indian Oil Petrol Bunk Product 1',
-      imageUrl: PETROL_BUNK_IMG,
-      variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({
-        id: `v1-${qty}`,
-        name: String(qty),
-        price: 5500 * qty,
-        coopPrice: Math.round(5500 * qty * 0.85),
-        stock: 50,
-      })),
-    },
+    { id: 'pb-1', title: 'Indian Oil Petrol Bunk Product 1', imageUrl: PETROL_BUNK_IMG, variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({ id: `v1-${qty}`, name: String(qty), price: 5500 * qty, coopPrice: Math.round(5500 * qty * 0.85), stock: 50 })) },
   ],
-};
+  'hindustan-oil-products': [
+    { id: 'ho-1', title: 'Hindustan Oil Product 1', imageUrl: '/products/Hindhustan_oil_products/0.jpg', variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({ id: `ho1-${qty}`, name: String(qty), price: 4500 * qty, coopPrice: Math.round(4500 * qty * 0.85), stock: 50 })) },
+  ],
+  'bharat-petrol-products': [
+    { id: 'bp-1', title: 'Bharat Petrol Product 1', imageUrl: '/products/Bharat_petrol_products/0.jpg', variants: [1, 2, 3, 4, 5, 6, 7].map((qty) => ({ id: `bp1-${qty}`, name: String(qty), price: 4800 * qty, coopPrice: Math.round(4800 * qty * 0.85), stock: 50 })) },
+  ],
+  };
 
-// Category header images (local petrol bunk images)
+// Category header images
 const categoryImages: Record<string, string> = {
   'indian-oil-petrol-bunk-products': '/products/Indian_oil_petrol_bump_products/7.png',
+  'hindustan-oil-products': '/products/Hindhustan_oil_products/7.png',
+  'bharat-petrol-products': '/products/Bharat_petrol_products/7.png',
   'all': '/products/Indian_oil_petrol_bump_products/0.jpg',
 };
 
@@ -189,7 +188,7 @@ export default function CategoryPage({ params }: PageProps) {
                 {categoryName}
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-medium-gray px-4">
-                Explore our organic {categoryName.toLowerCase()} collection
+                Explore our {categoryName.toLowerCase()} collection
               </p>
             </div>
 
@@ -222,7 +221,7 @@ export default function CategoryPage({ params }: PageProps) {
                     Browse All Products
                   </Link>
                   <a
-                    href="tel:+919590922000"
+                    href="tel:+919866309037"
                     className="inline-block bg-white text-primary-green border-2 border-primary-green hover:bg-light-green text-sm font-semibold px-8 py-3 rounded-md transition-colors"
                   >
                     Contact Us

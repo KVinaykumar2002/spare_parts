@@ -8,7 +8,7 @@ export default function BlogPage() {
           Blog
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Blog page for EverSol. Publish your latest
+          This is a placeholder Blog page for ANANDH BunkStores. Publish your latest
           articles, news, and updates here.
         </p>
       </div>

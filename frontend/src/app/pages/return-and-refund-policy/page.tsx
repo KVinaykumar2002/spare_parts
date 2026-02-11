@@ -8,7 +8,7 @@ export default function ReturnAndRefundPolicyPage() {
           Return and Refund Policy
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Return and Refund Policy page for EverSol.
+          This is a placeholder Return and Refund Policy page for ANANDH BunkStores.
           Replace this content with your detailed policy text.
         </p>
       </div>

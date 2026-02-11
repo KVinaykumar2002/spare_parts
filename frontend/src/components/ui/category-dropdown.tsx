@@ -11,10 +11,16 @@ import {
   X,
 } from "lucide-react";
 
-const categories = ["Indian Oil Petrol Bunk Products"];
+const categories = [
+  "Indian Oil Petrol Bunk Products",
+  "Hindustan Oil Products",
+  "Bharat Petrol Products",
+];
 
 const categoryHrefs: Record<string, string> = {
   "Indian Oil Petrol Bunk Products": "/collections/indian-oil-petrol-bunk-products",
+  "Hindustan Oil Products": "/collections/hindustan-oil-products",
+  "Bharat Petrol Products": "/collections/bharat-petrol-products",
 };
 
 export default function CategoryDropdown() {

@@ -8,8 +8,8 @@ import Script from "next/script";
 import AppShell from "./AppShell";
 
 export const metadata: Metadata = {
-  title: "EverSol",
-  description: "EverSol - Your trusted organic marketplace",
+  title: "ANANDH BunkStores",
+  description: "ANANDH BunkStores - One Stop shop For All Petrol Pump Material",
 };
 
 export default function RootLayout({

@@ -8,7 +8,7 @@ export default function TermsOfServicePage() {
           Terms of Service
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Terms of Service page for EverSol. Replace this
+          This is a placeholder Terms of Service page for ANANDH BunkStores. Replace this
           content with your detailed terms and conditions.
         </p>
       </div>

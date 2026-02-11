@@ -10,7 +10,7 @@ export default function SitemapPage() {
           Sitemap
         </h1>
         <p className="text-sm text-medium-gray mb-4">
-          This is a simple sitemap listing key pages in the EverSol website.
+          This is a simple sitemap listing key pages in the ANANDH BunkStores website.
         </p>
         <ul className="list-disc list-inside text-sm text-dark-gray space-y-2">
           <li>

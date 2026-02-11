@@ -4,21 +4,9 @@ import { MapPin, ArrowLeft, Phone, Clock } from "lucide-react";
 export default function StoreLocatorPage() {
   const stores = [
     {
-      name: "EverSol - Indiranagar",
-      address: "123 Main Road, Indiranagar, Bengaluru, Karnataka 560038",
-      phone: "+91 9590922000",
-      hours: "9:00 AM - 9:00 PM (All Days)",
-    },
-    {
-      name: "EverSol - Koramangala",
-      address: "456 Shopping Complex, Koramangala, Bengaluru, Karnataka 560034",
-      phone: "+91 9590922000",
-      hours: "9:00 AM - 9:00 PM (All Days)",
-    },
-    {
-      name: "EverSol - Whitefield",
-      address: "789 Tech Park Road, Whitefield, Bengaluru, Karnataka 560066",
-      phone: "+91 9590922000",
+      name: "ANANDH BunkStores",
+      address: "#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103",
+      phone: "9866309037",
       hours: "9:00 AM - 9:00 PM (All Days)",
     },
   ];
@@ -40,7 +28,7 @@ export default function StoreLocatorPage() {
               Store Locations
             </h1>
             <p className="text-lg text-medium-gray">
-              Visit our stores across Bengaluru for fresh organic products
+              Visit us for all petrol pump material and spare parts
             </p>
           </div>
 
@@ -81,7 +69,7 @@ export default function StoreLocatorPage() {
               Can't Find a Store Near You?
             </h2>
             <p className="text-medium-gray mb-6">
-              Order online and get fresh organic products delivered to your doorstep
+              Order online and get petrol pump parts delivered to your doorstep
             </p>
             <Link
               href="/"

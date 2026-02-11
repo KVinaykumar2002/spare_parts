@@ -24,19 +24,17 @@ interface SearchResults {
   categories: Category[];
 }
 
-const PETROL_BUNK_URL = "/collections/indian-oil-petrol-bunk-products";
-
-// Data from website content – Indian Oil petrol bunk products only
+// Data from website content – all product categories
 const mockProducts: Product[] = [
-  { id: "1", name: "Indian Oil Petrol Bunk Product 1", price: 5500, url: PETROL_BUNK_URL },
-  { id: "2", name: "Indian Oil Petrol Bunk Product 2", price: 6000, url: PETROL_BUNK_URL },
-  { id: "3", name: "Indian Oil Petrol Bunk Product 3", price: 6500, url: PETROL_BUNK_URL },
-  { id: "4", name: "Indian Oil Petrol Bunk Product 4", price: 7000, url: PETROL_BUNK_URL },
-  { id: "5", name: "Indian Oil Petrol Bunk Product 5", price: 7500, url: PETROL_BUNK_URL },
+  { id: "1", name: "Indian Oil Petrol Bunk Product 1", price: 5500, url: "/collections/indian-oil-petrol-bunk-products" },
+  { id: "2", name: "Hindustan Oil Product 1", price: 4500, url: "/collections/hindustan-oil-products" },
+  { id: "3", name: "Bharat Petrol Product 1", price: 4800, url: "/collections/bharat-petrol-products" },
 ];
 
 const mockCategories: Category[] = [
-  { id: "1", name: "Indian Oil Petrol Bunk Products", url: PETROL_BUNK_URL },
+  { id: "1", name: "Indian Oil Petrol Bunk Products", url: "/collections/indian-oil-petrol-bunk-products" },
+  { id: "2", name: "Hindustan Oil Products", url: "/collections/hindustan-oil-products" },
+  { id: "3", name: "Bharat Petrol Products", url: "/collections/bharat-petrol-products" },
 ];
 
 const SearchBar = () => {

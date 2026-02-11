@@ -8,7 +8,7 @@ export default function OurTeamPage() {
           Our Team
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Our Team page for EverSol. Introduce your core
+          This is a placeholder Our Team page for ANANDH BunkStores. Introduce your core
           team members and their roles here.
         </p>
       </div>

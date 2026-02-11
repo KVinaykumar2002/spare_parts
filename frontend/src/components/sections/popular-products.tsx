@@ -35,7 +35,9 @@ interface Product {
 
 // Category mapping from API category name to display name
 const categoryMapping: Record<string, string> = {
-  'Indian Oil Petrol Bunk Products': 'Petrol Bunk',
+  'Indian Oil Petrol Bunk Products': 'Indian Oil',
+  'Hindustan Oil Products': 'Hindustan Oil',
+  'Bharat Petrol Products': 'Bharat Petrol',
 };
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -266,7 +268,7 @@ export default function PopularProducts() {
               Popular Products
             </h2>
             <a
-              href="/collections/indian-oil-petrol-bunk-products"
+              href="/collections/all"
               className="text-primary font-semibold text-sm whitespace-nowrap rounded-lg px-3 py-1.5 hover:bg-primary/5 transition-colors"
             >
               View All

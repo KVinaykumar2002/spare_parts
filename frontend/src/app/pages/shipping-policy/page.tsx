@@ -8,7 +8,7 @@ export default function ShippingPolicyPage() {
           Shipping Policy
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Shipping Policy page for EverSol. Replace this
+          This is a placeholder Shipping Policy page for ANANDH BunkStores. Replace this
           text with your shipping, delivery timelines, and charges information.
         </p>
       </div>

@@ -18,8 +18,7 @@ const VideoTestimonial = () => {
     <section className="bg-[#fafafa] py-12 font-body md:py-20">
       <div className="container">
         <h2 className="mx-auto mb-8 max-w-4xl text-center font-display text-2xl font-semibold text-[#2d2d2d] md:mb-12">
-          This Engineer Returned From The US To Build An Organic Movement! 12,000
-          Farmers! EVERSOL
+          One Stop shop For All Petrol Pump Material — ANANDH BunkStores
         </h2>
 
         <div className="relative mx-auto aspect-[16/9] max-w-[1200px] overflow-hidden rounded-[12px] bg-black">

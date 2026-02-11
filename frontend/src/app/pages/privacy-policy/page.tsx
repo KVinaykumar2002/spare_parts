@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
           Privacy Policy
         </h1>
         <p className="text-sm text-medium-gray mb-6">
-          This is a placeholder Privacy Policy page for EverSol. Replace this
+          This is a placeholder Privacy Policy page for ANANDH BunkStores. Replace this
           content with your actual policy text when it is ready.
         </p>
       </div>

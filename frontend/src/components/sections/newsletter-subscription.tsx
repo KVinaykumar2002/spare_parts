@@ -28,7 +28,7 @@ const NewsletterSubscription = () => {
               Stay home &amp; get your daily needs from our shop
             </h2>
             <p className="text-[#666666] text-base md:text-lg mb-8">
-              Start Your Daily Shopping with EverSol
+              One Stop shop For All Petrol Pump Material — ANANDH BunkStores
             </p>
 
             <form

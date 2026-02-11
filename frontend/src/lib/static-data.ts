@@ -1,7 +1,7 @@
 /**
  * Static data for fully static storefront (no backend).
- * Products and banners – Indian Oil petrol bunk products only.
- * Images from frontend/public/products/Indian_oil_petrol_bump_products/
+ * Products and banners – Indian Oil, Hindustan Oil, Bharat Petrol.
+ * Images from frontend/public/products/
  */
 
 export interface StaticCategory {
@@ -31,93 +31,115 @@ export interface StaticBanner {
   order?: number;
 }
 
-const PETROL_BUNK_SLUG = 'indian-oil-petrol-bunk-products';
-const PETROL_BUNK_NAME = 'Indian Oil Petrol Bunk Products';
-const IMG_DIR = '/products/Indian_oil_petrol_bump_products';
-
-// All images in Indian_oil_petrol_bump_products (0.jpg, 1.png … 27.jpg)
-const PETROL_BUNK_IMAGES = [
+// Indian Oil Petrol Bunk
+const INDIAN_OIL_SLUG = 'indian-oil-petrol-bunk-products';
+const INDIAN_OIL_NAME = 'Indian Oil Petrol Bunk Products';
+const INDIAN_OIL_DIR = '/products/Indian_oil_petrol_bump_products';
+const INDIAN_OIL_IMAGES = [
   '0.jpg', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png',
   '8.png', '9.png', '10.png', '11.png', '12.png', '13.png', '14.png', '15.png',
   '16.png', '17.png', '18.png', '19.png', '20.png', '21.png', '22.png', '23.png',
   '24.png', '25.png', '26.png', '27.jpg',
 ];
 
-function buildStaticProducts(): StaticProduct[] {
-  const category = {
-    _id: PETROL_BUNK_SLUG,
-    name: PETROL_BUNK_NAME,
-    slug: PETROL_BUNK_SLUG,
-  };
+// Hindustan Oil (folder: Hindhustan_oil_products)
+const HINDUSTAN_SLUG = 'hindustan-oil-products';
+const HINDUSTAN_NAME = 'Hindustan Oil Products';
+const HINDUSTAN_DIR = '/products/Hindhustan_oil_products';
+const HINDUSTAN_IMAGES = [
+  '0.jpg', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png',
+  '8.png', '9.png', '10.png', '11.png', '12.png', '13.png', '14.png', '15.png',
+  '16.png', '17.png', '18.png', '19.png', '20.png', '21.png', '22.png', '23.png', '24.jpg',
+];
 
-  return PETROL_BUNK_IMAGES.map((filename, index) => ({
-    _id: `prod-static-${index + 1}`,
-    name: `Indian Oil Petrol Bunk Product ${index + 1}`,
-    images: [`${IMG_DIR}/${filename}`],
-    price: 5000 + (index + 1) * 500,
-    compareAtPrice: index % 3 === 0 ? 6000 + (index + 1) * 500 : undefined,
+// Bharat Petrol
+const BHARAT_SLUG = 'bharat-petrol-products';
+const BHARAT_NAME = 'Bharat Petrol Products';
+const BHARAT_DIR = '/products/Bharat_petrol_products';
+const BHARAT_IMAGES = [
+  '0.jpg', '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png',
+  '8.png', '9.png', '10.png', '11.png', '12.png', '13.png', '14.png', '15.png',
+  '16.png', '17.png', '18.png', '19.png', '20.png', '21.png', '22.jpg',
+];
+
+function buildProductsForCategory(
+  slug: string,
+  name: string,
+  imgDir: string,
+  images: string[],
+  productLabel: string,
+  priceBase: number,
+  startId: number
+): StaticProduct[] {
+  const category = { _id: slug, name, slug };
+  return images.map((filename, index) => ({
+    _id: `prod-static-${startId + index}`,
+    name: `${productLabel} ${index + 1}`,
+    images: [imgDir + (imgDir.endsWith('/') ? '' : '/') + filename],
+    price: priceBase + (index + 1) * 500,
+    compareAtPrice: index % 3 === 0 ? priceBase + (index + 1) * 500 + 500 : undefined,
     isFeatured: index % 4 === 0,
     category,
     stock: 50,
   }));
 }
 
+function buildStaticProducts(): StaticProduct[] {
+  let idOffset = 0;
+  const indian = buildProductsForCategory(
+    INDIAN_OIL_SLUG,
+    INDIAN_OIL_NAME,
+    INDIAN_OIL_DIR,
+    INDIAN_OIL_IMAGES,
+    'Indian Oil Petrol Bunk Product',
+    5000,
+    (idOffset += 1) - 1
+  );
+  idOffset += indian.length;
+
+  const hindustan = buildProductsForCategory(
+    HINDUSTAN_SLUG,
+    HINDUSTAN_NAME,
+    HINDUSTAN_DIR,
+    HINDUSTAN_IMAGES,
+    'Hindustan Oil Product',
+    4500,
+    idOffset
+  );
+  idOffset += hindustan.length;
+
+  const bharat = buildProductsForCategory(
+    BHARAT_SLUG,
+    BHARAT_NAME,
+    BHARAT_DIR,
+    BHARAT_IMAGES,
+    'Bharat Petrol Product',
+    4800,
+    idOffset
+  );
+  idOffset += bharat.length;
+
+  return [...indian, ...hindustan, ...bharat];
+}
+
 const staticProducts = buildStaticProducts();
 
 export const staticCategories: StaticCategory[] = [
-  {
-    _id: PETROL_BUNK_SLUG,
-    name: PETROL_BUNK_NAME,
-    slug: PETROL_BUNK_SLUG,
-  },
+  { _id: INDIAN_OIL_SLUG, name: INDIAN_OIL_NAME, slug: INDIAN_OIL_SLUG },
+  { _id: HINDUSTAN_SLUG, name: HINDUSTAN_NAME, slug: HINDUSTAN_SLUG },
+  { _id: BHARAT_SLUG, name: BHARAT_NAME, slug: BHARAT_SLUG },
 ];
 
 export const staticBannersHero: StaticBanner[] = [
-  {
-    _id: 'banner-hero-1',
-    title: 'Indian Oil Petrol Bunk Products',
-    subtitle: 'Shop Now',
-    image: `${IMG_DIR}/0.jpg`,
-    link: `/collections/${PETROL_BUNK_SLUG}`,
-    position: 'hero',
-    order: 1,
-  },
-  {
-    _id: 'banner-hero-2',
-    title: 'Petrol Pump Equipment & Spares',
-    subtitle: 'Discover',
-    image: `${IMG_DIR}/7.png`,
-    link: `/collections/${PETROL_BUNK_SLUG}`,
-    position: 'hero',
-    order: 2,
-  },
+  { _id: 'banner-hero-1', title: INDIAN_OIL_NAME, subtitle: 'Shop Now', image: `${INDIAN_OIL_DIR}/0.jpg`, link: `/collections/${INDIAN_OIL_SLUG}`, position: 'hero', order: 1 },
+  { _id: 'banner-hero-2', title: HINDUSTAN_NAME, subtitle: 'Discover', image: `${HINDUSTAN_DIR}/0.jpg`, link: `/collections/${HINDUSTAN_SLUG}`, position: 'hero', order: 2 },
+  { _id: 'banner-hero-3', title: BHARAT_NAME, subtitle: 'Explore', image: `${BHARAT_DIR}/0.jpg`, link: `/collections/${BHARAT_SLUG}`, position: 'hero', order: 3 },
 ];
 
 export const staticBannersMiddle: StaticBanner[] = [
-  {
-    _id: 'banner-mid-1',
-    title: 'Indian Oil Petrol Bunk',
-    image: `${IMG_DIR}/1.png`,
-    link: `/collections/${PETROL_BUNK_SLUG}`,
-    position: 'middle',
-    order: 1,
-  },
-  {
-    _id: 'banner-mid-2',
-    title: 'Petrol Pump Products',
-    image: `${IMG_DIR}/14.png`,
-    link: `/collections/${PETROL_BUNK_SLUG}`,
-    position: 'middle',
-    order: 2,
-  },
-  {
-    _id: 'banner-mid-3',
-    title: 'Equipment & Spare Parts',
-    image: `${IMG_DIR}/27.jpg`,
-    link: `/collections/${PETROL_BUNK_SLUG}`,
-    position: 'middle',
-    order: 3,
-  },
+  { _id: 'banner-mid-1', title: INDIAN_OIL_NAME, image: `${INDIAN_OIL_DIR}/7.png`, link: `/collections/${INDIAN_OIL_SLUG}`, position: 'middle', order: 1 },
+  { _id: 'banner-mid-2', title: HINDUSTAN_NAME, image: `${HINDUSTAN_DIR}/7.png`, link: `/collections/${HINDUSTAN_SLUG}`, position: 'middle', order: 2 },
+  { _id: 'banner-mid-3', title: BHARAT_NAME, image: `${BHARAT_DIR}/7.png`, link: `/collections/${BHARAT_SLUG}`, position: 'middle', order: 3 },
 ];
 
 export function getStaticProducts(): StaticProduct[] {

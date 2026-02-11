@@ -3,10 +3,10 @@
 import { motion } from "framer-motion";
 
 const bannerItems = [
+  "One Stop shop For All Petrol Pump Material",
   "Get 10% OFF Your First Order – Use Code: EXTRA10",
   "Free Shipping on Orders Above ₹500",
-  "New Organic Products Added Weekly",
-  "Need help? Call Us: +91 9590922000",
+  "Need help? Call Us: 9866309037",
 ];
 
 export default function TopBanner() {

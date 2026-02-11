@@ -15,18 +15,29 @@ interface Category {
   products: Product[];
 }
 
-const PETROL_BUNK_HREF = '/collections/indian-oil-petrol-bunk-products';
-const IMG = '/products/Indian_oil_petrol_bump_products';
-
 const categoriesData: Category[] = [
   {
     title: 'Indian Oil Petrol Bunk Products',
     products: [
-      { name: 'Indian Oil Petrol Bunk Product 1', coopPrice: '4,675', imageUrl: `${IMG}/0.jpg`, href: PETROL_BUNK_HREF },
-      { name: 'Indian Oil Petrol Bunk Product 2', coopPrice: '5,100', imageUrl: `${IMG}/1.png`, href: PETROL_BUNK_HREF },
-      { name: 'Indian Oil Petrol Bunk Product 3', coopPrice: '5,525', imageUrl: `${IMG}/7.png`, href: PETROL_BUNK_HREF },
-      { name: 'Indian Oil Petrol Bunk Product 4', coopPrice: '5,950', imageUrl: `${IMG}/14.png`, href: PETROL_BUNK_HREF },
-      { name: 'Indian Oil Petrol Bunk Product 5', coopPrice: '6,375', imageUrl: `${IMG}/27.jpg`, href: PETROL_BUNK_HREF },
+      { name: 'Indian Oil Petrol Bunk Product 1', coopPrice: '4,675', imageUrl: '/products/Indian_oil_petrol_bump_products/0.jpg', href: '/collections/indian-oil-petrol-bunk-products' },
+      { name: 'Indian Oil Petrol Bunk Product 2', coopPrice: '5,100', imageUrl: '/products/Indian_oil_petrol_bump_products/7.png', href: '/collections/indian-oil-petrol-bunk-products' },
+      { name: 'Indian Oil Petrol Bunk Product 3', coopPrice: '5,525', imageUrl: '/products/Indian_oil_petrol_bump_products/14.png', href: '/collections/indian-oil-petrol-bunk-products' },
+    ],
+  },
+  {
+    title: 'Hindustan Oil Products',
+    products: [
+      { name: 'Hindustan Oil Product 1', coopPrice: '3,825', imageUrl: '/products/Hindhustan_oil_products/0.jpg', href: '/collections/hindustan-oil-products' },
+      { name: 'Hindustan Oil Product 2', coopPrice: '4,250', imageUrl: '/products/Hindhustan_oil_products/7.png', href: '/collections/hindustan-oil-products' },
+      { name: 'Hindustan Oil Product 3', coopPrice: '4,675', imageUrl: '/products/Hindhustan_oil_products/14.png', href: '/collections/hindustan-oil-products' },
+    ],
+  },
+  {
+    title: 'Bharat Petrol Products',
+    products: [
+      { name: 'Bharat Petrol Product 1', coopPrice: '4,080', imageUrl: '/products/Bharat_petrol_products/0.jpg', href: '/collections/bharat-petrol-products' },
+      { name: 'Bharat Petrol Product 2', coopPrice: '4,505', imageUrl: '/products/Bharat_petrol_products/7.png', href: '/collections/bharat-petrol-products' },
+      { name: 'Bharat Petrol Product 3', coopPrice: '4,930', imageUrl: '/products/Bharat_petrol_products/14.png', href: '/collections/bharat-petrol-products' },
     ],
   },
 ];

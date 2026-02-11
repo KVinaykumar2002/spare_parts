@@ -2,26 +2,10 @@ import React from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Phone } from 'lucide-react';
 
 const socialLinks = [
-  {
-    name: 'Facebook',
-    href: '//www.facebook.com/eversol/',
-    icon: <Facebook />,
-  },
-  {
-    name: 'Twitter',
-    href: '//twitter.com/eversol/',
-    icon: <Twitter />,
-  },
-  {
-    name: 'Instagram',
-    href: '//instagram.com/eversol/',
-    icon: <Instagram />,
-  },
-  {
-    name: 'YouTube',
-    href: '//www.youtube.com/channel/UCx_Aiys8c1Vx3fLF1r6yc2Q',
-    icon: <Youtube />,
-  },
+  { name: 'Facebook', href: 'https://www.facebook.com/', icon: <Facebook /> },
+  { name: 'Twitter', href: 'https://twitter.com/', icon: <Twitter /> },
+  { name: 'Instagram', href: 'https://instagram.com/', icon: <Instagram /> },
+  { name: 'YouTube', href: 'https://www.youtube.com/', icon: <Youtube /> },
 ];
 
 const ContactFooterBar = () => {
@@ -34,11 +18,11 @@ const ContactFooterBar = () => {
 
           <div className="order-first md:order-none text-center">
             <a 
-              href="tel:+919590922000" 
+              href="tel:+919866309037" 
               className="inline-flex items-center text-foreground font-semibold text-xl lg:text-2xl hover:text-primary transition-colors"
             >
               <Phone className="h-5 w-5 lg:h-6 lg:w-6 mr-3" />
-              <span>+91 9590922000</span>
+              <span>9866309037</span>
             </a>
           </div>
           

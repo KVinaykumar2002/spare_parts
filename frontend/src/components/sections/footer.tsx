@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import {
   Phone,
@@ -48,14 +47,14 @@ const linkGroups: LinkGroup[] = [
       { name: "Lab Test Reports", href: "https://trust.eversol.com" },
       { name: "About Us", href: "/pages/about-us" },
       { name: "Our Team", href: "/pages/our-team" },
-      { name: "Our Recipes", href: "/collections/all" },
+      { name: "All Products", href: "/collections/all" },
       { name: "Our Videos", href: "https://www.youtube.com/channel/UCx_Aiys8c1Vx3fLF1r6yc2Q" },
     ],
   },
   {
     title: "Account",
     links: [
-      { name: "Contact Us", href: "mailto:support@eversol.com" },
+      { name: "Contact Us", href: "mailto:support@anandhbunkstores.com" },
       { name: "Become a Co-Op Member", href: "/pages/membership" },
     ],
   },
@@ -119,21 +118,16 @@ const Footer = () => {
           {/* Top section for large screens */}
           <div className="hidden lg:grid lg:grid-cols-6 gap-8">
             <div className="space-y-4">
-              <Link href="/">
-                <Image
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/OM_Logo_2-1.png"
-                  alt="EverSol"
-                  width={130}
-                  height={88}
-                  className="mb-4"
-                />
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
+                <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
               </Link>
-              <p className="text-sm text-zinc-600">Address: Bengaluru, Karnataka</p>
+              <p className="text-sm text-zinc-600">#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103</p>
               <p className="text-sm text-zinc-600">
-                Call Us: <a href="tel:+919590922000" className="hover:text-primary-green">+91 9590922000</a>
+                Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a>
               </p>
               <p className="text-sm text-zinc-600">
-                Email: <a href="mailto:support@eversol.com" className="hover:text-primary-green">support@eversol.com</a>
+                Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a>
               </p>
             </div>
             {linkGroups.map((group) => (
@@ -144,18 +138,13 @@ const Footer = () => {
           {/* Content for small screens */}
           <div className="lg:hidden">
               <div className="space-y-4 mb-8">
-                <Link href="/">
-                  <Image
-                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/OM_Logo_2-1.png"
-                    alt="EverSol"
-                    width={130}
-                    height={88}
-                    className="mb-4"
-                  />
+                <Link href="/" className="inline-block mb-4">
+                  <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
+                  <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
                 </Link>
-                <p className="text-sm text-zinc-600">Address: Bengaluru, Karnataka</p>
-                <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919590922000" className="hover:text-primary-green">+91 9590922000</a></p>
-                <p className="text-sm text-zinc-600">Email: <a href="mailto:support@eversol.com" className="hover:text-primary-green">support@eversol.com</a></p>
+                <p className="text-sm text-zinc-600">#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103</p>
+                <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a></p>
+                <p className="text-sm text-zinc-600">Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a></p>
               </div>
 
               {linkGroups.map(group => (
@@ -179,21 +168,21 @@ const Footer = () => {
       <div className="bg-primary-green text-primary-foreground">
         <div className="container mx-auto px-5 py-4 lg:px-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-            <p className="text-sm">&copy; 2024, EverSol</p>
-            <a href="tel:+919590922000" className="text-sm flex items-center gap-2">
+            <p className="text-sm">&copy; 2024, ANANDH BunkStores</p>
+            <a href="tel:+919866309037" className="text-sm flex items-center gap-2">
               <Phone size={16} />
-              +91 9590922000
+              9866309037
             </a>
             <div className="flex items-center gap-4">
               <span className="text-sm">Follow Us</span>
               <div className="flex items-center gap-2">
-                <SocialIcon href="https://www.facebook.com/eversol/">
+                <SocialIcon href="https://www.facebook.com/">
                   <Facebook size={16} />
                 </SocialIcon>
-                <SocialIcon href="https://twitter.com/eversol/">
+                <SocialIcon href="https://twitter.com/">
                   <Twitter size={16} />
                 </SocialIcon>
-                <SocialIcon href="https://instagram.com/eversol/">
+                <SocialIcon href="https://instagram.com/">
                   <Instagram size={16} />
                 </SocialIcon>
                 <SocialIcon href="https://www.youtube.com/channel/UCx_Aiys8c1Vx3fLF1r6yc2Q">

@@ -82,16 +82,16 @@ const MINIMUM_ORDER_VALUE = 100; // Example minimum order value
  * The `getProductById` function simulates fetching this data.
  */
 const mockProducts: Product[] = [
-    { id: 'prod-1', name: 'Organic Rajmudi Rice', imageUrl: '/products/rajmudi-rice.jpg', variants: [
-        { id: 'var-1-1', name: '1kg', price: 152.00, coopPrice: 129.20, stock: 10 },
-        { id: 'var-1-2', name: '5kg', price: 750.00, coopPrice: 637.50, stock: 5 },
+    { id: 'prod-1', name: 'Indian Oil Petrol Bunk Product 1', imageUrl: '/products/Indian_oil_petrol_bump_products/0.jpg', variants: [
+        { id: 'var-1-1', name: '1', price: 5500, coopPrice: 4675, stock: 10 },
+        { id: 'var-1-2', name: '2', price: 11000, coopPrice: 9350, stock: 5 },
     ]},
-    { id: 'prod-3', name: 'Organic Tur/Toor Dal', imageUrl: '/products/toor-dal.jpg', variants: [
-        { id: 'var-3-1', name: '500g', price: 182.00, coopPrice: 154.70, stock: 0 }, // Out of stock
-        { id: 'var-3-2', name: '1kg', price: 350.00, coopPrice: 297.50, stock: 15 },
+    { id: 'prod-3', name: 'Hindustan Oil Product 1', imageUrl: '/products/Hindhustan_oil_products/0.jpg', variants: [
+        { id: 'var-3-1', name: '1', price: 4500, coopPrice: 3825, stock: 15 },
+        { id: 'var-3-2', name: '2', price: 9000, coopPrice: 7650, stock: 15 },
     ]},
-    { id: 'prod-4', name: 'Cold Pressed - Groundnut Oil', imageUrl: '/products/groundnut-oil.jpg', variants: [
-        { id: 'var-4-1', name: '1L', price: 494.00, coopPrice: 419.90, stock: 8 },
+    { id: 'prod-4', name: 'Bharat Petrol Product 1', imageUrl: '/products/Bharat_petrol_products/0.jpg', variants: [
+        { id: 'var-4-1', name: '1', price: 4800, coopPrice: 4080, stock: 8 },
     ]},
 ];
 

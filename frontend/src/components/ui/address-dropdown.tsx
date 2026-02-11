@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { MapPin, Plus, Edit2, Trash2, Check } from "lucide-react";
 import {
   DropdownMenu,
@@ -132,12 +131,7 @@ export default function AddressDropdown({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[400px] max-h-[500px] overflow-y-auto">
           <DropdownMenuLabel className="flex items-center gap-2 text-base font-semibold">
-            <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg"
-              alt="Location Icon"
-              width={16}
-              height={20}
-            />
+            <MapPin className="w-4 h-5 text-dark-gray flex-shrink-0" aria-hidden />
             Delivery Address
           </DropdownMenuLabel>
           <DropdownMenuSeparator />

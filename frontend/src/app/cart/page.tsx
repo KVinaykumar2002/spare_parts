@@ -135,10 +135,10 @@ export default function CartPage() {
                 If you have any questions, feel free to contact us.
               </p>
               <a
-                href="tel:+919590922000"
+                href="tel:+919866309037"
                 className="inline-flex items-center text-primary-green font-semibold text-sm sm:text-base touch-manipulation"
               >
-                Call Us: +91 9590922000
+                Call Us: 9866309037
               </a>
             </div>
           </div>
@@ -306,10 +306,10 @@ export default function CartPage() {
                     If you have any questions, feel free to contact us.
                   </p>
                   <a
-                    href="tel:+919590922000"
+                    href="tel:+919866309037"
                     className="text-sm text-primary-green font-semibold hover:underline"
                   >
-                    Call Us: +91 9590922000
+                    Call Us: 9866309037
                   </a>
                 </div>
               </div>

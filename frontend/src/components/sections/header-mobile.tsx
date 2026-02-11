@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { Menu, Heart, ShoppingCart, ChevronDown, X } from "lucide-react";
+import { Menu, Heart, MapPin, ShoppingCart, ChevronDown, X } from "lucide-react";
 import { getCartItemCount, getCartUpdateEventName } from "@/lib/cart-functionality";
 import { getWishlistCount, getWishlistUpdateEventName } from "@/lib/wishlist-functionality";
 import AddressDropdown from "@/components/ui/address-dropdown";
@@ -35,7 +34,7 @@ const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
     <div className={`fixed top-0 left-0 h-full w-4/5 max-w-[320px] bg-white z-50 p-5 shadow-lg transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
       <div className="flex justify-between items-center mb-8">
         <Link href="/" onClick={onClose} className="text-xl font-bold text-primary-green">
-          EverSol
+          ANANDH BunkStores
         </Link>
         <button onClick={onClose} className="p-1 -mr-1 cursor-pointer" aria-label="Close menu">
           <X size={28} className="text-dark-gray"/>
@@ -117,7 +116,7 @@ const HeaderMobile = () => {
             </button>
             <AddressDropdown onAddressChange={setSelectedAddress}>
               <div className="flex items-center gap-1 sm:gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <Image src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg" alt="Location Icon" width={16} height={18} className="sm:w-[18px] sm:h-[21px]" />
+                <MapPin size={16} className="sm:w-[18px] sm:h-[21px] text-dark-gray flex-shrink-0" aria-hidden />
                 <div>
                   <span className="block text-[10px] sm:text-caption text-medium-gray leading-none">Deliver to</span>
                   <div className="flex items-center text-xs sm:text-sm font-semibold text-dark-gray-alt pt-0.5 sm:pt-1">
@@ -130,15 +129,9 @@ const HeaderMobile = () => {
           </div>
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Link href="/">
-              <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/OM_Logo_2-1.png"
-                alt="EverSol"
-                width={85}
-                height={30}
-                className="sm:w-[100px] sm:h-[36px]"
-                priority
-              />
+            <Link href="/" className="flex flex-col items-center">
+              <span className="text-base sm:text-lg font-bold text-primary-green leading-tight" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
+              <span className="text-[10px] sm:text-xs text-white/90 mt-0.5 hidden sm:block">Petrol Pump Material</span>
             </Link>
           </div>
 

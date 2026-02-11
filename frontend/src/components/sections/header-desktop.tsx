@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   ChevronDown,
   Heart,
+  MapPin,
   Phone,
   Search,
   ShoppingCart,
@@ -77,12 +78,7 @@ const HeaderDesktop = () => {
           <div className="flex items-center gap-6 flex-1">
             <AddressDropdown onAddressChange={setSelectedAddress}>
               <div className="flex items-center gap-2 cursor-pointer flex-shrink-0 hover:opacity-80 transition-opacity">
-                <Image
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg"
-                  alt="Location Icon"
-                  width={16}
-                  height={20}
-                />
+                <MapPin className="h-4 w-5 text-dark-gray flex-shrink-0" aria-hidden />
                 <div className="flex items-center text-sm">
                   <span className="text-medium-gray mr-1">Deliver to</span>
                   <span className="text-dark-gray font-medium mr-1">{getAddressDisplay()}</span>
@@ -94,7 +90,7 @@ const HeaderDesktop = () => {
             <form className="flex items-center border border-border-gray-alt rounded h-11 w-full max-w-xs">
                <Input
                 type="text"
-                placeholder="organic"
+                placeholder="Search petrol pump parts..."
                 className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-full flex-grow pl-4"
               />
               <div className="border-l border-border-gray-alt h-full flex items-center">
@@ -106,15 +102,9 @@ const HeaderDesktop = () => {
           </div>
 
           <div className="px-8 flex-shrink-0">
-            <Link href="/">
-              <Image
-                src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/images/OM_Logo_2-1.png"
-                alt="EverSol Logo"
-                width={136}
-                height={91}
-                priority
-                className="h-auto"
-              />
+            <Link href="/" className="flex flex-col items-center justify-center">
+              <span className="text-xl font-bold text-primary-green leading-tight" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
+              <span className="text-xs text-zinc-600 mt-0.5">One Stop shop For All Petrol Pump Material</span>
             </Link>
           </div>
 
@@ -161,10 +151,10 @@ const HeaderDesktop = () => {
             </ul>
           </nav>
           
-          <a href="tel:+919590922000" className="flex items-center gap-2 text-dark-gray-alt hover:text-primary-green transition-colors">
+          <a href="tel:+919866309037" className="flex items-center gap-2 text-dark-gray-alt hover:text-primary-green transition-colors">
             <Phone className="h-6 w-6" />
             <div className="text-sm text-left">
-              <span className="font-semibold">+91 9590922000</span>
+              <span className="font-semibold">9866309037</span>
             </div>
           </a>
         </div>

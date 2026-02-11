@@ -13,11 +13,10 @@ interface Category {
   href: string;
 }
 
-const PETROL_BUNK_HREF = "/collections/indian-oil-petrol-bunk-products";
-const PETROL_BUNK_IMG = "/products/Indian_oil_petrol_bump_products/0.jpg";
-
 const categoriesData: Category[] = [
-  { name: "Indian Oil Petrol Bunk Products", items: "28 Items", image: PETROL_BUNK_IMG, bgColor: "bg-[#E8F4F8]", href: PETROL_BUNK_HREF },
+  { name: "Indian Oil Petrol Bunk Products", items: "28 Items", image: "/products/Indian_oil_petrol_bump_products/0.jpg", bgColor: "bg-[#E8F4F8]", href: "/collections/indian-oil-petrol-bunk-products" },
+  { name: "Hindustan Oil Products", items: "25 Items", image: "/products/Hindhustan_oil_products/0.jpg", bgColor: "bg-[#FBF3D4]", href: "/collections/hindustan-oil-products" },
+  { name: "Bharat Petrol Products", items: "23 Items", image: "/products/Bharat_petrol_products/0.jpg", bgColor: "bg-[#DDEFE0]", href: "/collections/bharat-petrol-products" },
 ];
 
 const CategoryCard = ({ category }: { category: Category }) => (

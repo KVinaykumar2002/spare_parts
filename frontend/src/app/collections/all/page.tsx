@@ -3,6 +3,8 @@ import { Package, ArrowLeft } from "lucide-react";
 
 const categories = [
   { name: "Indian Oil Petrol Bunk Products", href: "/collections/indian-oil-petrol-bunk-products", count: "28 items" },
+  { name: "Hindustan Oil Products", href: "/collections/hindustan-oil-products", count: "25 items" },
+  { name: "Bharat Petrol Products", href: "/collections/bharat-petrol-products", count: "23 items" },
 ];
 
 export default function AllProductsPage() {
@@ -50,10 +52,10 @@ export default function AllProductsPage() {
               Contact us and we&apos;ll help you find the right equipment and spare parts
             </p>
             <a
-              href="tel:+919590922000"
+              href="tel:+919866309037"
               className="inline-flex items-center text-primary-green font-semibold text-lg"
             >
-              Call Us: +91 9590922000
+              Call Us: 9866309037
             </a>
           </div>
         </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { X, Loader2, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -123,12 +122,7 @@ export default function PincodeModal({
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                <Image
-                  src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/56749ad2-75ec-41c1-917d-cfc50301e8cc-organicmandya-com/assets/svgs/Location_4-1.svg"
-                  alt="Location Pin"
-                  width={20}
-                  height={20}
-                />
+                <MapPin className="w-5 h-5 text-medium-gray" aria-hidden />
               </div>
               <Input
                 type="tel"
