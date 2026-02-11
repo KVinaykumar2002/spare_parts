@@ -208,6 +208,17 @@ const Footer = () => {
               </div>
             </div>
           </div>
+          <p className="text-center text-sm text-primary-foreground/90 mt-3 pt-3 border-t border-primary-foreground/20">
+            Developed by{' '}
+            <a
+              href="https://www.instagram.com/optiwebrix/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-white font-medium"
+            >
+              Optiwebrix team
+            </a>
+          </p>
         </div>
       </div>
     </>
