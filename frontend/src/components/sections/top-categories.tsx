@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React from "react";
 import Image from "next/image";
-import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 interface Category {
   name: string;
@@ -14,106 +13,50 @@ interface Category {
 }
 
 const categoriesData: Category[] = [
-  { name: "Indian Oil Petrol Bunk Products", items: "28 Items", image: "/products/Indian_oil_petrol_bump_products/0.jpg", bgColor: "bg-[#E8F4F8]", href: "/collections/indian-oil-petrol-bunk-products" },
-  { name: "Hindustan Oil Products", items: "25 Items", image: "/products/Hindhustan_oil_products/0.jpg", bgColor: "bg-[#FBF3D4]", href: "/collections/hindustan-oil-products" },
-  { name: "Bharat Petrol Products", items: "23 Items", image: "/products/Bharat_petrol_products/0.jpg", bgColor: "bg-[#DDEFE0]", href: "/collections/bharat-petrol-products" },
+  { name: "Indian Oil Petrol Bunk Products", items: "28 items", image: "/products/Indian_oil_petrol_bump_products/0.jpg", bgColor: "bg-[#E8F4F8]", href: "/collections/indian-oil-petrol-bunk-products" },
+  { name: "Hindustan Oil Products", items: "25 items", image: "/products/Hindhustan_oil_products/0.jpg", bgColor: "bg-[#FBF3D4]", href: "/collections/hindustan-oil-products" },
+  { name: "Bharat Petrol Products", items: "23 items", image: "/products/Bharat_petrol_products/0.jpg", bgColor: "bg-[#DDEFE0]", href: "/collections/bharat-petrol-products" },
 ];
 
 const CategoryCard = ({ category }: { category: Category }) => (
-  <Link 
-    href={category.href} 
-    className={`group flex-shrink-0 w-[160px] h-[220px] md:w-[200px] md:h-[280px] rounded-xl flex flex-col items-center justify-center p-4 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:scale-105 ${category.bgColor}`}
+  <Link
+    href={category.href}
+    className={`group flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-md hover:scale-[1.02] shadow-sm ${category.bgColor}`}
   >
-    <div className="relative w-24 h-24 md:w-32 md:h-32 mb-3 md:mb-5">
+    <div className="relative w-full aspect-square min-h-[120px] md:min-h-[160px] flex items-center justify-center p-4">
       <Image
         src={category.image}
         alt={category.name}
-        fill
-        sizes="(max-width: 768px) 96px, 128px"
-        style={{ objectFit: 'contain' }}
-        className="transition-transform duration-300"
+        width={160}
+        height={160}
+        className="object-contain w-full h-full transition-transform duration-300 group-hover:scale-105"
+        sizes="(max-width: 768px) 120px, 160px"
       />
     </div>
-    <h3 className="font-semibold text-center text-base text-dark-gray-alt line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>{category.name}</h3>
-    <p className="text-sm text-medium-gray-alt mt-1" style={{ fontFamily: 'var(--font-body)' }}>{category.items}</p>
+    <div className="p-4 pt-2 flex flex-col justify-center min-h-[72px]">
+      <h3 className="font-semibold text-primary-green text-sm md:text-base leading-tight line-clamp-2" style={{ fontFamily: 'var(--font-display)' }}>
+        {category.name}
+      </h3>
+      <p className="text-sm text-gray-500 mt-1" style={{ fontFamily: 'var(--font-body)' }}>
+        {category.items}
+      </p>
+    </div>
   </Link>
 );
 
 
 const TopCategories = () => {
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [isAtStart, setIsAtStart] = useState(true);
-    const [isAtEnd, setIsAtEnd] = useState(false);
-
-    const checkScrollPosition = useCallback(() => {
-        if (scrollContainerRef.current) {
-            const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-            const atStart = scrollLeft < 5;
-            const atEnd = scrollLeft + clientWidth >= scrollWidth - 5;
-            if (atStart !== isAtStart) setIsAtStart(atStart);
-            if (atEnd !== isAtEnd) setIsAtEnd(atEnd);
-        }
-    }, [isAtStart, isAtEnd]);
-
-    useEffect(() => {
-        const container = scrollContainerRef.current;
-        if (container) {
-            checkScrollPosition();
-            container.addEventListener('scroll', checkScrollPosition, { passive: true });
-            window.addEventListener('resize', checkScrollPosition);
-
-            return () => {
-                container.removeEventListener('scroll', checkScrollPosition);
-                window.removeEventListener('resize', checkScrollPosition);
-            };
-        }
-    }, [checkScrollPosition]);
-
-    const handleScroll = (direction: 'left' | 'right') => {
-        if (scrollContainerRef.current) {
-            const scrollAmount = scrollContainerRef.current.clientWidth * 0.75;
-            scrollContainerRef.current.scrollBy({
-                left: direction === 'left' ? -scrollAmount : scrollAmount,
-                behavior: 'smooth'
-            });
-        }
-    };
-
     return (
-        <section className="bg-white py-12 md:py-20 font-body">
+        <section className="bg-white py-12 md:py-16 font-body">
             <div className="container mx-auto px-4 md:px-10">
-                <div className="flex justify-between items-center mb-6 md:mb-8">
-                    <h2 className="text-3xl md:text-4xl font-semibold text-dark-gray -tracking-[0.3px]" style={{ fontFamily: 'var(--font-display)' }}>Top Categories</h2>
-                    <div className="hidden md:flex items-center space-x-2">
-                        <button 
-                            onClick={() => handleScroll('left')} 
-                            disabled={isAtStart}
-                            aria-label="Scroll left"
-                            className="bg-light-gray hover:bg-border-gray disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors rounded-full w-10 h-10 flex items-center justify-center text-gray-600"
-                        >
-                            <ChevronLeft size={24} />
-                        </button>
-                        <button 
-                            onClick={() => handleScroll('right')}
-                            disabled={isAtEnd}
-                            aria-label="Scroll right"
-                            className="bg-light-gray hover:bg-border-gray disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer transition-colors rounded-full w-10 h-10 flex items-center justify-center text-gray-600"
-                        >
-                            <ChevronRight size={24} />
-                        </button>
-                    </div>
-                </div>
+                <h2 className="text-2xl md:text-3xl font-semibold text-dark-gray mb-6 md:mb-8" style={{ fontFamily: 'var(--font-display)' }}>
+                    Top Categories
+                </h2>
 
-                <div className="relative">
-                    <div 
-                        ref={scrollContainerRef} 
-                        className="flex overflow-x-auto gap-4 pb-4 -mx-4 px-4"
-                        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-                    >
-                        {categoriesData.map((category) => (
-                            <CategoryCard key={category.name} category={category} />
-                        ))}
-                    </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 md:gap-6">
+                    {categoriesData.map((category) => (
+                        <CategoryCard key={category.name} category={category} />
+                    ))}
                 </div>
             </div>
         </section>

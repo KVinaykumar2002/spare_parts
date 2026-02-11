@@ -12,8 +12,8 @@ export default function Home() {
     <div className="bg-white font-body min-h-screen w-full" style={{ backgroundColor: '#ffffff' }}>
       <HeroCarousel />
       <TopCategories />
-      <FeaturedBanners />
-      <PopularProducts />
+      {/* <FeaturedBanners /> */}
+      {/* <PopularProducts /> */}
       <LifestyleSwitch />
       <VideoTestimonial />
       <TestimonialsCarousel />

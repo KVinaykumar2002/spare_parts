@@ -110,10 +110,27 @@ const Footer = () => {
         setOpenAccordion(openAccordion === title ? null : title);
     };
 
+  const footerVideoSrc = "https://cdn.shopify.com/videos/c/o/v/2f74fc9020624fb09059c766e538177a.mp4";
+
   return (
     <>
-      <footer className="bg-white text-zinc-800 font-body">
-        <div className="container mx-auto px-5 py-16 lg:px-10">
+      <footer className="relative text-zinc-800 font-body overflow-hidden">
+        {/* Background video */}
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            aria-hidden
+          >
+            <source src={footerVideoSrc} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-white/40" aria-hidden />
+        </div>
+
+        <div className="container mx-auto px-5 py-16 lg:px-10 relative z-10">
           
           {/* Top section for large screens */}
           <div className="hidden lg:grid lg:grid-cols-6 gap-8">
