@@ -127,7 +127,7 @@ const Footer = () => {
           >
             <source src={footerVideoSrc} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-white/40" aria-hidden />
+          <div className="absolute inset-0 bg-white/0" aria-hidden />
         </div>
 
         <div className="container mx-auto px-5 py-16 lg:px-10 relative z-10">
