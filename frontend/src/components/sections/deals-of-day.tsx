@@ -167,9 +167,23 @@ const DealProductCard = ({ product }: { product: Product }) => {
             variantName: product.weight,
             price: product.dealPrice,
             coopPrice: parseFloat(product.coopPrice.match(/[\d.]+/)?.[0] || String(product.dealPrice * 0.85)),
+            imageUrl: product.image?.startsWith("http") ? product.image : undefined,
           })}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => {
+            e.preventDefault();
+            const coopPriceVal = parseFloat(product.coopPrice.match(/[\d.]+/)?.[0] || String(product.dealPrice * 0.85));
+            const url = getWhatsAppProductUrl({
+              productName: product.name,
+              variantName: product.weight,
+              price: product.dealPrice,
+              coopPrice: coopPriceVal,
+              imageUrl: product.image,
+              baseUrl: window.location.origin,
+            });
+            window.open(url, "_blank", "noopener,noreferrer");
+          }}
           className="h-10 w-10 flex items-center justify-center rounded-md bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors flex-shrink-0"
           aria-label="Inquire on WhatsApp"
         >

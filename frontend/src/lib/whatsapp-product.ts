@@ -11,8 +11,17 @@ export function getWhatsAppProductUrl(params: {
   price: number;
   coopPrice?: number;
   quantity?: number;
+  imageUrl?: string;
+  baseUrl?: string; // e.g. window.location.origin - needed to resolve relative image paths
 }): string {
-  const { productName, variantName, price, coopPrice, quantity = 1 } = params;
+  const { productName, variantName, price, coopPrice, quantity = 1, imageUrl, baseUrl } = params;
+
+  const imageUrlFull =
+    imageUrl?.startsWith("http")
+      ? imageUrl
+      : imageUrl && baseUrl
+        ? `${baseUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`
+        : undefined; // Omit image for relative URLs when baseUrl not available (e.g. SSR)
 
   const lines = [
     "Hi, I'm interested in this product:",
@@ -22,6 +31,7 @@ export function getWhatsAppProductUrl(params: {
     `Price: ₹${price.toFixed(2)}`,
     coopPrice ? `Co-Op Price: ₹${coopPrice.toFixed(2)}` : null,
     quantity > 1 ? `Quantity: ${quantity}` : null,
+    imageUrlFull ? `Product Image: ${imageUrlFull}` : null,
     "",
     "Store Address:",
     STORE_ADDRESS,

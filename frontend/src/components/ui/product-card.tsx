@@ -293,9 +293,22 @@ const ProductCard: React.FC<ProductCardProps> = ({
               variantName: selectedVariant.name,
               price: selectedVariant.price,
               coopPrice: selectedVariant.coopPrice,
+              imageUrl: product.imageUrl?.startsWith("http") ? product.imageUrl : undefined,
             })}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              const url = getWhatsAppProductUrl({
+                productName: product.title,
+                variantName: selectedVariant.name,
+                price: selectedVariant.price,
+                coopPrice: selectedVariant.coopPrice,
+                imageUrl: product.imageUrl,
+                baseUrl: window.location.origin,
+              });
+              window.open(url, "_blank", "noopener,noreferrer");
+            }}
             className="h-9 sm:h-10 w-9 sm:w-10 flex items-center justify-center rounded-[4px] bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors flex-shrink-0"
             aria-label="Inquire on WhatsApp"
           >

@@ -179,9 +179,22 @@ const ProductCard = ({ product }: { product: Product }) => {
                 variantName: selectedVariant,
                 price: product.price,
                 coopPrice: product.coOpPrice,
+                imageUrl: product.image?.startsWith("http") ? product.image : undefined,
               })}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => {
+                e.preventDefault();
+                const url = getWhatsAppProductUrl({
+                  productName: product.name,
+                  variantName: selectedVariant,
+                  price: product.price,
+                  coopPrice: product.coOpPrice,
+                  imageUrl: product.image,
+                  baseUrl: window.location.origin,
+                });
+                window.open(url, "_blank", "noopener,noreferrer");
+              }}
               className="h-9 w-9 flex items-center justify-center rounded-md bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors flex-shrink-0"
               aria-label="Inquire on WhatsApp"
             >
