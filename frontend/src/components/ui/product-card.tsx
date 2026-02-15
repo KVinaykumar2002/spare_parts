@@ -219,7 +219,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           variant="ghost"
           size="icon"
           className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 z-10 h-8 w-8 sm:h-9 sm:w-9 bg-white/90 rounded-full hover:bg-white text-medium-gray touch-manipulation"
-          onClick={handleWishlistClick}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleWishlistClick(e);
+          }}
           aria-label={isWishlisted ? 'Remove from wishlist' : 'Add to wishlist'}
         >
           <Heart className={cn('h-4 w-4 sm:h-5 sm:w-5 transition-all', isWishlisted ? 'text-destructive fill-current' : 'text-inherit')} />
@@ -235,13 +238,27 @@ const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       <div className="flex flex-col flex-grow p-3 sm:p-4 space-y-2 sm:space-y-3">
-        <h3 className="font-body text-dark-gray-alt text-xs sm:text-sm font-normal line-clamp-2 min-h-[36px] sm:min-h-[45px] leading-tight">
+        <h3
+          className="font-body text-dark-gray-alt text-xs sm:text-sm font-normal line-clamp-2 min-h-[36px] sm:min-h-[45px] leading-tight cursor-pointer hover:text-primary-green transition-colors"
+          onClick={() => setIsImagePreviewOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+          aria-label={`View larger image of ${product.title}`}
+        >
           {product.title}
         </h3>
 
         <div className="flex-grow"></div>
 
-        <div className="space-y-0.5 sm:space-y-1">
+        <div
+          className="space-y-0.5 sm:space-y-1 cursor-pointer"
+          onClick={() => setIsImagePreviewOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+          aria-label={`View larger image of ${product.title}`}
+        >
           <div className="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
             <span className="text-dark-gray font-semibold text-sm sm:text-base">
               ₹{onSale ? selectedVariant.salePrice?.toFixed(2) : selectedVariant.price.toFixed(2)}

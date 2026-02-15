@@ -8,12 +8,8 @@ import {
   Heart,
   MapPin,
   Phone,
-  Search,
   ShoppingCart,
 } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import CategoryDropdown from "@/components/ui/category-dropdown";
 import AddressDropdown from "@/components/ui/address-dropdown";
 import { getCartItemCount, getCartUpdateEventName } from "@/lib/cart-functionality";
@@ -84,19 +80,6 @@ const HeaderDesktop = () => {
                 </div>
               </div>
             </AddressDropdown>
-            
-            <form className="flex items-center border border-border-gray-alt rounded h-11 w-full max-w-xs">
-               <Input
-                type="text"
-                placeholder="Search petrol pump parts..."
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-full flex-grow pl-4"
-              />
-              <div className="border-l border-border-gray-alt h-full flex items-center">
-                <Button type="submit" variant="ghost" size="icon" className="h-full w-12 hover:bg-gray-100 rounded-none rounded-r-[3px]">
-                  <Search className="h-5 w-5 text-dark-gray" />
-                </Button>
-              </div>
-            </form>
           </div>
 
           <div className="px-8 flex-shrink-0">

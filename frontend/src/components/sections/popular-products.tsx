@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,6 +22,11 @@ import {
 } from '@/lib/wishlist-functionality';
 import { getWhatsAppProductUrl } from '@/lib/whatsapp-product';
 import ImagePreviewModal from '@/components/ui/image-preview-modal';
+import {
+  ProductFilters,
+  applyProductFilters,
+  type ProductFiltersState,
+} from '@/components/ui/product-filters';
 import { publicApi } from '@/lib/api';
 
 interface Product {
@@ -129,7 +134,10 @@ const ProductCard = ({ product }: { product: Product }) => {
             size="icon"
             variant="ghost"
             className="absolute top-2 right-2 bg-white rounded-full h-8 w-8 text-gray-400 hover:text-red-alert hover:bg-white focus:ring-0"
-            onClick={handleWishlistToggle}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleWishlistToggle();
+            }}
           >
             <Heart
               className={`h-4 w-4 transition-colors ${
@@ -140,10 +148,24 @@ const ProductCard = ({ product }: { product: Product }) => {
           </Button>
         </div>
         <div className="p-4 flex flex-col flex-grow">
-          <h3 className="text-sm font-medium text-dark-gray-alt h-10 line-clamp-2 mb-2">
+          <h3
+            className="text-sm font-medium text-dark-gray-alt h-10 line-clamp-2 mb-2 cursor-pointer hover:text-primary-green transition-colors"
+            onClick={() => setIsImagePreviewOpen(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+            aria-label={`View larger image of ${product.name}`}
+          >
             {product.name}
           </h3>
-          <div className="flex items-baseline gap-2 mb-1">
+          <div
+            className="flex items-baseline gap-2 mb-1 cursor-pointer"
+            onClick={() => setIsImagePreviewOpen(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+            aria-label={`View larger image of ${product.name}`}
+          >
             <h5 className="text-lg font-semibold text-dark-gray-alt">₹{product.price.toFixed(2)}</h5>
             {product.originalPrice && (
               <span className="text-sm text-medium-gray line-through">
@@ -238,10 +260,11 @@ const ProductSkeleton = () => (
 
 export default function PopularProducts() {
   const [activeTab, setActiveTab] = useState('All');
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [categoryFilteredProducts, setCategoryFilteredProducts] = useState<Product[]>([]);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<string[]>(['All']);
+  const [filters, setFilters] = useState<ProductFiltersState>({ searchQuery: '', sortBy: 'default' });
 
   // Fetch products from API
   useEffect(() => {
@@ -276,7 +299,7 @@ export default function PopularProducts() {
           } else {
             productsToShow = transformedProducts.filter(p => p.category === activeTab);
           }
-          setFilteredProducts(productsToShow);
+          setCategoryFilteredProducts(productsToShow);
         }
       } catch (error) {
         console.error('Failed to fetch products:', error);
@@ -297,9 +320,21 @@ export default function PopularProducts() {
       } else {
         productsToShow = allProducts.filter(p => p.category === activeTab);
       }
-      setFilteredProducts(productsToShow);
+      setCategoryFilteredProducts(productsToShow);
     }
   }, [activeTab, allProducts]);
+
+  const priceRange = useMemo(() => {
+    if (categoryFilteredProducts.length === 0) return undefined;
+    const prices = categoryFilteredProducts.map((p) => p.price).filter((n) => n > 0);
+    if (prices.length === 0) return undefined;
+    return { min: Math.min(...prices), max: Math.max(...prices) };
+  }, [categoryFilteredProducts]);
+
+  const filteredProducts = useMemo(
+    () => applyProductFilters(categoryFilteredProducts, filters),
+    [categoryFilteredProducts, filters]
+  );
 
   return (
     <section className="py-12 lg:py-20 bg-white">
@@ -316,32 +351,41 @@ export default function PopularProducts() {
               View All
             </a>
           </div>
-          <div className="rounded-xl bg-stone-50/80 border border-stone-200/80 p-2">
-            <div className="overflow-x-auto -mx-1 px-1">
-              <ul className="flex gap-2 min-w-0 pb-1" role="tablist" aria-label="Product category filters">
-                {categories.map((category) => (
-                  <li key={category} role="presentation">
-                    <button
-                      role="tab"
-                      aria-selected={activeTab === category}
-                      tabIndex={activeTab === category ? 0 : -1}
-                      onClick={() => setActiveTab(category)}
-                      className={`
-                        shrink-0 rounded-lg px-4 py-2.5 text-sm font-medium whitespace-nowrap
-                        transition-all duration-200 cursor-pointer
-                        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
-                        ${activeTab === category
-                          ? 'bg-primary text-primary-foreground shadow-sm'
-                          : 'text-stone-600 hover:bg-white hover:text-primary hover:shadow-sm border border-transparent hover:border-stone-200'
-                        }
-                      `}
-                    >
-                      {category}
-                    </button>
-                  </li>
-                ))}
-              </ul>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="rounded-xl bg-stone-50/80 border border-stone-200/80 p-2 flex-1 min-w-0">
+              <div className="overflow-x-auto -mx-1 px-1">
+                <ul className="flex gap-2 min-w-0 pb-1" role="tablist" aria-label="Product category filters">
+                  {categories.map((category) => (
+                    <li key={category} role="presentation">
+                      <button
+                        role="tab"
+                        aria-selected={activeTab === category}
+                        tabIndex={activeTab === category ? 0 : -1}
+                        onClick={() => setActiveTab(category)}
+                        className={`
+                          shrink-0 rounded-lg px-4 py-2.5 text-sm font-medium whitespace-nowrap
+                          transition-all duration-200 cursor-pointer
+                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2
+                          ${activeTab === category
+                            ? 'bg-primary text-primary-foreground shadow-sm'
+                            : 'text-stone-600 hover:bg-white hover:text-primary hover:shadow-sm border border-transparent hover:border-stone-200'
+                          }
+                        `}
+                      >
+                        {category}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
+            {!loading && categoryFilteredProducts.length > 0 && (
+              <ProductFilters
+                filters={filters}
+                onFiltersChange={setFilters}
+                priceRange={priceRange}
+              />
+            )}
           </div>
         </div>
 

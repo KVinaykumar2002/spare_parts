@@ -134,8 +134,24 @@ const DealProductCard = ({ product }: { product: Product }) => {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </div>
-        <h3 className="text-sm font-medium text-dark-gray-alt mb-2 h-10">{product.name}</h3>
-        <div className="flex items-baseline mb-2">
+        <h3
+          className="text-sm font-medium text-dark-gray-alt mb-2 h-10 cursor-pointer hover:text-primary-green transition-colors"
+          onClick={() => setIsImagePreviewOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+          aria-label={`View larger image of ${product.name}`}
+        >
+          {product.name}
+        </h3>
+        <div
+          className="flex items-baseline mb-2 cursor-pointer"
+          onClick={() => setIsImagePreviewOpen(true)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && setIsImagePreviewOpen(true)}
+          aria-label={`View larger image of ${product.name}`}
+        >
           <span className="text-2xl font-bold text-red-alert-alt">₹{product.dealPrice.toFixed(2)}</span>
           <span className="text-sm text-medium-gray line-through ml-2">₹{product.originalPrice.toFixed(2)}</span>
         </div>

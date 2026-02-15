@@ -1,10 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Package, ArrowLeft } from "lucide-react";
 import ProductCard from "@/components/ui/product-card";
+import {
+  ProductFilters,
+  applyProductFilters,
+  type ProductFiltersState,
+} from "@/components/ui/product-filters";
 import { addToCart } from "@/lib/cart-functionality";
 import { publicApi } from '@/lib/api';
 
@@ -51,6 +56,7 @@ export default function CategoryPage({ params }: PageProps) {
   const [products, setProducts] = useState<any[]>([]);
   const [categoryImage, setCategoryImage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
+  const [filters, setFilters] = useState<ProductFiltersState>({ searchQuery: "", sortBy: "default" });
 
   useEffect(() => {
     const fetchCategoryData = async () => {
@@ -133,6 +139,18 @@ export default function CategoryPage({ params }: PageProps) {
     fetchCategoryData();
   }, [params]);
 
+  const priceRange = useMemo(() => {
+    if (products.length === 0) return undefined;
+    const prices = products.map((p) => p.variants?.[0]?.price ?? 0).filter((n) => n > 0);
+    if (prices.length === 0) return undefined;
+    return { min: Math.min(...prices), max: Math.max(...prices) };
+  }, [products]);
+
+  const filteredProducts = useMemo(
+    () => applyProductFilters(products, filters),
+    [products, filters]
+  );
+
   const handleAddToCart = async (variantId: string, quantity: number) => {
     // Find the product that contains this variant
     const product = products.find(p => 
@@ -199,15 +217,48 @@ export default function CategoryPage({ params }: PageProps) {
                 ))}
               </div>
             ) : products.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-                {products.map((product) => (
-                  <ProductCard
-                    key={product.id}
-                    product={product}
-                    onAddToCart={handleAddToCart}
+              <>
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                  <p className="text-sm text-muted-foreground">
+                    {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
+                  </p>
+                  <ProductFilters
+                    filters={filters}
+                    onFiltersChange={setFilters}
+                    priceRange={priceRange}
                   />
-                ))}
-              </div>
+                </div>
+                {filteredProducts.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+                    {filteredProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        onAddToCart={handleAddToCart}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-dashed p-8 text-center">
+                    <p className="text-muted-foreground mb-4">
+                      No products match your filters. Try adjusting the price range or clearing filters.
+                    </p>
+                    <button
+                      onClick={() =>
+                        setFilters({
+                          searchQuery: "",
+                          sortBy: "default",
+                          priceMin: undefined,
+                          priceMax: undefined,
+                        })
+                      }
+                      className="text-sm font-medium text-primary-green hover:underline"
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="p-8 bg-light-gray rounded-lg text-center">
                 <p className="text-medium-gray mb-6">
