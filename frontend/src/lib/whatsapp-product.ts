@@ -1,9 +1,20 @@
 /**
- * Generates WhatsApp link for product inquiry with product details and store address.
+ * Generates WhatsApp link for product inquiry with product details and delivery address.
+ * User must save address before sending; their saved address is included in the message.
  */
 
 const WHATSAPP_NUMBER = "919866309037";
 const STORE_ADDRESS = "#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103";
+
+export interface DeliveryAddress {
+  name: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  state: string;
+  pincode: string;
+}
 
 export function getWhatsAppProductUrl(params: {
   productName: string;
@@ -13,8 +24,9 @@ export function getWhatsAppProductUrl(params: {
   quantity?: number;
   imageUrl?: string;
   baseUrl?: string; // e.g. window.location.origin - needed to resolve relative image paths
+  deliveryAddress?: DeliveryAddress | null; // User's saved delivery address – included when provided
 }): string {
-  const { productName, variantName, price, coopPrice, quantity = 1, imageUrl, baseUrl } = params;
+  const { productName, variantName, price, coopPrice, quantity = 1, imageUrl, baseUrl, deliveryAddress } = params;
 
   const imageUrlFull =
     imageUrl?.startsWith("http")
@@ -23,7 +35,7 @@ export function getWhatsAppProductUrl(params: {
         ? `${baseUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`
         : undefined; // Omit image for relative URLs when baseUrl not available (e.g. SSR)
 
-  const lines = [
+  const productLines = [
     "Hi, I'm interested in this product:",
     "",
     `*${productName}*`,
@@ -32,11 +44,21 @@ export function getWhatsAppProductUrl(params: {
     coopPrice ? `Co-Op Price: ₹${coopPrice.toFixed(2)}` : null,
     quantity > 1 ? `Quantity: ${quantity}` : null,
     imageUrlFull ? `Product Image: ${imageUrlFull}` : null,
-    "",
-    "Store Address:",
-    STORE_ADDRESS,
   ].filter(Boolean);
 
+  const addressLines = deliveryAddress
+    ? [
+        "",
+        "My Delivery Address:",
+        deliveryAddress.name,
+        deliveryAddress.phone,
+        deliveryAddress.addressLine1,
+        deliveryAddress.addressLine2 || null,
+        `${deliveryAddress.city}, ${deliveryAddress.state} - ${deliveryAddress.pincode}`,
+      ].filter(Boolean)
+    : ["", "Store Address:", STORE_ADDRESS];
+
+  const lines = [...productLines, ...addressLines];
   const message = lines.join("\n");
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

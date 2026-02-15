@@ -24,6 +24,8 @@ interface AddressModalProps {
   onOpenChange: (open: boolean) => void;
   address?: Address | null;
   onSave?: () => void;
+  /** Optional subtitle shown below the title (e.g. for WhatsApp inquiry flow) */
+  subtitle?: string;
 }
 
 export default function AddressModal({
@@ -31,6 +33,7 @@ export default function AddressModal({
   onOpenChange,
   address,
   onSave,
+  subtitle,
 }: AddressModalProps) {
   const [formData, setFormData] = React.useState({
     name: "",
@@ -158,6 +161,9 @@ export default function AddressModal({
             <DialogTitle className="text-2xl font-semibold text-dark-gray-alt">
               {address ? "Edit Address" : "Add New Address"}
             </DialogTitle>
+            {subtitle && (
+              <p className="text-sm text-medium-gray mt-1">{subtitle}</p>
+            )}
           </DialogHeader>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -263,15 +269,13 @@ export default function AddressModal({
                   id="pincode"
                   name="pincode"
                   type="tel"
+                  inputMode="numeric"
+                  autoComplete="postal-code"
                   value={formData.pincode}
                   onChange={(e) => {
-                    const value = e.target.value.replace(/[^0-9]/g, "");
-                    if (value.length <= 6) {
-                      handleChange({
-                        ...e,
-                        target: { ...e.target, value },
-                      } as React.ChangeEvent<HTMLInputElement>);
-                    }
+                    const value = e.target.value.replace(/\D/g, "").slice(0, 6);
+                    setFormData((prev) => ({ ...prev, pincode: value }));
+                    if (error) setError(null);
                   }}
                   placeholder="6-digit pincode"
                   className="w-full h-11"
