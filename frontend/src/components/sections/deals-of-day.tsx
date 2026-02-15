@@ -139,7 +139,6 @@ const DealProductCard = ({ product }: { product: Product }) => {
           <span className="text-2xl font-bold text-red-alert-alt">₹{product.dealPrice.toFixed(2)}</span>
           <span className="text-sm text-medium-gray line-through ml-2">₹{product.originalPrice.toFixed(2)}</span>
         </div>
-        <p className="text-xs text-primary-green italic mb-4">{product.coopPrice}</p>
         
         <div className="w-full bg-[#d4edd9] rounded-full h-2.5 mb-1">
           <div className="bg-primary-green h-2.5 rounded-full" style={{ width: `${progressPercentage}%` }}></div>

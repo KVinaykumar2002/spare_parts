@@ -187,11 +187,6 @@ export default function WishlistPage() {
                     {item.price !== undefined && (
                       <p className="text-sm sm:text-base text-dark-gray font-medium">
                         ₹{item.price.toFixed(2)}
-                        {item.coopPrice && item.coopPrice < item.price && (
-                          <span className="text-xs text-primary-green ml-2 block sm:inline">
-                            ₹{item.coopPrice.toFixed(2)} for Co-Op Members
-                          </span>
-                        )}
                       </p>
                     )}
                   </div>

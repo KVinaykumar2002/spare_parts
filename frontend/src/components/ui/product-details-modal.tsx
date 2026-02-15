@@ -213,9 +213,6 @@ export default function ProductDetailsModal({
                   </span>
                 )}
               </div>
-              <p className="text-xs sm:text-sm font-medium text-primary-green">
-                ₹{selectedVariant.coopPrice.toFixed(2)} for Co-Op Members*
-              </p>
               <p className="text-[10px] sm:text-xs text-medium-gray">
                 Stock: {selectedVariant.stock > 0 ? `${selectedVariant.stock} available` : 'Out of Stock'}
               </p>

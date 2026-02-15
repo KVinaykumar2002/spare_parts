@@ -151,9 +151,6 @@ const ProductCard = ({ product }: { product: Product }) => {
               </span>
             )}
           </div>
-          <p className="text-xs font-semibold text-green-700 mb-4 h-8">
-            ₹{product.coOpPrice.toFixed(2)} for Co-Op Members*
-          </p>
           <div className="flex items-center gap-2 mt-auto">
             <Select defaultValue={product.variants[0]} onValueChange={setSelectedVariant}>
               <SelectTrigger className="w-[100px] h-9 text-xs focus:ring-ring focus:ring-1">

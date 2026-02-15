@@ -252,9 +252,6 @@ const ProductCard: React.FC<ProductCardProps> = ({
               </span>
             )}
           </div>
-          <p className="text-primary text-[10px] sm:text-xs font-normal leading-tight">
-            ₹{selectedVariant.coopPrice.toFixed(2)} for Co-Op Members*
-          </p>
         </div>
 
         <div className="flex items-center gap-1.5 sm:gap-2 pt-1">

@@ -77,10 +77,6 @@ const CategoryShowcases = () => {
                           {product.name}
                         </p>
                       </Link>
-                      <p className="text-xs sm:text-sm mt-1">
-                        <span className="font-semibold text-success-green">₹{product.coopPrice}</span>
-                        <span className="text-[10px] sm:text-xs text-medium-gray-alt ml-1"> for Co-Op Members*</span>
-                      </p>
                     </div>
                   </div>
                 ))}
