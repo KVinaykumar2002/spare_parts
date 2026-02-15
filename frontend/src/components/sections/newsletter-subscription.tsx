@@ -1,22 +1,23 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { Mail } from "lucide-react";
-
-// Note: The design features a collage of floating product images.
+import LottiePlayer from "@/components/ui/lottie-player";
 // As no asset URLs were provided for this section, placeholder divs are used
 // to replicate the layout and feel without using broken or unverified image links,
 // adhering to the project's asset handling guidelines.
 
+const WHATSAPP_NUMBER = "919866309037";
+
 const NewsletterSubscription = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    // A real implementation would handle the API call for subscription here.
-    console.log("Subscribed with:", email);
-    alert(`Thank you for subscribing!`);
-    setEmail("");
+  const openWhatsApp = () => {
+    const message = email
+      ? `Hi, I'd like to connect. My email: ${email}`
+      : "Hi, I'd like to connect with ANANDH BunkStores.";
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -32,9 +33,12 @@ const NewsletterSubscription = () => {
             </p>
 
             <form
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                e.preventDefault();
+                openWhatsApp();
+              }}
               className="max-w-lg mx-auto lg:mx-0"
-              aria-label="Newsletter subscription"
+              aria-label="Connect via WhatsApp"
             >
               <div className="flex rounded-full shadow-lg overflow-hidden">
                 <div className="relative flex-grow">
@@ -52,7 +56,6 @@ const NewsletterSubscription = () => {
                     placeholder="Your email address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    required
                     className="w-full h-14 pl-12 pr-4 bg-white border-0 focus:ring-2 focus:ring-primary/50 focus:outline-none text-base text-dark-gray-alt placeholder:text-medium-gray-alt relative rounded-l-full"
                   />
                 </div>
@@ -60,22 +63,17 @@ const NewsletterSubscription = () => {
                   type="submit"
                   className="bg-primary text-primary-foreground font-semibold px-6 md:px-8 h-14 rounded-r-full whitespace-nowrap hover:bg-opacity-90 transition-colors duration-300 text-sm uppercase tracking-[0.5px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary cursor-pointer"
                 >
-                  Subscribe
+                  WhatsApp
                 </button>
               </div>
             </form>
           </div>
 
-          <div className="w-full lg:w-[45%] xl:w-1/2 min-h-[280px] lg:min-h-[400px] relative mt-16 lg:mt-0">
-            {/* Placeholder divs for floating images */}
-            <div className="absolute top-[-30px] right-[10%] lg:right-[15%] w-[100px] h-[100px] lg:w-[130px] lg:h-[130px] transform rotate-[15deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="absolute top-[40%] right-[-20px] lg:right-0 w-[90px] h-[90px] lg:w-[120px] lg:h-[120px] transform -rotate-[25deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="absolute top-[-10px] left-[50%] lg:left-auto lg:top-[55%] lg:right-[30%] w-[120px] h-[120px] transform -rotate-[10deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="absolute bottom-[-60px] lg:bottom-[-40px] left-[5%] lg:left-[15%] w-[80px] h-[130px] transform -rotate-[10deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="hidden lg:block absolute bottom-[-20px] right-[5%] w-[150px] h-[150px] transform rotate-[10deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="absolute top-[10%] left-[5%] lg:left-[10%] w-[80px] h-[80px] transform rotate-[10deg] shadow-lg bg-white/40 rounded-2xl"></div>
-            <div className="absolute bottom-0 left-[35%] lg:left-[45%] w-[90px] h-[90px] transform rotate-[20deg] shadow-lg bg-white/40 rounded-full"></div>
-            <div className="absolute bottom-[20%] left-[0] w-[90px] h-[90px] transform -rotate-[15deg] shadow-lg bg-white/40 rounded-full"></div>
+          <div className="w-full lg:w-[45%] xl:w-1/2 min-h-[280px] lg:min-h-[400px] relative mt-16 lg:mt-0 flex items-center justify-center">
+            <LottiePlayer
+              url="/lottie_files/Share.json"
+              className="w-full h-full max-w-[400px] max-h-[400px]"
+            />
           </div>
         </div>
       </div>

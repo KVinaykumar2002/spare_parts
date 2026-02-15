@@ -11,8 +11,6 @@ import { getSelectedAddress, getAddressUpdateEventName, type Address } from "@/l
 // The navItems are derived from the desktop navigation panel in the HTML structure
 const navItems = [
   { name: 'Browse All Categories', href: '/collections/all' },
-  { name: 'Co-Op Member', href: '/pages/membership' },
-  { name: 'Lab Test Reports', href: 'https://trust.eversol.com', external: true },
   { name: 'Store Locations', href: '/pages/store-locator' },
   { name: 'Deals', href: '/collections/om-deals' },
 ];

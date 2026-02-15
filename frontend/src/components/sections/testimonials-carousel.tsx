@@ -7,6 +7,7 @@ type Testimonial = {
   quote: string;
   name: string;
   title?: string;
+  avatar?: string;
   avatarInitial: string;
   avatarBgColor: string;
   avatarTextColor: string;
@@ -16,6 +17,7 @@ const testimonials: Testimonial[] = [
   {
     quote: "ANANDH BunkStores is our one-stop shop for all petrol pump material. Quality is consistent and delivery is reliable. We have been sourcing nozzles, hoses and spare parts from them for years.",
     name: "Ramesh",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop",
     avatarInitial: "R",
     avatarBgColor: "bg-orange-100",
     avatarTextColor: "text-orange-800",
@@ -23,6 +25,7 @@ const testimonials: Testimonial[] = [
   {
     quote: "We run multiple outlets and need a single supplier we can trust. ANANDH BunkStores has everything—Indian Oil, Bharat, Hindustan, Nayara—all in one place. Saves us time and hassle.",
     name: "Kumar",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop",
     avatarInitial: "K",
     avatarBgColor: "bg-blue-100",
     avatarTextColor: "text-blue-800",
@@ -30,6 +33,7 @@ const testimonials: Testimonial[] = [
   {
     quote: "Found them when we were setting up our new pump near Rajahmundry. They helped us with dispensers, uniforms and safety equipment. True one-stop shop for petrol pump material.",
     name: "Padma",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop",
     avatarInitial: "P",
     avatarBgColor: "bg-pink-100",
     avatarTextColor: "text-pink-800",
@@ -37,6 +41,7 @@ const testimonials: Testimonial[] = [
   {
     quote: "Good prices, genuine parts, and they deliver on time. We order nozzles and hose assemblies regularly. Co-Op member pricing is a plus. Recommend ANANDH BunkStores to any pump owner.",
     name: "Suresh",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop",
     avatarInitial: "S",
     avatarBgColor: "bg-teal-100",
     avatarTextColor: "text-teal-800",
@@ -45,6 +50,7 @@ const testimonials: Testimonial[] = [
     quote: "We needed fire safety equipment and canopy lighting for our station. ANANDH BunkStores had it all. Professional service and fair pricing. Will continue to order from them.",
     name: "Venkat",
     title: "Pump Owner, East Godavari",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=80&h=80&fit=crop",
     avatarInitial: "V",
     avatarBgColor: "bg-indigo-100",
     avatarTextColor: "text-indigo-800",
@@ -95,15 +101,23 @@ export default function TestimonialsCarousel() {
               </div>
 
               <div className="flex items-center gap-3 mt-3 pt-3 border-t border-primary-green/10">
-                <div
-                  className={cn(
-                    "flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm",
-                    testimonial.avatarBgColor,
-                    testimonial.avatarTextColor
-                  )}
-                >
-                  {testimonial.avatarInitial}
-                </div>
+                {testimonial.avatar ? (
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div
+                    className={cn(
+                      "flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm flex-shrink-0",
+                      testimonial.avatarBgColor,
+                      testimonial.avatarTextColor
+                    )}
+                  >
+                    {testimonial.avatarInitial}
+                  </div>
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-dark-gray text-sm">
                     {testimonial.name}
@@ -138,15 +152,23 @@ export default function TestimonialsCarousel() {
               </div>
 
               <div className="flex items-center gap-3 mt-3 pt-3 border-t border-primary-green/10">
-                <div
-                  className={cn(
-                    "flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm",
-                    testimonial.avatarBgColor,
-                    testimonial.avatarTextColor
-                  )}
-                >
-                  {testimonial.avatarInitial}
-                </div>
+                {testimonial.avatar ? (
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div
+                    className={cn(
+                      "flex items-center justify-center w-10 h-10 rounded-full font-bold text-sm flex-shrink-0",
+                      testimonial.avatarBgColor,
+                      testimonial.avatarTextColor
+                    )}
+                  >
+                    {testimonial.avatarInitial}
+                  </div>
+                )}
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-dark-gray text-sm">
                     {testimonial.name}

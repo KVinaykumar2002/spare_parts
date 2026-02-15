@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { MapPin, ArrowLeft, Phone, Clock } from "lucide-react";
+import { STORE_MAP_LINK, STORE_QR_CODE_URL } from "@/lib/store-location";
+
+const MAP_ADDRESS = "45-22-25 Beside Jupudy Tyres Bypass Road Thadithota Rajahmundry 533103";
+const MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAP_ADDRESS)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
 export default function StoreLocatorPage() {
   const stores = [
@@ -14,7 +18,7 @@ export default function StoreLocatorPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-5 py-16 lg:px-10">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <Link href="/" className="inline-flex items-center text-primary-green font-semibold mb-8">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
@@ -59,9 +63,38 @@ export default function StoreLocatorPage() {
                     <Clock className="w-5 h-5 text-primary-green mr-3" />
                     <p className="text-medium-gray">{store.hours}</p>
                   </div>
+                  <div className="mt-4 pt-4 border-t border-border-gray">
+                    <p className="text-sm font-medium text-dark-gray mb-2">Scan QR for directions</p>
+                    <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block">
+                      <img src={STORE_QR_CODE_URL} alt="Scan for store location" width={120} height={120} className="rounded-lg bg-white p-1 border border-border-gray" />
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 rounded-lg overflow-hidden border border-border-gray shadow-sm">
+            <iframe
+              src={MAP_EMBED_URL}
+              width="100%"
+              height="550"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="ANANDH BunkStores location on Google Maps"
+              className="w-full"
+            />
+            <a
+              href={STORE_MAP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 py-3 bg-light-green text-primary-green font-semibold hover:bg-primary-green/10 transition-colors"
+            >
+              <MapPin className="w-5 h-5" />
+              Open in Google Maps
+            </a>
           </div>
 
           <div className="mt-12 p-8 bg-light-green rounded-lg text-center">

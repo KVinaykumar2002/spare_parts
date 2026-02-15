@@ -21,8 +21,6 @@ import { getWishlistCount, getWishlistUpdateEventName } from "@/lib/wishlist-fun
 import { getSelectedAddress, getAddressUpdateEventName, type Address } from "@/lib/address-functionality";
 
 const navLinks = [
-  { href: "/pages/membership", text: "Co-Op Member" },
-  { href: "https://trust.eversol.com", text: "Lab Test Reports" },
   { href: "/pages/store-locator", text: "Store Locations" },
   { href: "/collections/om-deals", text: "Deals" },
 ];

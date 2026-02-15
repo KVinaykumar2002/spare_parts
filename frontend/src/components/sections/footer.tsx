@@ -10,6 +10,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
+import { STORE_QR_CODE_URL, STORE_MAP_LINK } from "@/lib/store-location";
 
 const SocialIcon = ({
   href,
@@ -146,6 +147,10 @@ const Footer = () => {
               <p className="text-sm text-zinc-600">
                 Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a>
               </p>
+              <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
+                <img src={STORE_QR_CODE_URL} alt="Scan for store location" width={120} height={120} className="rounded-lg bg-white p-1 border border-zinc-200" />
+                <span className="block text-xs text-zinc-600 mt-2 font-medium">Scan for directions</span>
+              </a>
             </div>
             {linkGroups.map((group) => (
                 <FooterLinkColumn key={group.title} title={group.title} links={group.links} />
@@ -162,6 +167,10 @@ const Footer = () => {
                 <p className="text-sm text-zinc-600">#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103</p>
                 <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a></p>
                 <p className="text-sm text-zinc-600">Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a></p>
+                <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
+                  <img src={STORE_QR_CODE_URL} alt="Scan for store location" width={120} height={120} className="rounded-lg bg-white p-1 border border-zinc-200" />
+                  <span className="block text-xs text-zinc-600 mt-2 font-medium">Scan for directions</span>
+                </a>
               </div>
 
               {linkGroups.map(group => (
