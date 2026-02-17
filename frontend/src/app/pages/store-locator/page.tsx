@@ -1,15 +1,12 @@
 import Link from "next/link";
 import { MapPin, ArrowLeft, Phone, Clock } from "lucide-react";
-import { STORE_MAP_LINK, STORE_QR_CODE_URL } from "@/lib/store-location";
-
-const MAP_ADDRESS = "45-22-25 Beside Jupudy Tyres Bypass Road Thadithota Rajahmundry 533103";
-const MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(MAP_ADDRESS)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+import { STORE_MAP_LINK, STORE_QR_CODE_URL, STORE_MAP_EMBED_URL, STORE_ADDRESS } from "@/lib/store-location";
 
 export default function StoreLocatorPage() {
   const stores = [
     {
       name: "ANANDH BunkStores",
-      address: "#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103",
+      address: STORE_ADDRESS,
       phone: "9866309037",
       hours: "9:00 AM - 9:00 PM (All Days)",
     },
@@ -76,7 +73,7 @@ export default function StoreLocatorPage() {
 
           <div className="mt-12 rounded-lg overflow-hidden border border-border-gray shadow-sm">
             <iframe
-              src={MAP_EMBED_URL}
+              src={STORE_MAP_EMBED_URL}
               width="100%"
               height="550"
               style={{ border: 0 }}

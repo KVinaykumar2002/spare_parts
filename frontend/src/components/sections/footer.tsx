@@ -10,7 +10,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
-import { STORE_QR_CODE_URL, STORE_MAP_LINK } from "@/lib/store-location";
+import { STORE_QR_CODE_URL, STORE_MAP_LINK, STORE_ADDRESS } from "@/lib/store-location";
 
 const SocialIcon = ({
   href,
@@ -140,7 +140,7 @@ const Footer = () => {
                 <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
                 <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
               </Link>
-              <p className="text-sm text-zinc-600">#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103</p>
+              <p className="text-sm text-zinc-600">{STORE_ADDRESS}</p>
               <p className="text-sm text-zinc-600">
                 Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a>
               </p>
@@ -164,7 +164,7 @@ const Footer = () => {
                   <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
                   <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
                 </Link>
-                <p className="text-sm text-zinc-600">#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103</p>
+                <p className="text-sm text-zinc-600">{STORE_ADDRESS}</p>
                 <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a></p>
                 <p className="text-sm text-zinc-600">Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a></p>
                 <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">

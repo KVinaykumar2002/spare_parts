@@ -3,8 +3,9 @@
  * User must save address before sending; their saved address is included in the message.
  */
 
+import { STORE_ADDRESS } from "./store-location";
+
 const WHATSAPP_NUMBER = "919866309037";
-const STORE_ADDRESS = "#45-22-25, Beside Jupudy Tyres, Bypass Road, Thadithota Rajahmundry - 533103";
 
 export interface DeliveryAddress {
   name: string;
