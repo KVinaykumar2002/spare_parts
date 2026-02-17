@@ -5,6 +5,14 @@ import { existsSync } from "node:fs";
 const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Redirect /home to /
+      { source: "/home", destination: "/", permanent: true },
+      // Add more redirects as needed, e.g.:
+      // { source: "/old-path", destination: "/new-path", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       {
