@@ -25,7 +25,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
+  // Only set in monorepos where deps live at repo root; omit on Vercel to avoid "Cannot find module next/dist/compiled/..." errors
+  ...(process.env.VERCEL ? {} : { outputFileTracingRoot: path.resolve(__dirname, '../../') }),
   typescript: {
     ignoreBuildErrors: true,
   },
