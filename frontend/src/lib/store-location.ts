@@ -3,8 +3,8 @@
  * QR code encodes the Google Maps link so users can scan for directions.
  */
 
-const MAP_ADDRESS = "45-22-25 Beside Jupudy Tyres Bypass Road Thadithota Rajahmundry 533103";
+/** Google Maps short link – used for "Open in Google Maps" and QR code */
+export const STORE_MAP_LINK = "https://maps.app.goo.gl/EQ2ry2rnmz5kW8iX7?g_st=iw";
 
-export const STORE_MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_ADDRESS)}`;
-
+/** QR code image URL encoding the store map link */
 export const STORE_QR_CODE_URL = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(STORE_MAP_LINK)}`;
