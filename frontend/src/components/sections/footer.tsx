@@ -66,7 +66,7 @@ const linkGroups: LinkGroup[] = [
       { name: "Return and Refund Policy", href: "/pages/return-and-refund-policy" },
       { name: "Shipping Policy", href: "/pages/shipping-policy" },
       { name: "Terms of Service", href: "/pages/terms-of-service" },
-      { name: "Sitemap", href: "/pages/sitemap" },
+
     ],
   },
 ];
@@ -105,11 +105,11 @@ const AccordionItem = ({ title, children, isOpen, onClick }: { title: string; ch
 );
 
 const Footer = () => {
-    const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
-    const handleAccordionToggle = (title: string) => {
-        setOpenAccordion(openAccordion === title ? null : title);
-    };
+  const handleAccordionToggle = (title: string) => {
+    setOpenAccordion(openAccordion === title ? null : title);
+  };
 
   const footerVideoSrc = "https://cdn.shopify.com/videos/c/o/v/2f74fc9020624fb09059c766e538177a.mp4";
 
@@ -132,7 +132,7 @@ const Footer = () => {
         </div>
 
         <div className="container mx-auto px-5 py-16 lg:px-10 relative z-10">
-          
+
           {/* Top section for large screens */}
           <div className="hidden lg:grid lg:grid-cols-6 gap-8">
             <div className="space-y-4">
@@ -153,40 +153,40 @@ const Footer = () => {
               </a>
             </div>
             {linkGroups.map((group) => (
-                <FooterLinkColumn key={group.title} title={group.title} links={group.links} />
+              <FooterLinkColumn key={group.title} title={group.title} links={group.links} />
             ))}
           </div>
-          
+
           {/* Content for small screens */}
           <div className="lg:hidden">
-              <div className="space-y-4 mb-8">
-                <Link href="/" className="inline-block mb-4">
-                  <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
-                  <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
-                </Link>
-                <p className="text-sm text-zinc-600">{STORE_ADDRESS}</p>
-                <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a></p>
-                <p className="text-sm text-zinc-600">Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a></p>
-                <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
-                  <img src={STORE_QR_CODE_URL} alt="Scan for store location" width={120} height={120} className="rounded-lg bg-white p-1 border border-zinc-200" />
-                  <span className="block text-xs text-zinc-600 mt-2 font-medium">Scan for directions</span>
-                </a>
-              </div>
+            <div className="space-y-4 mb-8">
+              <Link href="/" className="inline-block mb-4">
+                <span className="text-xl font-bold text-primary-green" style={{ fontFamily: 'var(--font-display)' }}>ANANDH BunkStores</span>
+                <span className="block text-xs text-zinc-600 mt-1">One Stop shop For All Petrol Pump Material</span>
+              </Link>
+              <p className="text-sm text-zinc-600">{STORE_ADDRESS}</p>
+              <p className="text-sm text-zinc-600">Call Us: <a href="tel:+919866309037" className="hover:text-primary-green">9866309037</a></p>
+              <p className="text-sm text-zinc-600">Email: <a href="mailto:support@anandhbunkstores.com" className="hover:text-primary-green">support@anandhbunkstores.com</a></p>
+              <a href={STORE_MAP_LINK} target="_blank" rel="noopener noreferrer" className="inline-block mt-4">
+                <img src={STORE_QR_CODE_URL} alt="Scan for store location" width={120} height={120} className="rounded-lg bg-white p-1 border border-zinc-200" />
+                <span className="block text-xs text-zinc-600 mt-2 font-medium">Scan for directions</span>
+              </a>
+            </div>
 
-              {linkGroups.map(group => (
-                  <AccordionItem 
-                    key={group.title} 
-                    title={group.title}
-                    isOpen={openAccordion === group.title}
-                    onClick={() => handleAccordionToggle(group.title)}
-                  >
-                      <ul className="space-y-3">
-                          {group.links.map(link => (
-                              <li key={link.name}><a href={link.href} className="text-sm text-zinc-600 hover:text-primary-green">{link.name}</a></li>
-                          ))}
-                      </ul>
-                  </AccordionItem>
-              ))}
+            {linkGroups.map(group => (
+              <AccordionItem
+                key={group.title}
+                title={group.title}
+                isOpen={openAccordion === group.title}
+                onClick={() => handleAccordionToggle(group.title)}
+              >
+                <ul className="space-y-3">
+                  {group.links.map(link => (
+                    <li key={link.name}><a href={link.href} className="text-sm text-zinc-600 hover:text-primary-green">{link.name}</a></li>
+                  ))}
+                </ul>
+              </AccordionItem>
+            ))}
           </div>
 
         </div>

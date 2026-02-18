@@ -48,6 +48,14 @@ export default function BackgroundMusic() {
                     playPromise.catch((error) => {
                         console.log("Autoplay prevented:", error);
                         setIsPlaying(false);
+                        // Add a one-time interaction listener to start music
+                        const handleInteraction = () => {
+                            setIsPlaying(true);
+                            document.removeEventListener("click", handleInteraction);
+                            document.removeEventListener("keydown", handleInteraction);
+                        };
+                        document.addEventListener("click", handleInteraction);
+                        document.addEventListener("keydown", handleInteraction);
                     });
                 }
             } else {
