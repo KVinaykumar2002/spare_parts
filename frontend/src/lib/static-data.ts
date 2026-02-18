@@ -88,6 +88,17 @@ const OTHER_IMAGES = [
   'STP-PMA-Gasket.jpg',
 ];
 
+function formatProductName(filename: string): string {
+  // Remove extension
+  let name = filename.replace(/\.[^/.]+$/, "");
+  // Remove leading numbers and dots (e.g., "17.IOCL" -> "IOCL")
+  name = name.replace(/^\d+[.\-\s]*/, "");
+  // Replace hyphens and underscores with spaces
+  name = name.replace(/[-_]+/g, " ");
+  // Trim and Title Case
+  return name.trim();
+}
+
 function buildProductsForCategory(
   slug: string,
   name: string,
@@ -100,10 +111,10 @@ function buildProductsForCategory(
   const category = { _id: slug, name, slug };
   return images.map((filename, index) => ({
     _id: `prod-static-${startId + index}`,
-    name: `${productLabel} ${index + 1}`,
+    name: formatProductName(filename),
     images: [imgDir + (imgDir.endsWith('/') ? '' : '/') + filename],
-    price: priceBase + (index + 1) * 500,
-    compareAtPrice: index % 3 === 0 ? priceBase + (index + 1) * 500 + 500 : undefined,
+    price: 0,
+    compareAtPrice: undefined,
     isFeatured: index % 4 === 0,
     category,
     stock: 50,
