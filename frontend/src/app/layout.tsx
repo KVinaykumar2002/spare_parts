@@ -6,6 +6,7 @@ import ToastListener from "@/components/ToastListener";
 import { Toaster } from "@/components/ui/sonner";
 import Script from "next/script";
 import AppShell from "./AppShell";
+import BackgroundMusic from "@/components/BackgroundMusic";
 
 export const metadata: Metadata = {
   title: "ANANDH BunkStores",
@@ -35,6 +36,7 @@ export default function RootLayout({
         />
         <AppShell>{children}</AppShell>
         <VisualEditsMessenger />
+        <BackgroundMusic />
       </body>
     </html>
   );
