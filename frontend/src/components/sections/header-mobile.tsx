@@ -118,18 +118,20 @@ const HeaderMobile = () => {
             <button onClick={() => setNavOpen(true)} className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 -ml-1 sm:-ml-2 cursor-pointer touch-manipulation" aria-label="Open menu">
               <Menu size={24} className="sm:w-7 sm:h-7 text-dark-gray" />
             </button>
-            <AddressDropdown onAddressChange={setSelectedAddress}>
-              <div className="flex items-center gap-1 sm:gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
-                <MapPin size={16} className="sm:w-[18px] sm:h-[21px] text-dark-gray flex-shrink-0" aria-hidden />
-                <div>
-                  <span className="block text-[10px] sm:text-caption text-medium-gray leading-none">Deliver to</span>
-                  <div className="flex items-center text-xs sm:text-sm font-semibold text-dark-gray-alt pt-0.5 sm:pt-1">
-                    <span className="max-w-[60px] sm:max-w-none truncate">{getAddressDisplay()}</span>
-                    <ChevronDown size={14} className="sm:w-4 sm:h-4 ml-0.5" />
+            <div className="hidden sm:block">
+              <AddressDropdown onAddressChange={setSelectedAddress}>
+                <div className="flex items-center gap-1 sm:gap-1.5 cursor-pointer hover:opacity-80 transition-opacity">
+                  <MapPin size={16} className="sm:w-[18px] sm:h-[21px] text-dark-gray flex-shrink-0" aria-hidden />
+                  <div>
+                    <span className="block text-[10px] sm:text-caption text-medium-gray leading-none">Deliver to</span>
+                    <div className="flex items-center text-xs sm:text-sm font-semibold text-dark-gray-alt pt-0.5 sm:pt-1">
+                      <span className="max-w-[60px] sm:max-w-none truncate">{getAddressDisplay()}</span>
+                      <ChevronDown size={14} className="sm:w-4 sm:h-4 ml-0.5" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </AddressDropdown>
+              </AddressDropdown>
+            </div>
           </div>
 
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">

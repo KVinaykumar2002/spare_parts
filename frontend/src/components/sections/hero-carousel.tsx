@@ -140,11 +140,11 @@ const HeroCarousel = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white text-black border-0 shadow-md opacity-0 transition-opacity group-hover:opacity-100 md:left-4 md:h-12 md:w-12 hover:bg-white hover:text-black" />
-          <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white text-black border-0 shadow-md opacity-0 transition-opacity group-hover:opacity-100 md:right-4 md:h-12 md:w-12 hover:bg-white hover:text-black" />
+          <CarouselPrevious className="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white text-black border-0 shadow-md opacity-0 transition-opacity group-hover:opacity-100 md:left-4 md:h-12 md:w-12 hover:bg-white hover:text-black" />
+          <CarouselNext className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 h-10 w-10 rounded-full bg-white text-black border-0 shadow-md opacity-0 transition-opacity group-hover:opacity-100 md:right-4 md:h-12 md:w-12 hover:bg-white hover:text-black" />
         </Carousel>
 
-        <div className="absolute bottom-3 sm:bottom-5 left-1/2 z-10 -translate-x-1/2">
+        <div className="hidden sm:block absolute bottom-5 left-1/2 z-10 -translate-x-1/2">
           <div className="flex items-center justify-center gap-1.5 sm:gap-2">
             {carouselSlides.map((_, index) => (
               <button
