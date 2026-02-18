@@ -84,7 +84,7 @@ const HeroCarousel = () => {
 
   return (
     <section
-      className="group relative w-full bg-white px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5"
+      className="group relative w-full bg-white px-4 py-3 sm:px-5 sm:py-4 md:px-6 md:py-5"
       aria-roledescription="carousel"
       aria-label="Promotional Banners"
     >
@@ -92,8 +92,8 @@ const HeroCarousel = () => {
         <Carousel
           setApi={setApi}
           plugins={[plugin.current]}
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.play}
+          onMouseEnter={() => plugin.current.stop()}
+          onMouseLeave={() => plugin.current.play()}
           opts={{
             loop: true,
           }}
@@ -145,21 +145,20 @@ const HeroCarousel = () => {
         </Carousel>
 
         <div className="absolute bottom-3 sm:bottom-5 left-1/2 z-10 -translate-x-1/2">
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2">
-          {carouselSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={`h-1.5 w-1.5 sm:h-2 sm:w-2 md:h-2.5 md:w-2.5 rounded-full transition-all duration-300 cursor-pointer touch-manipulation ${
-                current === index
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2">
+            {carouselSlides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`h-1.5 w-1.5 sm:h-2 sm:w-2 md:h-2.5 md:w-2.5 rounded-full transition-all duration-300 cursor-pointer touch-manipulation ${current === index
                   ? "bg-stone-800"
                   : "border border-stone-800 bg-transparent"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
+                  }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );

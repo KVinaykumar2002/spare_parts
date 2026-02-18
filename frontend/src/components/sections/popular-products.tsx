@@ -91,10 +91,10 @@ const ProductCard = ({ product }: { product: Product }) => {
   // Convert product to modal format
   const getModalProduct = () => {
     const productId = `prod-${product.id}`;
-    
+
     // Extract coop price - handle both number and string formats
-    const coopPrice = typeof product.coOpPrice === 'number' 
-      ? product.coOpPrice 
+    const coopPrice = typeof product.coOpPrice === 'number'
+      ? product.coOpPrice
       : parseFloat(product.coOpPrice.toString().match(/[\d.]+/)?.[0] || '0') || product.price * 0.85;
 
     return {
@@ -140,9 +140,8 @@ const ProductCard = ({ product }: { product: Product }) => {
             }}
           >
             <Heart
-              className={`h-4 w-4 transition-colors ${
-                isWishlisted ? 'text-red-alert fill-red-alert' : ''
-              }`}
+              className={`h-4 w-4 transition-colors ${isWishlisted ? 'text-red-alert fill-red-alert' : ''
+                }`}
             />
             <span className="sr-only">Add to Wishlist</span>
           </Button>
@@ -173,9 +172,9 @@ const ProductCard = ({ product }: { product: Product }) => {
               </span>
             )}
           </div>
-          <div className="flex items-center gap-2 mt-auto">
+          <div className="flex flex-col gap-2 mt-auto">
             <Select defaultValue={product.variants[0]} onValueChange={setSelectedVariant}>
-              <SelectTrigger className="w-[100px] h-9 text-xs focus:ring-ring focus:ring-1">
+              <SelectTrigger className="w-full h-8 text-xs focus:ring-ring focus:ring-1">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -186,23 +185,25 @@ const ProductCard = ({ product }: { product: Product }) => {
                 ))}
               </SelectContent>
             </Select>
-            <Button 
-              onClick={handleAddToCart}
-              className="flex-grow h-9 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold"
-            >
-              Add
-            </Button>
-            <WhatsAppInquiryButton
-              params={{
-                productName: product.name,
-                variantName: selectedVariant,
-                price: product.price,
-                coopPrice: product.coOpPrice,
-                imageUrl: product.image,
-              }}
-              className="h-9 w-9 flex items-center justify-center rounded-md bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors flex-shrink-0"
-              aria-label="Inquire on WhatsApp"
-            />
+            <div className="flex items-center gap-2">
+              <Button
+                onClick={handleAddToCart}
+                className="flex-grow h-9 bg-primary text-primary-foreground hover:bg-primary/90 text-sm font-semibold"
+              >
+                Add
+              </Button>
+              <WhatsAppInquiryButton
+                params={{
+                  productName: product.name,
+                  variantName: selectedVariant,
+                  price: product.price,
+                  coopPrice: product.coOpPrice,
+                  imageUrl: product.image,
+                }}
+                className="h-9 w-9 flex items-center justify-center rounded-md bg-[#25D366] hover:bg-[#20BD5A] text-white transition-colors flex-shrink-0"
+                aria-label="Inquire on WhatsApp"
+              />
+            </div>
           </div>
         </div>
       </CardContent>
@@ -254,7 +255,7 @@ export default function PopularProducts() {
       try {
         setLoading(true);
         const response = await publicApi.products.getAll({ limit: 100 });
-        
+
         if (response.success && response.data && response.data.products) {
           // Transform API products to component format
           const transformedProducts: Product[] = response.data.products.map((p: any, index: number) => ({
@@ -269,7 +270,7 @@ export default function PopularProducts() {
           }));
 
           setAllProducts(transformedProducts);
-          
+
           // Extract unique categories
           const uniqueCategories = ['All', ...Array.from(new Set(transformedProducts.map(p => p.category)))];
           setCategories(uniqueCategories);

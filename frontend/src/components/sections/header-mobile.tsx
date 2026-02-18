@@ -9,7 +9,13 @@ import AddressDropdown from "@/components/ui/address-dropdown";
 import { getSelectedAddress, getAddressUpdateEventName, type Address } from "@/lib/address-functionality";
 
 // The navItems are derived from the desktop navigation panel in the HTML structure
-const navItems = [
+interface NavItem {
+  name: string;
+  href: string;
+  external?: boolean;
+}
+
+const navItems: NavItem[] = [
   { name: 'Browse All Categories', href: '/collections/all' },
   { name: 'Store Locations', href: '/pages/store-locator' },
   { name: 'Deals', href: '/collections/om-deals' },
@@ -18,9 +24,9 @@ const navItems = [
 const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => (
   <>
     {/* Overlay */}
-    <div 
+    <div
       className={`fixed inset-0 bg-black transition-opacity duration-300 ease-in-out z-40 lg:hidden ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0 pointer-events-none'}`}
-      style={{ 
+      style={{
         display: isOpen ? 'block' : 'none',
         opacity: isOpen ? 0.5 : 0,
         pointerEvents: isOpen ? 'auto' : 'none'
@@ -35,7 +41,7 @@ const NavPanel = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void })
           ANANDH BunkStores
         </Link>
         <button onClick={onClose} className="p-1 -mr-1 cursor-pointer" aria-label="Close menu">
-          <X size={28} className="text-dark-gray"/>
+          <X size={28} className="text-dark-gray" />
         </button>
       </div>
       <nav>
@@ -106,8 +112,8 @@ const HeaderMobile = () => {
   return (
     <>
       <header className="sticky top-[36px] left-0 right-0 z-30 bg-white shadow-[0_1px_4px_rgba(0,0,0,0.1)] lg:hidden">
-        <div className="relative flex items-center justify-between h-[64px] sm:h-[72px] px-3 sm:px-4">
-          
+        <div className="relative flex items-center justify-between h-[64px] sm:h-[72px] px-4 sm:px-5">
+
           <div className="flex items-center gap-1.5 sm:gap-2">
             <button onClick={() => setNavOpen(true)} className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 -ml-1 sm:-ml-2 cursor-pointer touch-manipulation" aria-label="Open menu">
               <Menu size={24} className="sm:w-7 sm:h-7 text-dark-gray" />
@@ -135,7 +141,7 @@ const HeaderMobile = () => {
 
           <div className="flex items-center">
             <Link href="/wishlist" className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 touch-manipulation" aria-label="Wishlist">
-              <Heart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray"/>
+              <Heart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray" />
               {wishlistCount > 0 && (
                 <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-primary-green text-white text-[9px] sm:text-[10px] font-bold rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 flex items-center justify-center min-w-[14px] sm:min-w-[16px]">
                   {wishlistCount > 99 ? '99+' : wishlistCount}
@@ -143,7 +149,7 @@ const HeaderMobile = () => {
               )}
             </Link>
             <Link href="/cart" className="relative flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 -mr-1 sm:-mr-2 touch-manipulation" aria-label="Cart">
-              <ShoppingCart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray"/>
+              <ShoppingCart size={22} className="sm:w-[25px] sm:h-[25px] text-dark-gray" />
               {cartCount > 0 && (
                 <span className="absolute top-0.5 right-0.5 sm:top-1 sm:right-1 bg-primary-green text-white text-[9px] sm:text-[10px] font-bold rounded-full h-3.5 w-3.5 sm:h-4 sm:w-4 flex items-center justify-center min-w-[14px] sm:min-w-[16px]">
                   {cartCount > 99 ? '99+' : cartCount}
@@ -153,7 +159,7 @@ const HeaderMobile = () => {
           </div>
         </div>
       </header>
-      
+
       <NavPanel isOpen={isNavOpen} onClose={() => setNavOpen(false)} />
     </>
   );
