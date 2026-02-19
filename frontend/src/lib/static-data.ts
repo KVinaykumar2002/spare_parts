@@ -181,8 +181,9 @@ export const staticCategories: StaticCategory[] = [
 const HERO_IMAGES_DIR = '/hero_images';
 
 export const staticBannersHero: StaticBanner[] = [
-  { _id: 'banner-hero-1', title: INDIAN_OIL_NAME, subtitle: 'Shop Now', image: `${HERO_IMAGES_DIR}/1.png`, link: `/collections/${INDIAN_OIL_SLUG}`, position: 'hero', order: 1 },
-  { _id: 'banner-hero-2', title: HINDUSTAN_NAME, subtitle: 'Discover', image: `${HERO_IMAGES_DIR}/2.png`, link: `/collections/${HINDUSTAN_SLUG}`, position: 'hero', order: 2 },
+
+  { _id: 'banner-hero-3', title: 'Anandh Bunk Stores', subtitle: 'Visit Us', image: `${HERO_IMAGES_DIR}/3.png`, link: '/', position: 'hero', order: 1 },
+  { _id: 'banner-hero-4', title: 'Anandh Bunk Stores', subtitle: 'Shop Now', image: `${HERO_IMAGES_DIR}/4.png`, link: '/', position: 'hero', order: 2 },
 ];
 
 export const staticBannersMiddle: StaticBanner[] = [
