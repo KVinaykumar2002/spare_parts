@@ -103,14 +103,14 @@ const HeroCarousel = () => {
             {carouselSlides.map((slide, index) => (
               <CarouselItem key={index}>
                 <Link href={slide.href}>
-                  <div className="relative w-full aspect-[768/400] md:aspect-[1920/600]">
+                  <div className="relative w-full aspect-[768/400] md:aspect-[1920/600] bg-gray-100">
                     <div className="md:hidden">
                       <Image
                         src={slide.mobileImage}
                         alt={slide.alt}
                         fill
                         priority={index === 0}
-                        className="object-cover"
+                        className="object-contain"
                         sizes="(max-width: 768px) 100vw, 0"
                       />
                     </div>
@@ -120,7 +120,7 @@ const HeroCarousel = () => {
                         alt={slide.alt}
                         fill
                         priority={index === 0}
-                        className="object-cover"
+                        className="object-contain"
                         sizes="(min-width: 769px) 100vw, 0"
                       />
                     </div>
