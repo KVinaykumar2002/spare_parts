@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 
-// Using a pleasant, royalty-free acoustic track
-const MUSIC_URL = "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3";
+// Local background music from public folder
+const MUSIC_URL = "/music/background.mp3";
 
 export default function BackgroundMusic() {
     const [isPlaying, setIsPlaying] = useState(true);
