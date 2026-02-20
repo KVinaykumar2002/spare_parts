@@ -182,9 +182,9 @@ const HERO_IMAGES_DIR = '/hero_images';
 
 export const staticBannersHero: StaticBanner[] = [
 
-  { _id: 'banner-hero-7', title: 'Anandh Bunk Stores', subtitle: 'Visit Us', image: `${HERO_IMAGES_DIR}/7.png`, link: '/', position: 'hero', order: 1 },
-  { _id: 'banner-hero-8', title: 'Anandh Bunk Stores', subtitle: 'Shop Now', image: `${HERO_IMAGES_DIR}/8.png`, link: '/', position: 'hero', order: 2 },
-  { _id: 'banner-hero-9', title: 'Anandh Bunk Stores', subtitle: 'Visit Us', image: `${HERO_IMAGES_DIR}/9.png`, link: '/', position: 'hero', order: 3 },
+  { _id: 'banner-hero-7', title: 'Anandh Bunk Stores', subtitle: 'Visit Us', image: `${HERO_IMAGES_DIR}/7.jpg`, link: '/', position: 'hero', order: 1 },
+  { _id: 'banner-hero-8', title: 'Anandh Bunk Stores', subtitle: 'Shop Now', image: `${HERO_IMAGES_DIR}/8.jpg`, link: '/', position: 'hero', order: 2 },
+  { _id: 'banner-hero-9', title: 'Anandh Bunk Stores', subtitle: 'Visit Us', image: `${HERO_IMAGES_DIR}/9.jpg`, link: '/', position: 'hero', order: 3 },
 ];
 
 export const staticBannersMiddle: StaticBanner[] = [
