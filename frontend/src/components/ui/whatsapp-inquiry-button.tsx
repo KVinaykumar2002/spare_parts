@@ -12,6 +12,8 @@ export interface WhatsAppInquiryParams {
   coopPrice?: number;
   quantity?: number;
   imageUrl?: string;
+  /** Optional product page URL (relative or absolute) – shown as "View product: link" in the message */
+  productPageUrl?: string;
 }
 
 interface WhatsAppInquiryButtonProps {

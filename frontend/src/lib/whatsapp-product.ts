@@ -24,10 +24,11 @@ export function getWhatsAppProductUrl(params: {
   coopPrice?: number;
   quantity?: number;
   imageUrl?: string;
+  productPageUrl?: string; // Optional link to product page (relative or absolute)
   baseUrl?: string; // e.g. window.location.origin - needed to resolve relative image paths
   deliveryAddress?: DeliveryAddress | null; // User's saved delivery address – included when provided
 }): string {
-  const { productName, variantName, price, coopPrice, quantity = 1, imageUrl, baseUrl, deliveryAddress } = params;
+  const { productName, variantName, price, coopPrice, quantity = 1, imageUrl, productPageUrl, baseUrl, deliveryAddress } = params;
 
   const imageUrlFull =
     imageUrl?.startsWith("http")
@@ -36,7 +37,17 @@ export function getWhatsAppProductUrl(params: {
         ? `${baseUrl}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`
         : undefined; // Omit image for relative URLs when baseUrl not available (e.g. SSR)
 
+  const productPageUrlFull =
+    productPageUrl?.startsWith("http")
+      ? productPageUrl
+      : productPageUrl && baseUrl
+        ? `${baseUrl}${productPageUrl.startsWith("/") ? "" : "/"}${productPageUrl}`
+        : undefined;
+
+  // Put product image URL first on its own line so WhatsApp shows it as the link preview in the chat
   const productLines = [
+    imageUrlFull ? imageUrlFull : null,
+    "",
     "Hi, I'm interested in this product:",
     "",
     `*${productName}*`,
@@ -44,7 +55,7 @@ export function getWhatsAppProductUrl(params: {
     `Price: ₹${price.toFixed(2)}`,
     coopPrice ? `Co-Op Price: ₹${coopPrice.toFixed(2)}` : null,
     quantity > 1 ? `Quantity: ${quantity}` : null,
-    imageUrlFull ? `Product Image: ${imageUrlFull}` : null,
+    productPageUrlFull ? `View product: ${productPageUrlFull}` : null,
   ].filter(Boolean);
 
   const addressLines = deliveryAddress
