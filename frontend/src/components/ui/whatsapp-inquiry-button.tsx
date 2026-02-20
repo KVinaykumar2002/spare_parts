@@ -31,10 +31,14 @@ export function WhatsAppInquiryButton({
 
   const openWhatsApp = React.useCallback(
     (address: DeliveryAddress | null) => {
-      const baseUrl = typeof window !== "undefined" ? window.location.origin : undefined;
+      // Use public store URL so WhatsApp message always contains production links (not localhost)
+      const baseUrl =
+        typeof window !== "undefined"
+          ? (process.env.NEXT_PUBLIC_STORE_URL || window.location.origin)
+          : process.env.NEXT_PUBLIC_STORE_URL;
       const url = getWhatsAppProductUrl({
         ...params,
-        baseUrl,
+        baseUrl: baseUrl || undefined,
         deliveryAddress: address,
       });
       window.open(url, "_blank", "noopener,noreferrer");

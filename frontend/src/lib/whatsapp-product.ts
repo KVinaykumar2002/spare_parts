@@ -44,9 +44,19 @@ export function getWhatsAppProductUrl(params: {
         ? `${baseUrl}${productPageUrl.startsWith("/") ? "" : "/"}${productPageUrl}`
         : undefined;
 
-  // Put product image URL first on its own line so WhatsApp shows it as the link preview in the chat
+  // Encode URLs so spaces (e.g. in "17.IOCL COT.jpg") become %20 and the link opens correctly in WhatsApp
+  const imageUrlEncoded = imageUrlFull ? encodeURI(imageUrlFull) : undefined;
+  const productPageUrlEncoded = productPageUrlFull ? encodeURI(productPageUrlFull) : undefined;
+
+  // Use share preview page URL first so WhatsApp fetches it and shows og:image as the link preview
+  const sharePreviewUrl =
+    baseUrl && imageUrlFull
+      ? `${baseUrl}/share/product-preview?image=${encodeURIComponent(imageUrlFull)}&name=${encodeURIComponent(productName)}&price=${encodeURIComponent(price.toFixed(2))}`
+      : imageUrlEncoded;
+
+  // Put share preview URL (or direct image URL) first so WhatsApp shows the image preview in the chat
   const productLines = [
-    imageUrlFull ? imageUrlFull : null,
+    sharePreviewUrl ?? null,
     "",
     "Hi, I'm interested in this product:",
     "",
@@ -55,7 +65,7 @@ export function getWhatsAppProductUrl(params: {
     `Price: ₹${price.toFixed(2)}`,
     coopPrice ? `Co-Op Price: ₹${coopPrice.toFixed(2)}` : null,
     quantity > 1 ? `Quantity: ${quantity}` : null,
-    productPageUrlFull ? `View product: ${productPageUrlFull}` : null,
+    productPageUrlEncoded ? `View product: ${productPageUrlEncoded}` : null,
   ].filter(Boolean);
 
   const addressLines = deliveryAddress
